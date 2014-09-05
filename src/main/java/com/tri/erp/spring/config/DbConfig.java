@@ -32,7 +32,7 @@ public class DbConfig {
 	Environment env;
 	
 	@Bean
-	public BoneCPDataSource boneCPDataSource() {
+	public BoneCPDataSource dataSource() {
 		BoneCPDataSource boneCPDataSource = new BoneCPDataSource();
 		boneCPDataSource.setDriverClass(env.getRequiredProperty("db.driver"));
 		boneCPDataSource.setJdbcUrl(env.getRequiredProperty("db.url"));

@@ -6,9 +6,14 @@
 
 package com.tri.erp.spring.controller;
 
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod; 
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.Collection;
 
 /**
  *
@@ -18,13 +23,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class HomeController { 
 
     @RequestMapping(value = {"/", "index"}, method = RequestMethod.GET)
-    public String index() {
-        return "home";
+    public String index(HttpServletRequest request) {
+        if (request.isUserInRole("ADMIN")) {
+            return "admin/admin";
+        } else {
+            return "home";
+        }
     }  
     
     @RequestMapping(value = {"/admin"}, method = RequestMethod.GET)
     public String admin() {
-        return "admin";
+        return "admin/admin";
     } 
     
     @RequestMapping(value = {"/403"}, method = RequestMethod.GET)
