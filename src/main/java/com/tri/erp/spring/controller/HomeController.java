@@ -6,6 +6,8 @@
 
 package com.tri.erp.spring.controller;
 
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -41,8 +43,15 @@ public class HomeController {
         return "403";
     }
 
-    @RequestMapping(value = {"/logout"}, method = RequestMethod.GET)
-    public String logout() {
-        return "logout";
+    @RequestMapping(value = {"/logoutSuccess"}, method = RequestMethod.GET)
+    public String logoutSuccess() {
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth == null) {
+            return  "logout";
+        } else {
+            System.out.println("Logging out...");
+            return "redirect:/logout";
+        }
     }
 }

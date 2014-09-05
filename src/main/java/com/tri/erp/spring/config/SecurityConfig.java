@@ -26,22 +26,24 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity builder) throws Exception {
         builder .ignoring()
-                .antMatchers("/resources/**");
+                .antMatchers("/resources/**", "/logoutSuccess");
     }
     
     @Override
     protected void configure(HttpSecurity http) throws Exception { 
         http
-            .authorizeRequests()   
+            .authorizeRequests()
             .antMatchers("/admin/**").hasRole("ADMIN")
-            .anyRequest().authenticated()
-            .antMatchers("/logout").permitAll();
+            .anyRequest().authenticated();
         http
             .formLogin().loginPage("/login")
             .permitAll();
         http
-            .logout().logoutUrl("/logout").invalidateHttpSession(true)
+            .logout()
+                .logoutSuccessUrl("/logoutSuccess")
             .and()
+                .csrf();
+        http
             .exceptionHandling().accessDeniedPage("/403");
     }
 

@@ -1,6 +1,4 @@
-<%@ page import="org.springframework.security.core.context.SecurityContextHolder" %>
-<%@ page import="org.springframework.security.core.authority.SimpleGrantedAuthority" %>
-<%@ page import="java.util.Collection" %>
+<%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %>
 <%--
     Document   : admin
     Created on : 06 26, 14, 11:55:53 AM
@@ -15,11 +13,10 @@
         <title>Admin</title>
     </head>
     <body>
-        <h1>This is an admin page inner</h1>
-        Roles:
-        <%
-            Collection<SimpleGrantedAuthority> authorities = (Collection<SimpleGrantedAuthority>)    SecurityContextHolder.getContext().getAuthentication().getAuthorities();
-            out.println(authorities.toArray()[0].toString());
-        %>
+        <h1>This is an admin page</h1>
+        <form  action="${pageContext.request.contextPath}/logout" method="post">
+            <input type="submit" value="Log out" />
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+        </form>
     </body>
 </html>
