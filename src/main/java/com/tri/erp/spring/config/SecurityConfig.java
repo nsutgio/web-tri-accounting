@@ -25,8 +25,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     public void configure(WebSecurity builder) throws Exception {
-        builder
-            .ignoring()
+        builder .ignoring()
                 .antMatchers("/resources/**");
     }
     
@@ -35,7 +34,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
             .authorizeRequests()   
             .antMatchers("/admin/**").hasRole("ADMIN")
-            .anyRequest().authenticated();
+            .anyRequest().authenticated()
+            .antMatchers("/logout").permitAll();
         http
             .formLogin().loginPage("/login")
             .permitAll();

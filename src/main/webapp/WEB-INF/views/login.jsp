@@ -23,7 +23,6 @@
 			                    Invalid username and password.
 			                </div>
 		                </c:if>
-		                
 		                 <c:if test="${param.logout != null}">
 			                <div class="alert alert-info">    
 			                    You have been logged out.
