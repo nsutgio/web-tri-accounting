@@ -39,5 +39,10 @@ public class HomeController {
     @RequestMapping(value = {"/403"}, method = RequestMethod.GET)
     public String fourZeroThree() {
         return "403";
-    } 
+    }
+
+    @RequestMapping(value = {"/logout"}, method = RequestMethod.GET)
+    public String logout() {
+        return "redirect:login?logout";
+    }
 }

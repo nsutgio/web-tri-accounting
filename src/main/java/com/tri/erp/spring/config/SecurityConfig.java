@@ -40,11 +40,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .formLogin().loginPage("/login")
             .permitAll();
         http
-            .logout().logoutUrl("/login?logout").invalidateHttpSession(true)
-            .permitAll()
-                .and()
-            .exceptionHandling()
-            .accessDeniedPage("/403");
+            .logout().logoutUrl("/logout").invalidateHttpSession(true)
+            .and()
+            .exceptionHandling().accessDeniedPage("/403");
     }
 
     @Autowired
