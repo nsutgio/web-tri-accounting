@@ -1,5 +1,6 @@
 package com.tri.erp.spring.controller;
 
+import com.tri.erp.spring.dto.AccountDTO;
 import com.tri.erp.spring.model.Account;
 import com.tri.erp.spring.service.interfaces.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,8 +38,9 @@ public class ChartOfAccountsController {
     // json providers
     @RequestMapping(value = "/accounts", method = RequestMethod.GET)
     @ResponseBody
-    public List<Account> accountList() {
-        List<Account> accountList = new ArrayList<>();
+    public List<AccountDTO> accountList() {
+        List<AccountDTO> accountList = accountService.findAll();
+        System.out.println(accountList);
         return accountList;
     }
 }

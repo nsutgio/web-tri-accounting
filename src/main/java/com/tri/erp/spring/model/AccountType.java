@@ -25,6 +25,13 @@ public class AccountType {
     @OneToMany(mappedBy="accountType")
     private Set<AccountGroup> accountGroupSet;
 
+    public AccountType(String description, String code, Set<AccountGroup> accountGroupSet) {
+        this.description = description;
+        this.code = code;
+        this.accountGroupSet = accountGroupSet;
+    }
+
+    public AccountType() {}
     /**
      * @return the acctTypeDesc
      */

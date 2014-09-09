@@ -1,5 +1,8 @@
 package com.tri.erp.spring.model;
 
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
+
 import javax.persistence.*;
 
 /**
@@ -11,6 +14,7 @@ import javax.persistence.*;
 public class Account {
     @Id
     @GeneratedValue
+    @Column(name = "acct_id")
     private int id;
 
     @Column
@@ -46,17 +50,39 @@ public class Account {
     @Column(name = "has_sl")
     private int hasSL;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @NotFound(action = NotFoundAction.IGNORE)
     @JoinColumn(name="acct_type_id")
     private AccountType accountType;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @NotFound(action = NotFoundAction.IGNORE)
     @JoinColumn(name="acct_group_id")
     private AccountGroup accountGroup;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @NotFound(action = NotFoundAction.IGNORE)
     @JoinColumn(name="parent_acct_id")
     private Account parentAccount;
+
+    public Account(Account parentAccount, String code, String title, String GLAccount, String SLAccount, String auxilliaryAccount, int normalBalance, int parentAcctId, int level, int active, int isHeader, int hasSL, AccountType accountType, AccountGroup accountGroup) {
+        this.parentAccount = parentAccount;
+        this.code = code;
+        this.title = title;
+        this.GLAccount = GLAccount;
+        this.SLAccount = SLAccount;
+        this.auxilliaryAccount = auxilliaryAccount;
+        this.normalBalance = normalBalance;
+        this.parentAcctId = parentAcctId;
+        this.level = level;
+        this.active = active;
+        this.isHeader = isHeader;
+        this.hasSL = hasSL;
+        this.accountType = accountType;
+        this.accountGroup = accountGroup;
+    }
+
+    public Account() {}
 
     @Override
     public String toString() {

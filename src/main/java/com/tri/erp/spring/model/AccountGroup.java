@@ -25,6 +25,14 @@ public class AccountGroup {
     @JoinColumn(name="acct_type_id")
     private AccountType accountType;
 
+    public AccountGroup(String accountGroupCode, String description, AccountType accountType) {
+        this.accountGroupCode = accountGroupCode;
+        this.description = description;
+        this.accountType = accountType;
+    }
+
+    public AccountGroup() {}
+
     public String getAccountGroupCode() {
         return accountGroupCode;
     }

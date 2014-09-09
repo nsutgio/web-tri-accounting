@@ -1,11 +1,13 @@
 package com.tri.erp.spring.service.implementations;
 
+import com.tri.erp.spring.dto.AccountDTO;
 import com.tri.erp.spring.model.Account;
 import com.tri.erp.spring.repo.AccountRepo;
 import com.tri.erp.spring.service.interfaces.AccountService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -29,8 +31,20 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public List<Account> findAll() {
-        return accountRepo.findAll();
+    public List<AccountDTO> findAll() {
+        List<AccountDTO> accountsDtoList = new ArrayList<>();
+        List<Account> accounts = accountRepo.findAll();
+        if (accounts != null && accounts.size() > 0) {
+            for (Account account : accounts) {
+                AccountDTO accountDTO = new AccountDTO();
+                accountDTO.setCode(account.getCode());
+                accountDTO.setId(account.getId());
+                accountDTO.setTitle(account.getTitle());
+                accountsDtoList.add(accountDTO);
+                // do some work here on intValue
+            }
+        }
+        return accountsDtoList;
     }
 
     @Override
