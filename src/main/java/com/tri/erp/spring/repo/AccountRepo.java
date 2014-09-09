@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 /**
  * Created by TSI Admin on 9/9/2014.
  */
-public interface AccountRepo extends JpaRepository<Account, Integer> {
+public interface AccountRepo  extends JpaRepository<Account, Integer> {
 
 }

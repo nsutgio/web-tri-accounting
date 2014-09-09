@@ -38,7 +38,7 @@ public class ChartOfAccountsController {
     @ResponseBody
     public List<Account> accountList() {
         List<Account> accountList = accountService.findAll();
+        System.out.println("list " + accountList);
         return accountList;
     }
-
 }

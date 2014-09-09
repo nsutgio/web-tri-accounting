@@ -31,7 +31,7 @@ public class Account {
     @Column(name = "normal_balance")
     private int normalBalance;
 
-    @Column(name = "parent_acct_id")
+    @Column(name = "parent_acct_id", insertable = false, updatable = false)
     protected int parentAcctId;
 
     @Column

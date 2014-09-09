@@ -1,11 +1,11 @@
 // get application's base URL
 var baseURL = document.location.origin + document.location.pathname;
-var shopListApp = angular.module('coaApp', [
+var coaApp = angular.module('coaApp', [
     'ngRoute',
     'coaControllers'
 ]);
 
-shopListApp.config(['$routeProvider',
+coaApp.config(['$routeProvider',
     function($routeProvider) {
         $routeProvider.
             when('/admin/coa', {
