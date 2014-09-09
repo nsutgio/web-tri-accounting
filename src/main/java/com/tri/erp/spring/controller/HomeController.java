@@ -27,16 +27,11 @@ public class HomeController {
     @RequestMapping(value = {"/", "index"}, method = RequestMethod.GET)
     public String index(HttpServletRequest request) {
         if (request.isUserInRole("ADMIN")) {
-            return "admin/admin";
+            return "redirect:admin/dashboard";
         } else {
             return "home";
         }
-    }  
-    
-    @RequestMapping(value = {"/admin"}, method = RequestMethod.GET)
-    public String admin() {
-        return "admin/admin";
-    } 
+    }
     
     @RequestMapping(value = {"/403"}, method = RequestMethod.GET)
     public String fourZeroThree() {
