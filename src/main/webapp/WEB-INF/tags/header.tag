@@ -5,3 +5,4 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <title>Firely</title>
 <link href="<c:url value="/resources/css/bootstrap/bootstrap.min.css" />" rel="stylesheet">
+<link href="<c:url value="/resources/css/bootstrap/bootstrap-theme.css" />" rel="stylesheet">

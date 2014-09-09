@@ -7,7 +7,7 @@
     </jsp:attribute>
     <jsp:attribute name="body">
         <div>
-            This is a content
+            This is an admin dashboard
         </div>
     </jsp:attribute>
 </mytag:master>
