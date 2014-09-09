@@ -8,8 +8,8 @@
     </jsp:attribute>
     <jsp:attribute name="body">
         <div ng-app="coaApp">
-            <div id="coa-content">
-                Loading...
+            <div id="coa-content" ng-controller="accountTreeController">
+                {{accounts}}
             </div>
         </div>
     </jsp:attribute>

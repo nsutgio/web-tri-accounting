@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,6 +27,12 @@ public class ChartOfAccountsController {
     public String index() {
         return "admin/coa/main";
     }
+    // view providers
+    @RequestMapping(value = "/main2", method = RequestMethod.GET)
+    public String test() {
+        return "admin/coa/main2";
+    }
+
 
     @RequestMapping(value = "/accounts-tree-page", method = RequestMethod.GET)
     public String accountsTree() {
@@ -37,8 +44,7 @@ public class ChartOfAccountsController {
     @RequestMapping(value = "/accounts", method = RequestMethod.GET)
     @ResponseBody
     public List<Account> accountList() {
-        List<Account> accountList = accountService.findAll();
-        System.out.println("list " + accountList);
+        List<Account> accountList = new ArrayList<>();
         return accountList;
     }
 }

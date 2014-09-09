@@ -1,13 +1,15 @@
 var coaControllers = angular.module('coaControllers', []);
 
 coaControllers.controller('accountTreeController', ['$scope', '$http', '$location', function($scope, $http, $location) {
-    $scope.accounts = {};
-    alert();
+    $scope.accounts = "Loading data...";
 
     $http.get(baseURL + '/accounts').success(function(data) {
-        $scope.accounts = data;
-        console.log(data);
+        if (data.length > 0) {
+            $scope.accounts = data;
+        } else {
+            $scope.accounts = "No data.";
+        }
     }).error(function(data) {
-        console.log(data);
+        $scope.accounts = "Something went wrong!";
     });
 }]);
