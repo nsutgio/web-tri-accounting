@@ -27,12 +27,6 @@ public class ChartOfAccountsController {
     public String index() {
         return "admin/coa/main";
     }
-    // view providers
-    @RequestMapping(value = "/main2", method = RequestMethod.GET)
-    public String test() {
-        return "admin/coa/main2";
-    }
-
 
     @RequestMapping(value = "/accounts-tree-page", method = RequestMethod.GET)
     public String accountsTree() {

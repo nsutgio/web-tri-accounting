@@ -1,7 +1,7 @@
 <%@ tag %>
 <div style="margin-top: 20px;"></div>
 <ul class="nav nav-pills">
-    <li class="active"><a href="#">Home</a></li>
+    <li class="active"><a href="/">Home</a></li>
     <li class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
             Setup <span class="caret"></span>
@@ -12,7 +12,7 @@
             <li><a href="#">Suppliers</a></li>
         </ul>
     </li>
-    <li><a href="#">Accounting</a></li>
-    <li><a href="#">Inventory</a></li>
-    <li><a href="#">Reports</a></li>
+    <li><a href="#">Test1</a></li>
+    <li><a href="#">Test2</a></li>
+    <li><a href="#">Test3</a></li>
 </ul>
