@@ -106,7 +106,7 @@
             <div class="col-md-9 col-lg-9">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-filter"></i></span>
-                    <select required ng-model="account.accountGroup" id="acct_group_id" name="acct_group_id" class="form-control">
+                    <select required ng-model="account.accountGroup.id" id="acct_group_id" name="acct_group_id" class="form-control">
                         <option value="">Select group</option>
                         <option value="29">Accounts Payable</option>
                         <option value="14">Accounts Receivable Items-Under Litigation</option>
@@ -127,7 +127,7 @@
             <div class="col-md-9 col-lg-9">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-filter"></i></span>
-                    <select required ng-model="account.accountType" id="acct_type_id" name="acct_type_id" class="form-control">
+                    <select required ng-model="account.accountType.id" id="acct_type_id" name="acct_type_id" class="form-control">
                         <option value="">Select type</option>
                         <option value="1">Asset</option>
                         <option value="2">Liabilities</option>
@@ -150,8 +150,8 @@
             <div class="col-md-9 col-lg-9">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-filter"></i></span>
-                    <select ng-model="account.parentAccount" id="parent_acct_id" name="parent_acct_id" class="form-control">
-                        <option value="">Select parent</option>
+                    <select ng-model="account.parentAccount.id" id="parent_acct_id" name="parent_acct_id" class="form-control">
+                        <option value="0">Select parent</option>
                         <option value="19">ASSETS</option>
                         <option value="20">NON-CURRENT ASSETS</option>
                         <option value="32">CURRENT ASSETS</option>

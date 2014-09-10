@@ -1,5 +1,6 @@
 package com.tri.erp.spring.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
 
@@ -50,16 +51,20 @@ public class Account {
     @Column(name = "has_sl")
     private int hasSL;
 
+    @JsonIgnoreProperties(ignoreUnknown = true)
     @ManyToOne(fetch = FetchType.LAZY)
     @NotFound(action = NotFoundAction.IGNORE)
     @JoinColumn(name="acct_type_id")
     private AccountType accountType;
 
+
+    @JsonIgnoreProperties(ignoreUnknown = true)
     @ManyToOne(fetch = FetchType.LAZY)
     @NotFound(action = NotFoundAction.IGNORE)
     @JoinColumn(name="acct_group_id")
     private AccountGroup accountGroup;
 
+    @JsonIgnoreProperties(ignoreUnknown = true)
     @ManyToOne(fetch = FetchType.LAZY)
     @NotFound(action = NotFoundAction.IGNORE)
     @JoinColumn(name="parent_acct_id")
@@ -80,6 +85,22 @@ public class Account {
         this.hasSL = hasSL;
         this.accountType = accountType;
         this.accountGroup = accountGroup;
+    }
+
+
+    public Account(Account parentAccount, String code, String title, String GLAccount, String SLAccount, String auxiliaryAccount, int normalBalance, int parentAcctId, int level, int active, int isHeader, int hasSL) {
+        this.parentAccount = parentAccount;
+        this.code = code;
+        this.title = title;
+        this.GLAccount = GLAccount;
+        this.SLAccount = SLAccount;
+        this.auxiliaryAccount = auxiliaryAccount;
+        this.normalBalance = normalBalance;
+        this.parentAcctId = parentAcctId;
+        this.level = level;
+        this.active = active;
+        this.isHeader = isHeader;
+        this.hasSL = hasSL;
     }
 
     public Account() {}

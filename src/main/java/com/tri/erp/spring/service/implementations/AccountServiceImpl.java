@@ -9,6 +9,7 @@ import com.tri.erp.spring.repo.AccountRepo;
 import com.tri.erp.spring.service.interfaces.AccountService;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 
 import javax.annotation.Resource;
@@ -26,8 +27,8 @@ public class AccountServiceImpl implements AccountService {
 
 
     @Override
-    public Account create(Account shop) {
-        return null;
+    public Account create(Account account) {
+        return accountRepo.save(account);
     }
 
     @Override
@@ -61,6 +62,7 @@ public class AccountServiceImpl implements AccountService {
         return null;
     }
 
+    @Transactional
     public Response processCreate(Account account, BindingResult bindingResult, MessageSource messageSource) {
         Response response = new CreateAccountResponse();
 
