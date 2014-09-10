@@ -33,6 +33,12 @@ public class ChartOfAccountsController {
     public String accountsTree() {
         return BASE_PATH + "chart-of-accounts";
     }
+
+    @RequestMapping(value = "/new-account-page", method = RequestMethod.GET)
+    public String newAccount() {
+        return BASE_PATH + "add-edit";
+    }
+
     // end: view providers
 
     // json providers

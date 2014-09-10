@@ -21,14 +21,9 @@ public class AccountGroup {
     @Column(name = "acct_group_desc")
     private String description;
 
-    @ManyToOne
-    @JoinColumn(name="acct_type_id")
-    private AccountType accountType;
-
-    public AccountGroup(String accountGroupCode, String description, AccountType accountType) {
+    public AccountGroup(String accountGroupCode, String description) {
         this.accountGroupCode = accountGroupCode;
         this.description = description;
-        this.accountType = accountType;
     }
 
     public AccountGroup() {}
@@ -42,20 +37,6 @@ public class AccountGroup {
      */
     public void setAccountGroupCode(String accountGroupCode) {
         this.accountGroupCode = accountGroupCode;
-    }
-
-    /**
-     * @return the accountType
-     */
-    public AccountType getAccountType() {
-        return accountType;
-    }
-
-    /**
-     * @param accountType the accountType to set
-     */
-    public void setAccountType(AccountType accountType) {
-        this.accountType = accountType;
     }
 
     /**

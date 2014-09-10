@@ -22,13 +22,10 @@ public class AccountType {
     @Column
     private String code;
 
-    @OneToMany(mappedBy="accountType")
-    private Set<AccountGroup> accountGroupSet;
 
-    public AccountType(String description, String code, Set<AccountGroup> accountGroupSet) {
+    public AccountType(String description, String code) {
         this.description = description;
         this.code = code;
-        this.accountGroupSet = accountGroupSet;
     }
 
     public AccountType() {}
@@ -95,12 +92,4 @@ public class AccountType {
         return hash;
     }
 
-
-    public Set<AccountGroup> getAccountGroupSet() {
-        return accountGroupSet;
-    }
-
-    public void setAccountGroupSet(Set<AccountGroup> accountGroupSet) {
-        this.accountGroupSet = accountGroupSet;
-    }
 }

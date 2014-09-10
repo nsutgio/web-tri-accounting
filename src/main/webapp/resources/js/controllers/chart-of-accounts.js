@@ -11,3 +11,8 @@ coaControllers.controller('accountTreeController', ['$scope', '$http', '$locatio
         alert("Something went wrong!");
     });
 }]);
+
+
+coaControllers.controller('newAccountController', ['$scope', '$http', '$location', function($scope, $http, $location) {
+
+}]);

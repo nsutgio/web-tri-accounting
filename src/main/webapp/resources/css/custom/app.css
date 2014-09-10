@@ -1,4 +1,11 @@
  /* app css stylesheet */
+ .row-top-buffer {
+     margin-top: 5px;
+ }
+
+ .input-label {
+     padding-top: 10px;
+ }
 
  /* chart of accounts */
  .code-col {
