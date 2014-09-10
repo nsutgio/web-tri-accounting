@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
-import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -52,10 +51,8 @@ public class Account {
     @Column(name = "has_sl")
     private int hasSL;
 
-    @JsonIgnoreProperties(ignoreUnknown = true)
-    @NotFound(action = NotFoundAction.IGNORE)
-    @OneToMany(mappedBy = "parentAccount")
-    private List<Account> childAccount = new ArrayList();
+    @Column(name = "parent_acct_id")
+    private int parentAccountId;
 
     @JsonIgnoreProperties(ignoreUnknown = true)
     @ManyToOne(fetch = FetchType.LAZY)
@@ -69,13 +66,7 @@ public class Account {
     @JoinColumn(name="acct_group_id")
     private AccountGroup accountGroup;
 
-    @JsonIgnoreProperties(ignoreUnknown = true)
-    @NotFound(action = NotFoundAction.IGNORE)
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.ALL}, optional = true)
-    @JoinColumn(name="parent_acct_id")
-    private Account parentAccount;
-
-    public Account(String code, String title, String GLAccount, String SLAccount, String auxiliaryAccount, int normalBalance, int level, int active, int isHeader, int hasSL, List childAccount, AccountType accountType, AccountGroup accountGroup, Account parentAccount) {
+    public Account(String code, String title, String GLAccount, String SLAccount, String auxiliaryAccount, int normalBalance, int level, int active, int isHeader, int hasSL, int parentAccountId, AccountType accountType, AccountGroup accountGroup) {
         this.code = code;
         this.title = title;
         this.GLAccount = GLAccount;
@@ -86,10 +77,9 @@ public class Account {
         this.active = active;
         this.isHeader = isHeader;
         this.hasSL = hasSL;
-        this.childAccount = childAccount;
+        this.parentAccountId = parentAccountId;
         this.accountType = accountType;
         this.accountGroup = accountGroup;
-        this.parentAccount = parentAccount;
     }
 
     public Account() {}
@@ -289,19 +279,11 @@ public class Account {
         this.accountGroup = accountGroup;
     }
 
-    public Account getParentAccount() {
-        return parentAccount;
+    public int getParentAccountId() {
+        return parentAccountId;
     }
 
-    public void setParentAccount(Account parentAccount) {
-        this.parentAccount = parentAccount;
-    }
-
-    public List<Account> getChildAccount() {
-        return childAccount;
-    }
-
-    public void setChildAccount(List<Account> childAccount) {
-        this.childAccount = childAccount;
+    public void setParentAccountId(int parentAccountId) {
+        this.parentAccountId = parentAccountId;
     }
 }

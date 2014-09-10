@@ -150,7 +150,7 @@
             <div class="col-md-9 col-lg-9">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-filter"></i></span>
-                    <select ng-model="account.parentAccount.id" id="parent_acct_id" name="parent_acct_id" class="form-control">
+                    <select ng-model="account.parentAccountId" id="parent_acct_id" name="parent_acct_id" class="form-control">
                         <option value="0">Select parent</option>
                         <option value="19">ASSETS</option>
                         <option value="20">NON-CURRENT ASSETS</option>
@@ -190,7 +190,7 @@
             </div>
             <div class="col-md-5 col-lg-5">
                 <fieldset ng-disabled="submitting">
-                    <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk"></span> Save</button>
+                    <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk"></span> {{ save }}</button>
                     <button type="reset" class="btn btn-default"><span class="glyphicon glyphicon-refresh"></span> Reset</button>
                 </fieldset>
             </div>

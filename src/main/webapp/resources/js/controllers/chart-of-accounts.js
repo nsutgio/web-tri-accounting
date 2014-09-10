@@ -24,15 +24,15 @@ coaControllers.controller('newAccountController', ['$scope', '$routeParams', '$h
     // setup defaults
     var accountGroup = {"id" : ""};
     var accountType = {"id" : ""};
-    var parentAccount = {"id" : "0"};
 
     $scope.account['normalBalance'] = "1";
     $scope.account['accountGroup'] = accountGroup;
     $scope.account['accountType'] = accountType;
-    $scope.account['parentAccount'] = parentAccount;
+    $scope.account['parentAccountId'] = "0";
     $scope.account['active'] = true;
     $scope.errors = {};
     $scope.submitting = false;
+    $scope.save ='Save';
     $scope.title = 'Add an account';
     var resourceURI = baseURL + '/create';
 
@@ -51,6 +51,9 @@ coaControllers.controller('newAccountController', ['$scope', '$routeParams', '$h
 //    }
 
     $scope.processForm = function() {
+
+        $scope.save ='Saving...';
+
         $scope.errors = {};
         $scope.submitting = true;
         $http.defaults.headers.post['X-CSRF-TOKEN'] = $('input[name=_csrf]').val();
@@ -79,6 +82,7 @@ coaControllers.controller('newAccountController', ['$scope', '$routeParams', '$h
 //                    var message = data.messages[idx];
 //                    $scope.errors[field] = message;
 //                }
+                $scope.save ='Saving';
             } else {
                 // if successful, bind success message to message
                 $scope.message = data.successMessage;
@@ -92,6 +96,7 @@ coaControllers.controller('newAccountController', ['$scope', '$routeParams', '$h
         });
         res.error(function(data, status, headers, config) {
             alert("Something went wrong!");
+            $scope.save ='Saving';
             $scope.submitting = false;
         });
     };
