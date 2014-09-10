@@ -9,7 +9,7 @@ import org.springframework.validation.BindingResult;
 import java.util.List;
 
 public interface AccountService {
-    public Account create(Account shop);
+    public int create(Account shop);
     public Account delete(int id);
     public List<AccountDTO> findAll();
     public Account update(Account shop);

@@ -1,7 +1,9 @@
 package com.tri.erp.spring.model;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * Created by TSI Admin on 9/9/2014.
@@ -87,6 +89,5 @@ public class AccountGroup {
     public void setId(int id) {
         this.id = id;
     }
-
 
 }

@@ -7,6 +7,8 @@ import org.hibernate.annotations.NotFoundAction;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by TSI Admin on 9/9/2014.
@@ -23,7 +25,6 @@ public class Account {
     @Column
     private String code;
 
-    @NotEmpty
     @Column
     private String title;
 
@@ -33,14 +34,11 @@ public class Account {
     @Column(name = "sl_acct")
     private String SLAccount;
 
-    @Column(name = "auxilliary_acct")
+    @Column(name = "auxiliary_acct")
     private String auxiliaryAccount;
 
     @Column(name = "normal_balance")
     private int normalBalance;
-
-    @Column(name = "parent_acct_id", insertable = false, updatable = false)
-    protected int parentAcctId;
 
     @Column
     private int level;
@@ -55,11 +53,15 @@ public class Account {
     private int hasSL;
 
     @JsonIgnoreProperties(ignoreUnknown = true)
+    @NotFound(action = NotFoundAction.IGNORE)
+    @OneToMany(mappedBy = "parentAccount")
+    private List<Account> childAccount = new ArrayList();
+
+    @JsonIgnoreProperties(ignoreUnknown = true)
     @ManyToOne(fetch = FetchType.LAZY)
     @NotFound(action = NotFoundAction.IGNORE)
     @JoinColumn(name="acct_type_id")
     private AccountType accountType;
-
 
     @JsonIgnoreProperties(ignoreUnknown = true)
     @ManyToOne(fetch = FetchType.LAZY)
@@ -68,26 +70,26 @@ public class Account {
     private AccountGroup accountGroup;
 
     @JsonIgnoreProperties(ignoreUnknown = true)
-    @ManyToOne(fetch = FetchType.LAZY)
     @NotFound(action = NotFoundAction.IGNORE)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.ALL}, optional = true)
     @JoinColumn(name="parent_acct_id")
     private Account parentAccount;
 
-    public Account(Account parentAccount, String code, String title, String GLAccount, String SLAccount, String auxiliaryAccount, int normalBalance, int parentAcctId, int level, int active, int isHeader, int hasSL, AccountType accountType, AccountGroup accountGroup) {
-        this.parentAccount = parentAccount;
+    public Account(String code, String title, String GLAccount, String SLAccount, String auxiliaryAccount, int normalBalance, int level, int active, int isHeader, int hasSL, List childAccount, AccountType accountType, AccountGroup accountGroup, Account parentAccount) {
         this.code = code;
         this.title = title;
         this.GLAccount = GLAccount;
         this.SLAccount = SLAccount;
         this.auxiliaryAccount = auxiliaryAccount;
         this.normalBalance = normalBalance;
-        this.parentAcctId = parentAcctId;
         this.level = level;
         this.active = active;
-        this.setIsHeader(isHeader);
+        this.isHeader = isHeader;
         this.hasSL = hasSL;
+        this.childAccount = childAccount;
         this.accountType = accountType;
         this.accountGroup = accountGroup;
+        this.parentAccount = parentAccount;
     }
 
     public Account() {}
@@ -138,35 +140,6 @@ public class Account {
     public void setTitle(String title) {
         this.title = title;
     }
-
-    /**
-     * @return the accountType
-     */
-    public AccountType getAccountType() {
-        return accountType;
-    }
-
-    /**
-     * @param accountType the accountType to set
-     */
-    public void setAccountType(AccountType accountType) {
-        this.accountType = accountType;
-    }
-
-    /**
-     * @return the accountGroup
-     */
-    public AccountGroup getAccountGroup() {
-        return accountGroup;
-    }
-
-    /**
-     * @param accountGroup the accountGroup to set
-     */
-    public void setAccountGroup(AccountGroup accountGroup) {
-        this.accountGroup = accountGroup;
-    }
-
     /**
      * @return the normalBalance
      */
@@ -180,21 +153,6 @@ public class Account {
     public void setNormalBalance(int normalBalance) {
         this.normalBalance = normalBalance;
     }
-
-    /**
-     * @return the parentAcctId
-     */
-    public int getParentAcctId() {
-        return parentAcctId;
-    }
-
-    /**
-     * @param parentAcctId the parentAcctId to set
-     */
-    public void setParentAcctId(int parentAcctId) {
-        this.parentAcctId = parentAcctId;
-    }
-
     /**
      * @return the level
      */
@@ -222,21 +180,6 @@ public class Account {
     public void setActive(int active) {
         this.active = active;
     }
-
-    /**
-     * @return the parentAccount
-     */
-    public Account getParentAccount() {
-        return parentAccount;
-    }
-
-    /**
-     * @param parentAccount the parentAccount to set
-     */
-    public void setParentAccount(Account parentAccount) {
-        this.parentAccount = parentAccount;
-    }
-
     /**
      * @return the GLAccount
      */
@@ -306,7 +249,6 @@ public class Account {
      * @return the hasSL
      */
 
-
     @JsonProperty("hasSL")
     public int hasSL() {
         return hasSL;
@@ -329,5 +271,37 @@ public class Account {
     @JsonProperty("isHeader")
     public void setIsHeader(int isHeader) {
         this.isHeader = isHeader;
+    }
+
+    public AccountType getAccountType() {
+        return accountType;
+    }
+
+    public void setAccountType(AccountType accountType) {
+        this.accountType = accountType;
+    }
+
+    public AccountGroup getAccountGroup() {
+        return accountGroup;
+    }
+
+    public void setAccountGroup(AccountGroup accountGroup) {
+        this.accountGroup = accountGroup;
+    }
+
+    public Account getParentAccount() {
+        return parentAccount;
+    }
+
+    public void setParentAccount(Account parentAccount) {
+        this.parentAccount = parentAccount;
+    }
+
+    public List<Account> getChildAccount() {
+        return childAccount;
+    }
+
+    public void setChildAccount(List<Account> childAccount) {
+        this.childAccount = childAccount;
     }
 }

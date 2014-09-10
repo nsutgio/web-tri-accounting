@@ -1,6 +1,7 @@
 package com.tri.erp.spring.model;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -21,7 +22,6 @@ public class AccountType {
 
     @Column
     private String code;
-
 
     public AccountType(String description, String code) {
         this.description = description;
@@ -91,5 +91,4 @@ public class AccountType {
         hash = 97 * hash + Objects.hashCode(this.code);
         return hash;
     }
-
 }
