@@ -54,11 +54,11 @@ coaControllers.controller('newAccountController', ['$scope', '$routeParams', '$h
         $scope.account = {
             "title" : "test 1",
             "GLAccount" : "GL",
-            "SLAccount" : "SL1",
+            "SLAccount" : "SL",
             "auxiliaryAccount" : "AX1",
-            "is_header" : "1",
-            "isActive" : "1",
-            "has_sl" : "1"
+            "isHeader" : "1",
+            "active" : "1",
+            "hasSL" : "1"
         };
 
         var res = $http.post(resourceURI, $scope.account);

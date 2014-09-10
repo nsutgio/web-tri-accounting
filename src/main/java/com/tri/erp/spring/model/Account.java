@@ -1,6 +1,7 @@
 package com.tri.erp.spring.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
 
@@ -46,7 +47,7 @@ public class Account {
     private int active;
 
     @Column(name = "is_header")
-    protected int isHeader;
+    private int isHeader;
 
     @Column(name = "has_sl")
     private int hasSL;
@@ -81,7 +82,7 @@ public class Account {
         this.parentAcctId = parentAcctId;
         this.level = level;
         this.active = active;
-        this.isHeader = isHeader;
+        this.setIsHeader(isHeader);
         this.hasSL = hasSL;
         this.accountType = accountType;
         this.accountGroup = accountGroup;
@@ -99,7 +100,7 @@ public class Account {
         this.parentAcctId = parentAcctId;
         this.level = level;
         this.active = active;
-        this.isHeader = isHeader;
+        this.setIsHeader(isHeader);
         this.hasSL = hasSL;
     }
 
@@ -253,6 +254,8 @@ public class Account {
     /**
      * @return the GLAccount
      */
+
+    @JsonProperty("GLAccount")
     public String getGLAccount() {
         return GLAccount;
     }
@@ -260,6 +263,8 @@ public class Account {
     /**
      * @param GLAccount the GLAccount to set
      */
+
+    @JsonProperty("GLAccount")
     public void setGLAccount(String GLAccount) {
         this.GLAccount = GLAccount;
     }
@@ -267,6 +272,8 @@ public class Account {
     /**
      * @return the SLAccount
      */
+
+    @JsonProperty("SLAccount")
     public String getSLAccount() {
         return SLAccount;
     }
@@ -274,6 +281,8 @@ public class Account {
     /**
      * @param SLAccount the SLAccount to set
      */
+
+    @JsonProperty("SLAccount")
     public void setSLAccount(String SLAccount) {
         this.SLAccount = SLAccount;
     }
@@ -296,19 +305,23 @@ public class Account {
      * @return the isHeader
      */
     public int isHeader() {
-        return isHeader;
+        return getIsHeader();
     }
 
     /**
      * @param isHeader the isHeader to set
      */
+
     public void isHeader(int isHeader) {
-        this.isHeader = isHeader;
+        this.setIsHeader(isHeader);
     }
 
     /**
      * @return the hasSL
      */
+
+
+    @JsonProperty("hasSL")
     public int hasSL() {
         return hasSL;
     }
@@ -316,8 +329,19 @@ public class Account {
     /**
      * @param hasSL the hasSL to set
      */
+    @JsonProperty("hasSL")
     public void hasSL(int hasSL) {
         this.hasSL = hasSL;
     }
 
+
+    @JsonProperty("isHeader")
+    public int getIsHeader() {
+        return isHeader;
+    }
+
+    @JsonProperty("isHeader")
+    public void setIsHeader(int isHeader) {
+        this.isHeader = isHeader;
+    }
 }
