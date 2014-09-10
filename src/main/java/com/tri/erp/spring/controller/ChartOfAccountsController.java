@@ -40,7 +40,6 @@ public class ChartOfAccountsController {
     @ResponseBody
     public List<AccountDTO> accountList() {
         List<AccountDTO> accountList = accountService.findAll();
-        System.out.println(accountList);
         return accountList;
     }
 }

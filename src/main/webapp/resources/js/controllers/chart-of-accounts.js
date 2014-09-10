@@ -4,17 +4,11 @@ coaControllers.controller('accountTreeController', ['$scope', '$http', '$locatio
     $scope.accounts = {};
 
     $http.get(baseURL + '/accounts').success(function(data) {
-
+        console.log(data);
         if (data.length > 0) {
             $scope.accounts = data;
-        } else {
-            $scope.accounts = "No data.";
         }
-
-        console.log($scope.accounts);
-
-
     }).error(function(data) {
-        $scope.accounts = "Something went wrong!";
+        alert("Something went wrong!");
     });
 }]);
