@@ -16,12 +16,12 @@
         <div style="max-height: 600px; overflow: auto">
             <table class="table table-condensed table-responsive">
                 <tbody>
-                <tr class="animate-repeat" ng-repeat="account in accounts | filter:q">
+                <tr class="animate-repeat" ng-repeat="account in accounts | filter:q as results">
                     <td class="code-col">{{account.code}}</td>
                     <td>{{account.title}}</td>
                 </tr>
-                <tr class="animate-repeat" ng-if="accounts.length == 0">
-                    <td colspan="2">No data.</td>
+                <tr class="animate-repeat" ng-show="results.length == 0">
+                    <td colspan="2">No records found.</td>
                 </tr>
                 </tbody>
             </table>
