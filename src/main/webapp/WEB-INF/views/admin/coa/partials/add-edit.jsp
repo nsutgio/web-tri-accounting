@@ -1,9 +1,11 @@
+<div class="row-top-buffer"></div>
 <div class="row">
     <div class="col-md-12 col-lg-12">
         <div class="alert alert-info">Add an account</div>
     </div>
 </div>
 <form id="add-account-form" method="POST">
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
     <div class="row">
         <div class="col-md-7 col-lg-7">
             <div class="col-md-3 col-lg-3">
@@ -187,8 +189,10 @@
             <div class="col-md-3 col-lg-3">
             </div>
             <div class="col-md-5 col-lg-5">
-                <button type="reset" class="btn btn-default">Reset</button>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <fieldset ng-disabled="submitting">
+                    <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk"></span> Save</button>
+                    <button type="reset" class="btn btn-default"><span class="glyphicon glyphicon-refresh"></span> Reset</button>
+                </fieldset>
             </div>
         </div>
     </div>

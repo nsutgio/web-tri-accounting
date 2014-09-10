@@ -10,7 +10,7 @@
         <div ng-app="coaApp">
             <div class="row">
                 <div class="col-md-12 col-lg-12">
-                    <a href="#/new">Add</a>
+                    <label class="btn btn-default"><a href="#/new">Add</a></label>
                 </div>
             </div>
             <div id="coa-content" ng-view>Loading...</div>
