@@ -1,10 +1,9 @@
 <div class="row-top-buffer"></div>
 <div class="row">
     <div class="col-md-12 col-lg-12">
-        <div class="alert alert-info">Add an account</div>
+        <div class="alert alert-info">{{ title }}</div>
     </div>
 </div>
-<div id="messages" class="alert alert-success" ng-show="message">{{ message }}</div>
 <form ng-submit="processForm()">
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
     <div class="row">
@@ -15,7 +14,7 @@
             <div class="col-md-5 col-lg-5">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-filter"></i></span>
-                    <input id="code" name="code" class="form-control" type="text" placeholder="Auto generated" disabled/>
+                    <input required ng-model="account.code" id="code" name="code" class="form-control" type="text" placeholder="Auto generated" readonly/>
                 </div>
             </div>
         </div>
@@ -29,7 +28,7 @@
             <div class="col-md-9 col-lg-9">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-filter"></i></span>
-                    <input id="title" name="title" class="form-control" type="text" placeholder="Enter account title"/>
+                    <input required ng-model="account.title" id="title" name="title" class="form-control" type="text" placeholder="Enter account title"/>
                 </div>
             </div>
         </div>
@@ -44,7 +43,7 @@
             <div class="col-md-5 col-lg-5">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-filter"></i></span>
-                    <input id="gl_acct" name="gl_acct" class="form-control" type="text" placeholder="Enter GL account"/>
+                    <input required ng-model="account.GLAccount" id="gl_acct" name="gl_acct" class="form-control" type="text" placeholder="Enter GL account"/>
                 </div>
             </div>
         </div>
@@ -59,7 +58,7 @@
             <div class="col-md-5 col-lg-5">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-filter"></i></span>
-                    <input id="sl_acct" name="sl_acct" class="form-control" type="text" placeholder="Enter SL account"/>
+                    <input required ng-model="account.SLAccount" id="sl_acct" name="sl_acct" class="form-control" type="text" placeholder="Enter SL account"/>
                 </div>
             </div>
         </div>
@@ -74,7 +73,7 @@
             <div class="col-md-5 col-lg-5">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-filter"></i></span>
-                    <input id="auxilliary_acct" name="auxilliary_acct" class="form-control" type="text" placeholder="Enter auxiliary account"/>
+                    <input required ng-model="account.auxiliaryAccount" id="auxilliary_acct" name="auxilliary_acct" class="form-control" type="text" placeholder="Enter auxiliary account"/>
                 </div>
             </div>
         </div>
@@ -89,7 +88,7 @@
             <div class="col-md-5 col-lg-5">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-filter"></i></span>
-                    <select id="normal_balance" name="normal_balance" class="form-control">
+                    <select required ng-model="account.normalBalance" id="normal_balance" name="normal_balance" class="form-control">
                         <option value="1">Debit</option>
                         <option value="2">Credit</option>
                     </select>
@@ -107,8 +106,8 @@
             <div class="col-md-9 col-lg-9">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-filter"></i></span>
-                    <select id="acct_group_id" name="acct_group_id" class="form-control">
-                        <option value="0">Select group</option>
+                    <select required ng-model="account.accountGroup" id="acct_group_id" name="acct_group_id" class="form-control">
+                        <option value="">Select group</option>
                         <option value="29">Accounts Payable</option>
                         <option value="14">Accounts Receivable Items-Under Litigation</option>
                         <option value="32">Accrued Interest</option>
@@ -128,8 +127,8 @@
             <div class="col-md-9 col-lg-9">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-filter"></i></span>
-                    <select id="acct_type_id" name="acct_type_id" class="form-control">
-                        <option value="0">Select type</option>
+                    <select required ng-model="account.accountType" id="acct_type_id" name="acct_type_id" class="form-control">
+                        <option value="">Select type</option>
                         <option value="1">Asset</option>
                         <option value="2">Liabilities</option>
                         <option value="3">Members' Equity and Margins</option>
@@ -151,8 +150,8 @@
             <div class="col-md-9 col-lg-9">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-filter"></i></span>
-                    <select id="parent_acct_id" name="parent_acct_id" class="form-control">
-                        <option value="0">Select parent</option>
+                    <select ng-model="account.parentAccount" id="parent_acct_id" name="parent_acct_id" class="form-control">
+                        <option value="">Select parent</option>
                         <option value="19">ASSETS</option>
                         <option value="20">NON-CURRENT ASSETS</option>
                         <option value="32">CURRENT ASSETS</option>
@@ -176,9 +175,9 @@
             </div>
             <div class="col-md-9 col-lg-9">
                 <div class="inline-group">
-                    <label style="margin-right: 20px;"><input type="checkbox" id="has_sl" name="has_sl"> Has SL</label>
-                    <label style="margin-right: 20px;"><input type="checkbox" id="is_header" name="is_header"> Is Header</label>
-                    <label><input type="checkbox" id="isActive" name="isActive"> Active</label>
+                    <label style="margin-right: 20px;"><input ng-model="account.hasSL" type="checkbox" id="has_sl" name="has_sl"> Has SL</label>
+                    <label style="margin-right: 20px;"><input ng-model="account.isHeader" type="checkbox" id="is_header" name="is_header"> Is Header</label>
+                    <label><input ng-model="account.active" type="checkbox" id="isActive" name="isActive"> Active</label>
                 </div>
             </div>
         </div>

@@ -29,8 +29,8 @@ public class Account {
     @Column(name = "sl_acct")
     private String SLAccount;
 
-    @Column(name = "auxilliary_acct")
-    private String auxilliaryAccount;
+    @Column(name = "auxiliary_acct")
+    private String auxiliaryAccount;
 
     @Column(name = "normal_balance")
     private int normalBalance;
@@ -65,13 +65,13 @@ public class Account {
     @JoinColumn(name="parent_acct_id")
     private Account parentAccount;
 
-    public Account(Account parentAccount, String code, String title, String GLAccount, String SLAccount, String auxilliaryAccount, int normalBalance, int parentAcctId, int level, int active, int isHeader, int hasSL, AccountType accountType, AccountGroup accountGroup) {
+    public Account(Account parentAccount, String code, String title, String GLAccount, String SLAccount, String auxiliaryAccount, int normalBalance, int parentAcctId, int level, int active, int isHeader, int hasSL, AccountType accountType, AccountGroup accountGroup) {
         this.parentAccount = parentAccount;
         this.code = code;
         this.title = title;
         this.GLAccount = GLAccount;
         this.SLAccount = SLAccount;
-        this.auxilliaryAccount = auxilliaryAccount;
+        this.auxiliaryAccount = auxiliaryAccount;
         this.normalBalance = normalBalance;
         this.parentAcctId = parentAcctId;
         this.level = level;
@@ -258,17 +258,17 @@ public class Account {
     }
 
     /**
-     * @return the auxilliaryAccount
+     * @return the auxiliaryAccount
      */
-    public String getAuxilliaryAccount() {
-        return auxilliaryAccount;
+    public String getAuxiliaryAccount() {
+        return auxiliaryAccount;
     }
 
     /**
-     * @param auxilliaryAccount the auxilliaryAccount to set
+     * @param auxiliaryAccount the auxiliaryAccount to set
      */
-    public void setAuxilliaryAccount(String auxilliaryAccount) {
-        this.auxilliaryAccount = auxilliaryAccount;
+    public void setAuxiliaryAccount(String auxiliaryAccount) {
+        this.auxiliaryAccount = auxiliaryAccount;
     }
 
     /**
