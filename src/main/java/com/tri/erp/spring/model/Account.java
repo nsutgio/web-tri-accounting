@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 
@@ -22,6 +23,7 @@ public class Account {
     @Column
     private String code;
 
+    @NotEmpty
     @Column
     private String title;
 
@@ -31,7 +33,7 @@ public class Account {
     @Column(name = "sl_acct")
     private String SLAccount;
 
-    @Column(name = "auxiliary_acct")
+    @Column(name = "auxilliary_acct")
     private String auxiliaryAccount;
 
     @Column(name = "normal_balance")
@@ -86,22 +88,6 @@ public class Account {
         this.hasSL = hasSL;
         this.accountType = accountType;
         this.accountGroup = accountGroup;
-    }
-
-
-    public Account(Account parentAccount, String code, String title, String GLAccount, String SLAccount, String auxiliaryAccount, int normalBalance, int parentAcctId, int level, int active, int isHeader, int hasSL) {
-        this.parentAccount = parentAccount;
-        this.code = code;
-        this.title = title;
-        this.GLAccount = GLAccount;
-        this.SLAccount = SLAccount;
-        this.auxiliaryAccount = auxiliaryAccount;
-        this.normalBalance = normalBalance;
-        this.parentAcctId = parentAcctId;
-        this.level = level;
-        this.active = active;
-        this.setIsHeader(isHeader);
-        this.hasSL = hasSL;
     }
 
     public Account() {}

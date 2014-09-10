@@ -12,6 +12,12 @@ coaControllers.controller('accountTreeController', ['$scope', '$http', '$locatio
     });
 }]);
 
+
+coaControllers.controller('accountDetailsController', ['$scope', '$http', '$location', function($scope, $http, $location) {
+
+}]);
+
+
 coaControllers.controller('newAccountController', ['$scope', '$routeParams', '$http', '$resource', function($scope, $routeParams, $http,  $resource) {
 
     $scope.account = {};
@@ -49,21 +55,22 @@ coaControllers.controller('newAccountController', ['$scope', '$routeParams', '$h
         $scope.submitting = true;
         $http.defaults.headers.post['X-CSRF-TOKEN'] = $('input[name=_csrf]').val();
 
+        if ($scope.account.hasOwnProperty('active')) {
+            $scope.account.active = 1;
+        }
+
+        if ($scope.account.hasOwnProperty('hasSL')) {
+            $scope.account.hasSL = 1;
+        }
+
+        if ($scope.account.hasOwnProperty('isHeader')) {
+            $scope.account.isHeader = 1;
+        }
 
         console.log($scope.account);
-        $scope.account = {
-            "title" : "test 1",
-            "GLAccount" : "GL",
-            "SLAccount" : "SL",
-            "auxiliaryAccount" : "AX1",
-            "isHeader" : "1",
-            "active" : "1",
-            "hasSL" : "1"
-        };
 
         var res = $http.post(resourceURI, $scope.account);
         res.success(function(data) {
-            console.log(data);
             if (!data.success) {
                 // if not successful, bind errors to error variables
 //                var messages = data.messages;
@@ -78,7 +85,7 @@ coaControllers.controller('newAccountController', ['$scope', '$routeParams', '$h
 
                 setTimeout(function () {
                     $scope.$apply(function () {
-                        window.location.href = '#/accounts';
+                        window.location.href = '#/account';
                     });
                 }, 4000);
             }
