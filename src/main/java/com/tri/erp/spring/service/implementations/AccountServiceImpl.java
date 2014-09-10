@@ -34,8 +34,6 @@ public class AccountServiceImpl implements AccountService {
     public List<AccountDTO> findAll() {
         List<AccountDTO> accountsDtoList = new ArrayList<>();
         List<Account> accounts = accountRepo.findAll();
-        System.out.println("Results: ");
-        System.out.println(accounts);
         if (accounts != null && accounts.size() > 0) {
             for (Account account : accounts) {
                 AccountDTO accountDTO = new AccountDTO();

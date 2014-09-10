@@ -8,18 +8,16 @@
     </div>
 </div>
 <div class="row">
+    <div class="col-md-2 col-lg-2"><span style="font-weight: bold; padding-left: 7px;">Code</span></div>
+    <div class="col-md-10 col-lg-10"><span style="font-weight: bold">Title</span></div>
+</div>
+<div class="row">
     <div class="col-md-12 col-lg-12">
         <div style="max-height: 600px; overflow: auto">
             <table class="table table-condensed table-responsive">
-                <thead>
-                <tr>
-                    <th>Code</th>
-                    <th>Title</th>
-                </tr>
-                </thead>
                 <tbody>
                 <tr class="animate-repeat" ng-repeat="account in accounts | filter:q">
-                    <td>{{account.code}}</td>
+                    <td class="code-col">{{account.code}}</td>
                     <td>{{account.title}}</td>
                 </tr>
                 <tr class="animate-repeat" ng-if="accounts.length == 0">
