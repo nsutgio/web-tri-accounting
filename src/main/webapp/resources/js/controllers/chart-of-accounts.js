@@ -15,6 +15,27 @@ coaControllers.controller('accountTreeController', ['$scope', '$http', '$locatio
 
 coaControllers.controller('newAccountController', ['$scope', '$http', '$location', function($scope, $http, $location) {
 
+    $scope.shop = {};
+    $scope.errors = {};
+    $scope.submitting = false;
+    $scope.panelTitle = 'Create new shop';
+    var resourceURI = baseURL + '/create';
+
+    alert(resourceURI);
+//    if(!($routeParams.shopId === undefined)) {  // update mode
+//        $scope.panelTitle = 'Update shop';
+//
+//        $scope.shopId = $routeParams.shopId;
+//        $http.get(baseURL + 'shop/'+ $scope.shopId + '/edit').success(function(data) {
+//            if (data === '') {    // not found
+//                window.location.href = '#/shop';
+//            } else {
+//                $scope.shop = data;
+//            }
+//        });
+//        resourceURI = baseURL + 'shop/edit';
+//    }
+
     $scope.processForm = function() {
         $scope.errors = {};
         $scope.submitting = true;

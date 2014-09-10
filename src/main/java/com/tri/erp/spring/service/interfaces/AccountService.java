@@ -1,7 +1,10 @@
 package com.tri.erp.spring.service.interfaces;
 
+import com.tri.erp.spring.commons.Response;
 import com.tri.erp.spring.dto.AccountDTO;
 import com.tri.erp.spring.model.Account;
+import org.springframework.context.MessageSource;
+import org.springframework.validation.BindingResult;
 
 import java.util.List;
 
@@ -11,4 +14,5 @@ public interface AccountService {
     public List<AccountDTO> findAll();
     public Account update(Account shop);
     public Account findById(int id);
+    public Response processCreate(Account account, BindingResult bindingResult, MessageSource messageSource);
 }

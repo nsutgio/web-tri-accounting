@@ -4,7 +4,8 @@
         <div class="alert alert-info">Add an account</div>
     </div>
 </div>
-<form id="add-account-form" method="POST">
+<div id="messages" class="alert alert-success" ng-show="message">{{ message }}</div>
+<form ng-submit="processForm()">
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
     <div class="row">
         <div class="col-md-7 col-lg-7">

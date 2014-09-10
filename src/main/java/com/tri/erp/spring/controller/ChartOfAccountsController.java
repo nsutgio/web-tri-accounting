@@ -1,14 +1,22 @@
 package com.tri.erp.spring.controller;
 
+import com.tri.erp.spring.commons.Response;
+import com.tri.erp.spring.commons.beans.CreateAccountResponse;
+import com.tri.erp.spring.commons.helpers.MessageFormatter;
 import com.tri.erp.spring.dto.AccountDTO;
 import com.tri.erp.spring.model.Account;
 import com.tri.erp.spring.service.interfaces.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +30,9 @@ public class ChartOfAccountsController {
 
     @Autowired
     AccountService accountService;
+
+    @Autowired
+    MessageSource messageSource;
 
     // view providers
     @RequestMapping(method = RequestMethod.GET)
@@ -38,7 +49,6 @@ public class ChartOfAccountsController {
     public String newAccount() {
         return BASE_PATH + "add-edit";
     }
-
     // end: view providers
 
     // json providers
@@ -47,5 +57,13 @@ public class ChartOfAccountsController {
     public List<AccountDTO> accountList() {
         List<AccountDTO> accountList = accountService.findAll();
         return accountList;
+    }
+    // end: json provides
+
+    // create account
+    @RequestMapping(value = "/create", method = RequestMethod.POST)
+    @ResponseBody
+    public Response createAccount(@Valid @RequestBody Account account, BindingResult bindingResult) {
+        return accountService.processCreate(account, bindingResult, messageSource);
     }
 }
