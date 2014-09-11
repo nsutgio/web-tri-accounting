@@ -77,7 +77,14 @@ public class AccountServiceImpl implements AccountService {
         Response response = new CreateAccountResponse();
 
         if (bindingResult.hasErrors()) {
-            response = MessageFormatter.errorMessages(bindingResult, messageSource, response);
+            MessageFormatter messageFormatter = new MessageFormatter(bindingResult, messageSource, response);
+            messageFormatter.buildErrorMessages();
+            messageFormatter.setCustomMessage(
+                    // {new key, existing key, actual message}
+                    new String[] {"accountType", "accountType.code", "Must select an account type"},
+                    new String[] {"accountGroup", "accountGroup.accountGroupCode", "Must select an account group"}
+            );
+            response = messageFormatter.getRespone();
             response.setSuccess(false);
         } else {
 
