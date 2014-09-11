@@ -36,20 +36,6 @@ coaControllers.controller('newAccountController', ['$scope', '$routeParams', '$h
     $scope.title = 'Add an account';
     var resourceURI = baseURL + '/create';
 
-//    if(!($routeParams.accountId === undefined)) {  // update mode
-//        $scope.title = 'Update account';
-//
-//        $scope.accountId = $routeParams.accountId;
-//        $http.get(baseURL + '/account/'+ $scope.accountId + '/edit').success(function(data) {
-//            if (data === '') {    // not found
-//                window.location.href = '#/accounts';
-//            } else {
-//                $scope.account = data;
-//            }
-//        });
-//        resourceURI = baseURL + '/account/edit';
-//    }
-
     $scope.processForm = function() {
 
         $scope.save ='Saving...';

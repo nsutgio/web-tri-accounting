@@ -28,12 +28,6 @@ public class Account {
     @Column(name = "acct_id")
     private int id;
 
-    @NotEmpty
-    @Size(
-            min = 3,
-            max = 20,
-            message = "The title '${validatedValue}' must be between {min} and {max} characters long"
-    )
     @Column
     private String code;
 

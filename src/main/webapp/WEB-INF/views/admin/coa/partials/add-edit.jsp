@@ -9,20 +9,6 @@
     <div class="row">
         <div class="col-md-10 col-lg-10">
             <div class="col-md-2 col-lg-2">
-                <label class="input-label" for="code">Code</label>
-            </div>
-            <div class="col-md-3 col-lg-3">
-                <div class="input-group">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-filter"></i></span>
-                    <input required ng-model="account.code" id="code" name="code" class="form-control" type="text" placeholder="Auto generated" readonly/>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row-top-buffer"></div>
-    <div class="row">
-        <div class="col-md-10 col-lg-10">
-            <div class="col-md-2 col-lg-2">
                 <label class="input-label" for="title">Title</label>
             </div>
             <div class="col-md-6 col-lg-6">
