@@ -75,15 +75,21 @@ public class AccountServiceImpl implements AccountService {
     @Transactional
     public Response processCreate(Account account, BindingResult bindingResult, MessageSource messageSource) {
         Response response = new CreateAccountResponse();
+        MessageFormatter messageFormatter = new MessageFormatter(bindingResult, messageSource, response);
+        boolean hasError = false;
 
-        if (bindingResult.hasErrors()) {
-            MessageFormatter messageFormatter = new MessageFormatter(bindingResult, messageSource, response);
+        if (account.getAccountGroup() == null || account.getAccountGroup().getId() <= 0) {
+            messageFormatter.setCustomMessage(new String[] {"accountGroup", "Must select an account group"});
+            hasError = true;
+        }
+
+        if (account.getAccountType() == null || account.getAccountType().getId() <= 0) {
+            messageFormatter.setCustomMessage(new String[] {"accountType", "Must select an account type"});
+            hasError = true;
+        }
+
+        if (bindingResult.hasErrors() || hasError) {
             messageFormatter.buildErrorMessages();
-            messageFormatter.setCustomMessage(
-                    // {new key, existing key, actual message}
-                    new String[] {"accountType", "accountType.code", "Must select an account type"},
-                    new String[] {"accountGroup", "accountGroup.accountGroupCode", "Must select an account group"}
-            );
             response = messageFormatter.getRespone();
             response.setSuccess(false);
         } else {

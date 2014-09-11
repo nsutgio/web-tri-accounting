@@ -69,6 +69,7 @@ coaControllers.controller('newAccountController', ['$scope', '$routeParams', '$h
         if ($scope.account.hasOwnProperty('isHeader')) {
             $scope.account.isHeader = 1;
         }
+
         var res = $http.post(resourceURI, $scope.account);
         res.success(function(data) {
             if (!data.success) {

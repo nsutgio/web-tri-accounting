@@ -122,9 +122,9 @@
                     <span class="input-group-addon"><i class="glyphicon glyphicon-filter"></i></span>
                     <select <%--required--%> ng-model="account.accountGroup.id" id="acct_group_id" name="acct_group_id" class="form-control">
                         <option value="">Select group</option>
-                        <%--<option value="29">Accounts Payable</option>--%>
-                        <%--<option value="14">Accounts Receivable Items-Under Litigation</option>--%>
-                        <%--<option value="32">Accrued Interest</option>--%>
+                        <option value="29">Accounts Payable</option>
+                        <option value="14">Accounts Receivable Items-Under Litigation</option>
+                        <option value="32">Accrued Interest</option>
                     </select>
                 </div>
             </div>
@@ -146,11 +146,11 @@
                     <span class="input-group-addon"><i class="glyphicon glyphicon-filter"></i></span>
                     <select <%--required--%> ng-model="account.accountType.id" id="acct_type_id" name="acct_type_id" class="form-control">
                         <option value="">Select type</option>
-                        <%--<option value="1">Asset</option>--%>
-                        <%--<option value="2">Liabilities</option>--%>
-                        <%--<option value="3">Members' Equity and Margins</option>--%>
-                        <%--<option value="4">Revenue</option>--%>
-                        <%--<option value="5">Cost and Expenses</option>--%>
+                        <option value="1">Asset</option>
+                        <option value="2">Liabilities</option>
+                        <option value="3">Members' Equity and Margins</option>
+                        <option value="4">Revenue</option>
+                        <option value="5">Cost and Expenses</option>
                     </select>
                 </div>
             </div>

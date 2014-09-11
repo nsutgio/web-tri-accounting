@@ -45,17 +45,12 @@ public class MessageFormatter {
 
     public void setCustomMessage(String[]... keyFields) {
         if (keyFields.length > 0) {
-            ArrayList<String> responseFields = this.response.getFields();
             for (String[] keyField : keyFields) {
                 String newKey = keyField[0];
-                String existingKey = keyField[1];
-                String message = keyField[2];
+                String message = keyField[1];
 
-                if (responseFields.contains(existingKey)) {
-                    int idx = responseFields.indexOf(existingKey);
-                    response.getMessages().add(idx, message);
-                    response.getFields().add(idx, newKey);
-                }
+                response.getMessages().add(message);
+                response.getFields().add(newKey);
             }
         }
     }

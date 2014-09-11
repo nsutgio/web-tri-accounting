@@ -85,15 +85,12 @@ public class Account {
     @Column(name = "parent_acct_id")
     private int parentAccountId;
 
-
-    @Valid
     @JsonIgnoreProperties(ignoreUnknown = true)
     @NotFound(action = NotFoundAction.IGNORE)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="acct_type_id")
     private AccountType accountType;
 
-    @Valid
     @JsonIgnoreProperties(ignoreUnknown = true)
     @NotFound(action = NotFoundAction.IGNORE)
     @ManyToOne(fetch = FetchType.LAZY)
