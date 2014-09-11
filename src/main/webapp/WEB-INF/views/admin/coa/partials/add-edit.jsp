@@ -28,7 +28,7 @@
             <div class="col-md-9 col-lg-9">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-filter"></i></span>
-                    <input ng-model="account.title" id="title" name="title" class="form-control" type="text" placeholder="Enter account title"/>
+                    <input required ng-model="account.title" id="title" name="title" class="form-control" type="text" placeholder="Enter account title"/>
                 </div>
             </div>
         </div>
@@ -43,7 +43,7 @@
             <div class="col-md-5 col-lg-5">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-filter"></i></span>
-                    <input required ng-model="account.GLAccount" id="gl_acct" name="gl_acct" class="form-control" type="text" placeholder="Enter GL account"/>
+                    <input required ng-model="account.GLAccount" id="gl_acct" name="gl_acct" class="form-control" type="text" pattern="[0-9]*" maxlength="3" placeholder="Enter GL account (000)"/>
                 </div>
             </div>
         </div>
@@ -58,7 +58,7 @@
             <div class="col-md-5 col-lg-5">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-filter"></i></span>
-                    <input required ng-model="account.SLAccount" id="sl_acct" name="sl_acct" class="form-control" type="text" placeholder="Enter SL account"/>
+                    <input required ng-model="account.SLAccount" id="sl_acct" name="sl_acct" class="form-control"  type="text" pattern="[0-9]*" maxlength="2" placeholder="Enter SL account (00)"/>
                 </div>
             </div>
         </div>
@@ -73,7 +73,7 @@
             <div class="col-md-5 col-lg-5">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-filter"></i></span>
-                    <input required ng-model="account.auxiliaryAccount" id="auxilliary_acct" name="auxilliary_acct" class="form-control" type="text" placeholder="Enter auxiliary account"/>
+                    <input required ng-model="account.auxiliaryAccount" id="auxilliary_acct" name="auxilliary_acct" class="form-control"  type="text" pattern="[0-9]*" maxlength="3" placeholder="Enter auxiliary account (000)"/>
                 </div>
             </div>
         </div>
