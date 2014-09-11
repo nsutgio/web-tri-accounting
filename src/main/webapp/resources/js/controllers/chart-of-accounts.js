@@ -69,20 +69,15 @@ coaControllers.controller('newAccountController', ['$scope', '$routeParams', '$h
         if ($scope.account.hasOwnProperty('isHeader')) {
             $scope.account.isHeader = 1;
         }
-
-        console.log($scope.account);
-
         var res = $http.post(resourceURI, $scope.account);
         res.success(function(data) {
             if (!data.success) {
-                // if not successful, bind errors to error variables
-//                var messages = data.messages;
-//                for (var idx = 0; idx < messages.length; idx++) {
-//                    var field = 'err' + data.fields[idx];
-//                    var message = data.messages[idx];
-//                    $scope.errors[field] = message;
-//                }
-                $scope.save ='Saving';
+
+                console.log(data);
+
+                $scope.errors = bindErrorsToElements(data, $scope.errors);
+                $scope.save ='Save';
+                $scope.submitting = false;
             } else {
                 // if successful, bind success message to message
                 $scope.message = data.successMessage;
@@ -96,7 +91,7 @@ coaControllers.controller('newAccountController', ['$scope', '$routeParams', '$h
         });
         res.error(function(data, status, headers, config) {
             alert("Something went wrong!");
-            $scope.save ='Saving';
+            $scope.save ='Save';
             $scope.submitting = false;
         });
     };

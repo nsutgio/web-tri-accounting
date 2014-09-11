@@ -4,8 +4,15 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
+import javax.validation.Valid;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,48 +28,75 @@ public class Account {
     @Column(name = "acct_id")
     private int id;
 
+    @NotEmpty
+    @Size(
+            min = 3,
+            max = 20,
+            message = "The title '${validatedValue}' must be between {min} and {max} characters long"
+    )
     @Column
     private String code;
 
+    @NotEmpty
+    @Size(
+            min = 3,
+            max = 500,
+            message = "The title '${validatedValue}' must be between {min} and {max} characters long"
+    )
     @Column
     private String title;
 
+    @NotEmpty
+    @Length(min = 3, max = 3, message = "GL account must be a 3-character code")
     @Column(name = "gl_acct")
     private String GLAccount;
 
+    @NotEmpty
+    @Length(min = 2, max = 2, message = "SL account must be a 2-character code")
     @Column(name = "sl_acct")
     private String SLAccount;
 
+    @NotEmpty
+    @Length(min = 3, max = 3, message = "Auxiliary account must be a 3-character code")
     @Column(name = "auxiliary_acct")
     private String auxiliaryAccount;
 
+    @Range(min = 1, max = 2)
     @Column(name = "normal_balance")
     private int normalBalance;
 
+    @Range(min = 0, max = 999)
     @Column
     private int level;
 
+    @Range(min = 0, max = 1)
     @Column(name = "isActive")
     private int active;
 
+    @Range(min = 0, max = 1)
     @Column(name = "is_header")
     private int isHeader;
 
+    @Range(min = 0, max = 1)
     @Column(name = "has_sl")
     private int hasSL;
 
+    @Range(min = 0, max = 999,  message = "Select a valid account")
     @Column(name = "parent_acct_id")
     private int parentAccountId;
 
+
+    @Valid
     @JsonIgnoreProperties(ignoreUnknown = true)
-    @ManyToOne(fetch = FetchType.LAZY)
     @NotFound(action = NotFoundAction.IGNORE)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="acct_type_id")
     private AccountType accountType;
 
+    @Valid
     @JsonIgnoreProperties(ignoreUnknown = true)
-    @ManyToOne(fetch = FetchType.LAZY)
     @NotFound(action = NotFoundAction.IGNORE)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="acct_group_id")
     private AccountGroup accountGroup;
 

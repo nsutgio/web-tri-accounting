@@ -1,5 +1,7 @@
 package com.tri.erp.spring.model;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
@@ -17,9 +19,11 @@ public class AccountGroup {
     @GeneratedValue
     private int id;
 
+    @NotEmpty
     @Column(name = "acct_group_id")
     private String accountGroupCode;
 
+    @NotEmpty
     @Column(name = "acct_group_desc")
     private String description;
 

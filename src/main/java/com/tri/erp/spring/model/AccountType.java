@@ -1,5 +1,7 @@
 package com.tri.erp.spring.model;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
@@ -18,8 +20,10 @@ public class AccountType {
     private int id;
 
     @Column
+    @NotEmpty
     private String description;
 
+    @NotEmpty
     @Column
     private String code;
 
