@@ -12,6 +12,7 @@ import com.tri.erp.spring.repo.AccountGroupRepo;
 import com.tri.erp.spring.repo.AccountRepo;
 import com.tri.erp.spring.repo.AccountTypeRepo;
 import com.tri.erp.spring.service.interfaces.AccountService;
+import com.tri.erp.spring.validator.AccountValidator;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -76,21 +77,13 @@ public class AccountServiceImpl implements AccountService {
     public Response processCreate(Account account, BindingResult bindingResult, MessageSource messageSource) {
         Response response = new CreateAccountResponse();
         MessageFormatter messageFormatter = new MessageFormatter(bindingResult, messageSource, response);
-        boolean hasError = false;
 
-        if (account.getAccountGroup() == null || account.getAccountGroup().getId() <= 0) {
-            messageFormatter.setCustomMessage(new String[] {"accountGroup", "Must select an account group"});
-            hasError = true;
-        }
+        AccountValidator accountValidator = new AccountValidator();
+        accountValidator.validate(account, bindingResult);
 
-        if (account.getAccountType() == null || account.getAccountType().getId() <= 0) {
-            messageFormatter.setCustomMessage(new String[] {"accountType", "Must select an account type"});
-            hasError = true;
-        }
-
-        if (bindingResult.hasErrors() || hasError) {
+        if (bindingResult.hasErrors()) {
             messageFormatter.buildErrorMessages();
-            response = messageFormatter.getRespone();
+            response = messageFormatter.getResponse();
             response.setSuccess(false);
         } else {
 

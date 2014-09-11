@@ -106,7 +106,7 @@
             <div class="col-md-6 col-lg-6">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-filter"></i></span>
-                    <select <%--required--%> ng-model="account.accountGroup.id" id="acct_group_id" name="acct_group_id" class="form-control">
+                    <select required ng-model="account.accountGroup.id" id="acct_group_id" name="acct_group_id" class="form-control">
                         <option value="">Select group</option>
                         <option value="29">Accounts Payable</option>
                         <option value="14">Accounts Receivable Items-Under Litigation</option>
@@ -130,7 +130,7 @@
             <div class="col-md-6 col-lg-6">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-filter"></i></span>
-                    <select <%--required--%> ng-model="account.accountType.id" id="acct_type_id" name="acct_type_id" class="form-control">
+                    <select required ng-model="account.accountType.id" id="acct_type_id" name="acct_type_id" class="form-control">
                         <option value="">Select type</option>
                         <option value="1">Asset</option>
                         <option value="2">Liabilities</option>

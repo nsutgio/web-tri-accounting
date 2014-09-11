@@ -43,19 +43,7 @@ public class MessageFormatter {
         }
     }
 
-    public void setCustomMessage(String[]... keyFields) {
-        if (keyFields.length > 0) {
-            for (String[] keyField : keyFields) {
-                String newKey = keyField[0];
-                String message = keyField[1];
-
-                response.getMessages().add(message);
-                response.getFields().add(newKey);
-            }
-        }
-    }
-
-    public Response getRespone() {
+    public Response getResponse() {
         return this.response;
     }
 }
