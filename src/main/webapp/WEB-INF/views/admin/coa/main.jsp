@@ -8,14 +8,6 @@
     </jsp:attribute>
     <jsp:attribute name="body">
         <div ng-app="coaApp">
-            <div class="row">
-                <div class="col-md-12 col-lg-12">
-                    <label class="btn btn-default"><a href="#/new">Add</a></label>
-                </div>
-            </div>
-            <div class="row">
-                <div id="messages" class="alert alert-success" ng-show="message">{{ message }}</div>
-            </div>
             <div id="coa-content" ng-view>Loading...</div>
         </div>
     </jsp:attribute>

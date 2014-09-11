@@ -1,4 +1,9 @@
 <div class="row">
+    <div class="col-md-12 col-lg-12">
+        <button class="btn btn-primary" onclick="(window.location.href = '#/new')">Add</button>
+    </div>
+</div>
+<div class="row">
     <div class="col-md-9 col-lg-9"></div>
     <div class="col-md-3 col-lg-3">
         <div class="input-group">
