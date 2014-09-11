@@ -31,7 +31,7 @@
                     <input required ng-model="account.title" id="title" name="title" class="form-control" type="text" placeholder="Enter account title"/>
                 </div>
             </div>
-            <div class="col-md-4 col-lg-4 input-label">
+            <div class="col-md-4 col-lg-4">
                 <span style="color: red !important;" ng-show="errors.err_title">{{ errors.err_title }}</span>
             </div>
         </div>
