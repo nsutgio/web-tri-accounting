@@ -65,7 +65,7 @@ public class AccountServiceImpl implements AccountService {
                 accountDTO.setId(account.getId());
                 accountDTO.setTitle(account.getTitle());
                 if (account.getAccountType() != null) {
-                    accountDTO.setType(account.getAccountType().getDescription());
+                    accountDTO.setAccountType(account.getAccountType());
                 }
                 accountsDtoList.add(accountDTO);
             }
@@ -88,13 +88,13 @@ public class AccountServiceImpl implements AccountService {
         accountDTO.setTitle(account.getTitle());
         accountDTO.setCode(account.getCode());
         if (account.getAccountType() != null) {
-            accountDTO.setType(account.getAccountType().getDescription());
+            accountDTO.setAccountType(account.getAccountType());
         }
         accountDTO.setLevel(account.getLevel());
         accountDTO.setAuxAccount(account.getAuxiliaryAccount());
         accountDTO.setGLAccount(account.getGLAccount());
         if (account.getAccountGroup() != null) {
-            accountDTO.setGroup(account.getAccountGroup().getDescription());
+            accountDTO.setAccountGroup(account.getAccountGroup());
         }
         accountDTO.hasSL(account.hasSL());
         accountDTO.isActive(account.isActive());

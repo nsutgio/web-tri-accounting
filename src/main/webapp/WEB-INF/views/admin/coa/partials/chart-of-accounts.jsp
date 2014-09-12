@@ -26,7 +26,7 @@
                 <tr class="animate-repeat" ng-repeat="account in accounts | filter:q as results">
                     <td class="code-col">{{account.code}}</td>
                     <td>{{account.title}}</td>
-                    <td class="type-col">{{account.type}}</td>
+                    <td class="type-col">{{account.accountType.description}}</td>
                 </tr>
                 <tr class="animate-repeat" ng-show="results.length == 0">
                     <td colspan="2">No records found.</td>

@@ -4,6 +4,7 @@ coaControllers.controller('accountTreeController', ['$scope', '$http', '$locatio
     $scope.accounts = [{"code":"Loading data..."}];
 
     $http.get(baseURL + '/accounts').success(function(data) {
+        console.log(data);
         if (data.length > 0) {
             $scope.accounts = data;
         }
@@ -14,7 +15,7 @@ coaControllers.controller('accountTreeController', ['$scope', '$http', '$locatio
 
 
 coaControllers.controller('accountDetailsController', ['$scope', '$routeParams', '$http', '$location', function($scope,  $routeParams, $http, $location) {
-    if(!($routeParams.accountId === undefined)) {  // update mode
+    if(!($routeParams.accountId === undefined)) {
         $scope.title = 'Account details';
 
         $scope.accountId = $routeParams.accountId;
@@ -29,10 +30,14 @@ coaControllers.controller('accountDetailsController', ['$scope', '$routeParams',
     } else {
         window.location.hash = '#/accounts';
     }
+
+    $scope.pointToEditForm = function() {
+        window.location.hash = '#/account/' + $scope.accountId + "/edit";
+    }
 }]);
 
 
-coaControllers.controller('newAccountController', ['$scope', '$http', function($scope, $http) {
+coaControllers.controller('newAccountController', ['$scope', '$routeParams', '$http', function($scope, $routeParams, $http) {
 
     $scope.account = {};
     // setup defaults
@@ -49,6 +54,22 @@ coaControllers.controller('newAccountController', ['$scope', '$http', function($
     $scope.save ='Save';
     $scope.title = 'Add an account';
     var resourceURI = baseURL + '/create';
+
+    if(!($routeParams.accountId === undefined)) {  // update mode
+        $scope.title = 'Update account';
+
+        $scope.accountId = $routeParams.accountId;
+        $http.get(baseURL + '/account/'+ $scope.accountId).success(function(data) {
+            console.log(data);
+            if (data === '') {    // not found
+                window.location.hash = '#/account/' + $scope.accountId;
+            } else {
+                $scope.account = data;
+            }
+        });
+
+        resourceURI = baseURL + '/update';
+    }
 
     $scope.processForm = function() {
 
@@ -70,6 +91,8 @@ coaControllers.controller('newAccountController', ['$scope', '$http', function($
             $scope.account.isHeader = 1;
         }
 
+        console.log($scope.account);
+
         var res = $http.post(resourceURI, $scope.account);
         res.success(function(data) {
             if (!data.success) {
@@ -84,7 +107,7 @@ coaControllers.controller('newAccountController', ['$scope', '$http', function($
 
                 setTimeout(function () {
                     $scope.$apply(function () {
-                        window.location.href = '#/account/' + data.modelId;
+                        window.location.hash = '#/account/' + data.modelId;
                     });
                 }, 4000);
             }

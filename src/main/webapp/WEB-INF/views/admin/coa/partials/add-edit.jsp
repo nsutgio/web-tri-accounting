@@ -43,7 +43,7 @@
             <div class="col-md-3 col-lg-3">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-filter"></i></span>
-                    <input required ng-model="account.GLAccount" id="gl_acct" name="gl_acct" class="form-control" type="text"  pattern="[0-9]{3,3}" maxlength="3" placeholder="(000)"/>
+                    <input required ng-model="account.glaccount" id="gl_acct" name="gl_acct" class="form-control" type="text"  pattern="[0-9]{3,3}" maxlength="3" placeholder="(000)"/>
                 </div>
             </div>
             <div class="col-md-4 col-lg-4 input-label">
@@ -66,7 +66,7 @@
             <div class="col-md-3 col-lg-3">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-filter"></i></span>
-                    <input required ng-model="account.SLAccount" id="sl_acct" name="sl_acct" class="form-control"  type="text" pattern="[0-9]{2,2}" maxlength="2" placeholder="(00)"/>
+                    <input required ng-model="account.slaccount" id="sl_acct" name="sl_acct" class="form-control"  type="text" pattern="[0-9]{2,2}" maxlength="2" placeholder="(00)"/>
                 </div>
             </div>
             <div class="col-md-4 col-lg-4 input-label">
@@ -90,7 +90,7 @@
             <div class="col-md-3 col-lg-3">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-filter"></i></span>
-                    <input required ng-model="account.auxiliaryAccount" id="auxilliary_acct" name="auxilliary_acct" class="form-control"  type="text" pattern="[0-9]{3,3}" maxlength="3" placeholder="(000)"/>
+                    <input required ng-model="account.auxAccount" id="auxilliary_acct" name="auxilliary_acct" class="form-control"  type="text" pattern="[0-9]{3,3}" maxlength="3" placeholder="(000)"/>
                 </div>
             </div>
             <div class="col-md-4 col-lg-4 input-label">
@@ -247,8 +247,8 @@
 
     <div class="row-top-buffer"></div>
     <div class="row">
-        <div class="col-md-7 col-lg-7">
-            <div class="col-md-3 col-lg-3">
+        <div class="col-md-12 col-lg-12">
+            <div class="col-md-2 col-lg-2">
             </div>
             <div class="col-md-5 col-lg-5">
                 <fieldset ng-disabled="submitting">

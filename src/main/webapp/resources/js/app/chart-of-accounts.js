@@ -20,6 +20,10 @@ coaApp.config(['$routeProvider',
                 templateUrl: 'coa/account-details-page',
                 controller: 'accountDetailsController'
             }).
+            when('/account/:accountId/edit', {
+                templateUrl: 'coa/new-account-page',
+                controller: 'newAccountController'
+            }).
             otherwise({
                 redirectTo:  '/accounts'
             });

@@ -2,7 +2,7 @@
     <div class="col-md-12 col-lg-12">
         <button class="btn btn-primary" onclick="(window.location.href = '#/accounts')">Chart of Accounts</button>
         <button class="btn btn-primary" onclick="(window.location.href = '#/new')">Add</button>
-        <button class="btn btn-primary" onclick="(window.location.href = '#/new')">Edit</button>
+        <button class="btn btn-primary" ng-click="pointToEditForm()">Edit</button>
     </div>
 </div>
 <div style="margin-top: 20px;"></div>
@@ -86,7 +86,7 @@
             <label class="input-label">Group</label>
         </div>
         <div class="col-md-10 col-lg-10">
-            <label class="value-label">{{ account.group }}</label>
+            <label class="value-label">{{ account.accountGroup.description }}</label>
         </div>
     </div>
 </div>
@@ -97,7 +97,7 @@
             <label class="input-label">Type</label>
         </div>
         <div class="col-md-10 col-lg-10">
-            <label class="value-label">{{ account.type }}</label>
+            <label class="value-label">{{ account.accountType.description }}</label>
         </div>
     </div>
 </div>

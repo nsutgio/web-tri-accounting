@@ -199,7 +199,7 @@ public class Account {
      * @return the GLAccount
      */
 
-    @JsonProperty("GLAccount")
+    @JsonProperty("glaccount")
     public String getGLAccount() {
         return GLAccount;
     }
@@ -208,7 +208,7 @@ public class Account {
      * @param GLAccount the GLAccount to set
      */
 
-    @JsonProperty("GLAccount")
+    @JsonProperty("glaccount")
     public void setGLAccount(String GLAccount) {
         this.GLAccount = GLAccount;
     }
@@ -217,7 +217,7 @@ public class Account {
      * @return the SLAccount
      */
 
-    @JsonProperty("SLAccount")
+    @JsonProperty("slaccount")
     public String getSLAccount() {
         return SLAccount;
     }
@@ -226,7 +226,7 @@ public class Account {
      * @param SLAccount the SLAccount to set
      */
 
-    @JsonProperty("SLAccount")
+    @JsonProperty("slaccount")
     public void setSLAccount(String SLAccount) {
         this.SLAccount = SLAccount;
     }
@@ -234,6 +234,7 @@ public class Account {
     /**
      * @return the auxiliaryAccount
      */
+    @JsonProperty("auxAccount")
     public String getAuxiliaryAccount() {
         return auxiliaryAccount;
     }
@@ -241,6 +242,7 @@ public class Account {
     /**
      * @param auxiliaryAccount the auxiliaryAccount to set
      */
+    @JsonProperty("auxAccount")
     public void setAuxiliaryAccount(String auxiliaryAccount) {
         this.auxiliaryAccount = auxiliaryAccount;
     }

@@ -2,6 +2,8 @@ package com.tri.erp.spring.dto;
 
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import com.google.common.base.Objects;
+import com.tri.erp.spring.model.AccountGroup;
+import com.tri.erp.spring.model.AccountType;
 
 /**
  * Created by arjayadong on 9/9/14.
@@ -11,11 +13,11 @@ public class AccountDTO {
     private int id;
     private String code;
     private String title;
-    private String type;
+    private AccountType accountType;
     private String GLAccount;
     private String SLAccount;
     private String auxAccount;
-    private String group;
+    private AccountGroup accountGroup;
     private int isActive;
     private int level;
     private int hasSL;
@@ -53,14 +55,6 @@ public class AccountDTO {
         return this.code + " => " + this.title;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
     public String getGLAccount() {
         return GLAccount;
     }
@@ -83,14 +77,6 @@ public class AccountDTO {
 
     public void setAuxAccount(String auxAccount) {
         this.auxAccount = auxAccount;
-    }
-
-    public String getGroup() {
-        return group;
-    }
-
-    public void setGroup(String group) {
-        this.group = group;
     }
 
     public int getIsActive() {
@@ -139,5 +125,21 @@ public class AccountDTO {
 
     public void setIsHeader(int isHeader) {
         this.isHeader = isHeader;
+    }
+
+    public AccountType getAccountType() {
+        return accountType;
+    }
+
+    public void setAccountType(AccountType accountType) {
+        this.accountType = accountType;
+    }
+
+    public AccountGroup getAccountGroup() {
+        return accountGroup;
+    }
+
+    public void setAccountGroup(AccountGroup accountGroup) {
+        this.accountGroup = accountGroup;
     }
 }
