@@ -97,6 +97,11 @@ coaControllers.controller('newAccountController', ['$scope', '$routeParams', '$h
             if (!data.success) {
                 console.log(data);
 
+                // retain state
+                $scope.account.isActive = $scope.account.isActive == 1;
+                $scope.account.hasSL = $scope.account.hasSL  == 1;
+                $scope.account.isHeader = $scope.account.isHeader == 1;
+
                 $scope.errors = bindErrorsToElements(data, $scope.errors);
                 $scope.save ='Save';
                 $scope.submitting = false;

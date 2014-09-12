@@ -18,8 +18,6 @@ function bindErrorsToElements(data, scopeErrors) {
                 scopeErrors[field] = [data.messages[idx]];
                 fields.push(field);
             }
-
-            console.log(scopeErrors);
         }
     }catch (err) {}
     return scopeErrors;
