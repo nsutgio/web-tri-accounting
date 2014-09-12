@@ -11,6 +11,7 @@ public class AccountDTO {
     private int id;
     private String code;
     private String title;
+    private String type;
 
     public int getId() {
         return id;
@@ -40,5 +41,13 @@ public class AccountDTO {
     public String toString() {
 
         return this.code + " => " + this.title;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

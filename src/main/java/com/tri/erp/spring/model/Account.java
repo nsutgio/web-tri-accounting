@@ -81,7 +81,7 @@ public class Account {
 
     @JsonIgnoreProperties(ignoreUnknown = true)
     @NotFound(action = NotFoundAction.IGNORE)
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="acct_type_id")
     private AccountType accountType;
 

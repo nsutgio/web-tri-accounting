@@ -1,7 +1,7 @@
 var coaControllers = angular.module('coaControllers', ['ngResource']);
 
 coaControllers.controller('accountTreeController', ['$scope', '$http', '$location', function($scope, $http, $location) {
-    $scope.accounts = {};
+    $scope.accounts = [{"code":"Loading data..."}];
 
     $http.get(baseURL + '/accounts').success(function(data) {
         if (data.length > 0) {
@@ -13,12 +13,12 @@ coaControllers.controller('accountTreeController', ['$scope', '$http', '$locatio
 }]);
 
 
-coaControllers.controller('accountDetailsController', ['$scope', '$http', '$location', function($scope, $http, $location) {
+coaControllers.controller('accountDetailsController', ['$scope', '$routeParams', '$http', '$location', function($scope,  $routeParams, $http, $location) {
 
 }]);
 
 
-coaControllers.controller('newAccountController', ['$scope', '$routeParams', '$http', '$resource', function($scope, $routeParams, $http,  $resource) {
+coaControllers.controller('newAccountController', ['$scope', '$http', function($scope, $http) {
 
     $scope.account = {};
     // setup defaults

@@ -57,6 +57,9 @@ public class AccountServiceImpl implements AccountService {
                 accountDTO.setCode(account.getCode());
                 accountDTO.setId(account.getId());
                 accountDTO.setTitle(account.getTitle());
+                if (account.getAccountType() != null) {
+                    accountDTO.setType(account.getAccountType().getDescription());
+                }
                 accountsDtoList.add(accountDTO);
             }
         }
