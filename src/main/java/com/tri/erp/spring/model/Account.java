@@ -77,7 +77,7 @@ public class Account {
 
     @Range(min = 0, max = 999,  message = "Select a valid account")
     @Column(name = "parent_acct_id")
-    private int parentAccountId;
+    private Integer parentAccountId;
 
     @JsonIgnoreProperties(ignoreUnknown = true)
     @NotFound(action = NotFoundAction.IGNORE)
@@ -95,7 +95,7 @@ public class Account {
     @Transient
     private String parentAccount;
 
-    public Account(String code, String title, String GLAccount, String SLAccount, String auxiliaryAccount, int normalBalance, int level, int active, int isHeader, int hasSL, int parentAccountId, AccountType accountType, AccountGroup accountGroup, String parentAccount) {
+    public Account(String code, String title, String GLAccount, String SLAccount, String auxiliaryAccount, int normalBalance, int level, int active, int isHeader, int hasSL, Integer parentAccountId, AccountType accountType, AccountGroup accountGroup, String parentAccount) {
         this.code = code;
         this.title = title;
         this.GLAccount = GLAccount;
@@ -313,11 +313,11 @@ public class Account {
         this.accountGroup = accountGroup;
     }
 
-    public int getParentAccountId() {
+    public Integer getParentAccountId() {
         return parentAccountId;
     }
 
-    public void setParentAccountId(int parentAccountId) {
+    public void setParentAccountId(Integer parentAccountId) {
         this.parentAccountId = parentAccountId;
     }
 

@@ -49,6 +49,8 @@ coaControllers.controller('newAccountController', ['$scope', '$routeParams', '$h
     $scope.account['accountType'] = accountType;
     $scope.account['parentAccountId'] = "0";
     $scope.account['isActive'] = true;
+    $scope.account['hasSL'] = false;
+    $scope.account['isHeader'] = false;
     $scope.account['parentAccount'] = ""; // workaround
     $scope.errors = {};
     $scope.submitting = false;
@@ -84,17 +86,9 @@ coaControllers.controller('newAccountController', ['$scope', '$routeParams', '$h
         $scope.submitting = true;
         $http.defaults.headers.post['X-CSRF-TOKEN'] = $('input[name=_csrf]').val();
 
-        if ($scope.account.hasOwnProperty('isActive')) {
-            $scope.account.isActive = 1;
-        }
-
-        if ($scope.account.hasOwnProperty('hasSL')) {
-            $scope.account.hasSL = 1;
-        }
-
-        if ($scope.account.hasOwnProperty('isHeader')) {
-            $scope.account.isHeader = 1;
-        }
+        $scope.account.isActive = $scope.account.isActive ? 1 : 0;
+        $scope.account.hasSL = $scope.account.hasSL ? 1 : 0;
+        $scope.account.isHeader = $scope.account.isHeader ? 1 : 0;
 
         console.log($scope.account);
 
