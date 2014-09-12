@@ -13,6 +13,6 @@ public interface AccountService {
     public Account delete(int id);
     public List<AccountDTO> findAll();
     public Account update(Account shop);
-    public Account findById(int id);
+    public AccountDTO findById(int id);
     public Response processCreate(Account account, BindingResult bindingResult, MessageSource messageSource);
 }

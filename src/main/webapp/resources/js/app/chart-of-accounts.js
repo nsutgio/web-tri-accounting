@@ -16,7 +16,7 @@ coaApp.config(['$routeProvider',
                 templateUrl: 'coa/new-account-page',
                 controller: 'newAccountController'
             }).
-            when('/account', {
+            when('/account/:accountId', {
                 templateUrl: 'coa/account-details-page',
                 controller: 'accountDetailsController'
             }).

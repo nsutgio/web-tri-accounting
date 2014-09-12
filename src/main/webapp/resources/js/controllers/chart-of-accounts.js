@@ -14,7 +14,21 @@ coaControllers.controller('accountTreeController', ['$scope', '$http', '$locatio
 
 
 coaControllers.controller('accountDetailsController', ['$scope', '$routeParams', '$http', '$location', function($scope,  $routeParams, $http, $location) {
+    if(!($routeParams.accountId === undefined)) {  // update mode
+        $scope.title = 'Account details';
 
+        $scope.accountId = $routeParams.accountId;
+        $http.get(baseURL + '/account/'+ $scope.accountId).success(function(data) {
+            console.log(data);
+            if (data === '') {    // not found
+                window.location.hash = '#/accounts';
+            } else {
+                $scope.account = data;
+            }
+        });
+    } else {
+        window.location.hash = '#/accounts';
+    }
 }]);
 
 

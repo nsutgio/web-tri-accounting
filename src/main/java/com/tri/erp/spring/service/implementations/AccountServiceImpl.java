@@ -67,13 +67,40 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public Account update(Account shop) {
+    public Account update(Account account) {
         return null;
     }
 
     @Override
-    public Account findById(int id) {
-        return null;
+    public AccountDTO findById(int id) {
+        Account account = accountRepo.findOne(id);
+
+        AccountDTO accountDTO = new AccountDTO();
+
+        accountDTO.setId(account.getId());
+        accountDTO.setTitle(account.getTitle());
+        accountDTO.setCode(account.getCode());
+        if (account.getAccountType() != null) {
+            accountDTO.setType(account.getAccountType().getDescription());
+        }
+        accountDTO.setLevel(account.getLevel());
+        accountDTO.setAuxAccount(account.getAuxiliaryAccount());
+        accountDTO.setGLAccount(account.getGLAccount());
+        if (account.getAccountGroup() != null) {
+            accountDTO.setGroup(account.getAccountGroup().getDescription());
+        }
+        accountDTO.hasSL(account.hasSL());
+        accountDTO.isActive(account.isActive());
+
+        Account parentAccount = accountRepo.findOne(account.getParentAccountId());
+        if (parentAccount != null) {
+            accountDTO.setParentAccount(parentAccount.getTitle());
+        }
+        accountDTO.setSLAccount(account.getSLAccount());
+        accountDTO.setNormalBalance(account.getNormalBalance());
+        accountDTO.setIsHeader(account.getIsHeader());
+
+        return accountDTO;
     }
 
     @Transactional

@@ -7,6 +7,11 @@
      padding-top: 10px;
  }
 
+ .value-label {
+     padding-top: 10px;
+     font-weight: normal;
+ }
+
  /* chart of accounts */
  .code-col {
      width: 190px;

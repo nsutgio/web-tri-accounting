@@ -11,10 +11,7 @@ import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -62,6 +59,13 @@ public class ChartOfAccountsController {
     public List<AccountDTO> accountList() {
         List<AccountDTO> accountList = accountService.findAll();
         return accountList;
+    }
+
+    @RequestMapping(value = "/account/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public AccountDTO getAccount(@PathVariable Integer id) {
+        AccountDTO shop = accountService.findById(id);
+        return shop;
     }
     // end: json provides
 
