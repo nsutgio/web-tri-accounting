@@ -10,6 +10,7 @@ public abstract class Response {
     private ArrayList<String> fields = new ArrayList<>();
     private ArrayList<String> messages = new ArrayList<>();
     private String successMessage;
+    private int modelId;
 
     public boolean isSuccess() {
         return success;
@@ -41,5 +42,13 @@ public abstract class Response {
 
     public void setSuccessMessage(String successMessage) {
         this.successMessage = successMessage;
+    }
+
+    public int getModelId() {
+        return modelId;
+    }
+
+    public void setModelId(int modelId) {
+        this.modelId = modelId;
     }
 }

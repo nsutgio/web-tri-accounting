@@ -73,7 +73,6 @@ coaControllers.controller('newAccountController', ['$scope', '$http', function($
         var res = $http.post(resourceURI, $scope.account);
         res.success(function(data) {
             if (!data.success) {
-
                 console.log(data);
 
                 $scope.errors = bindErrorsToElements(data, $scope.errors);
@@ -85,7 +84,7 @@ coaControllers.controller('newAccountController', ['$scope', '$http', function($
 
                 setTimeout(function () {
                     $scope.$apply(function () {
-                        window.location.href = '#/account';
+                        window.location.href = '#/account/' + data.modelId;
                     });
                 }, 4000);
             }

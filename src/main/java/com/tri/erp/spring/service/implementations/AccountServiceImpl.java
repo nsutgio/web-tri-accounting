@@ -137,8 +137,9 @@ public class AccountServiceImpl implements AccountService {
                     account.setLevel(parentAccount.getLevel() + 1);
                 }
             }
+            Account newAccount = create(account);
 
-            create(account);
+            response.setModelId(newAccount.getId());
             response.setSuccessMessage("Account successfully saved!");
             response.setSuccess(true);
         }

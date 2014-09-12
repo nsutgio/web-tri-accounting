@@ -37,7 +37,7 @@ public class Account {
             max = 500,
             message = "The title '${validatedValue}' must be between {min} and {max} characters long"
     )
-    @Column
+    @Column(unique = true)
     private String title;
 
     @NotEmpty
