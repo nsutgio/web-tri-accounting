@@ -15,4 +15,5 @@ public interface AccountService {
     public Account update(Account shop);
     public AccountDTO findById(int id);
     public Response processCreate(Account account, BindingResult bindingResult, MessageSource messageSource);
-}
+    public Account findByTitle(String title)
+;}

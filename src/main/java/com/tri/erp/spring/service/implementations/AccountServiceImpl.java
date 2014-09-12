@@ -19,6 +19,10 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 
 import javax.annotation.Resource;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,6 +40,9 @@ public class AccountServiceImpl implements AccountService {
 
     @Resource
     private AccountGroupRepo accountGroupRepo;
+
+    @PersistenceContext
+    private EntityManager em;
 
     @Override
     public Account create(Account account) {
@@ -109,6 +116,7 @@ public class AccountServiceImpl implements AccountService {
         MessageFormatter messageFormatter = new MessageFormatter(bindingResult, messageSource, response);
 
         AccountValidator accountValidator = new AccountValidator();
+        accountValidator.setService(this);
         accountValidator.validate(account, bindingResult);
 
         if (bindingResult.hasErrors()) {
@@ -144,5 +152,10 @@ public class AccountServiceImpl implements AccountService {
             response.setSuccess(true);
         }
         return response;
+    }
+
+    @Override
+    public Account findByTitle(String title) {
+        return accountRepo.findByTitle(title);
     }
 }

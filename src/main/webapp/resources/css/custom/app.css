@@ -12,6 +12,11 @@
      font-weight: normal;
  }
 
+ .error-list {
+     list-style-type: none;
+     padding-left: 0;
+ }
+
  /* chart of accounts */
  .code-col {
      width: 190px;

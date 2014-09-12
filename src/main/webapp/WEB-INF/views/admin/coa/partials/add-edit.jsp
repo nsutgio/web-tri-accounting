@@ -12,25 +12,31 @@
 <form ng-submit="processForm()">
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
     <div class="row">
-        <div class="col-md-10 col-lg-10">
+        <div class="col-md-12 col-lg-12">
             <div class="col-md-2 col-lg-2">
                 <label class="input-label" for="title">Title</label>
             </div>
-            <div class="col-md-6 col-lg-6">
+            <div class="col-md-5 col-lg-5">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-filter"></i></span>
                     <input required ng-model="account.title" id="title" name="title" class="form-control" type="text" placeholder="Enter account title"/>
                 </div>
             </div>
-            <div class="col-md-4 col-lg-4">
-                <span style="color: red !important;" ng-show="errors.err_title">{{ errors.err_title }}</span>
+            <div class="col-md-5 col-lg-5">
+                <span style="color: red !important;" ng-show="errors.err_title">
+                    <ul class="error-list">
+                        <li ng-repeat="err in errors.err_title">
+                            {{ err }}
+                        </li>
+                    </ul>
+                </span>
             </div>
         </div>
     </div>
 
     <div class="row-top-buffer"></div>
     <div class="row">
-        <div class="col-md-10 col-lg-10">
+        <div class="col-md-12 col-lg-12">
             <div class="col-md-2 col-lg-2">
                 <label class="input-label" for="gl_acct">GL Account</label>
             </div>
@@ -41,13 +47,19 @@
                 </div>
             </div>
             <div class="col-md-4 col-lg-4 input-label">
-                <span style="color: red !important;" ng-show="errors.err_GLAccount">{{ errors.err_GLAccount }}</span>
+                <span style="color: red !important;" ng-show="errors.err_GLAccount">
+                    <ul class="error-list">
+                        <li ng-repeat="err in errors.err_GLAccount">
+                            {{ err }}
+                        </li>
+                    </ul>
+                </span>
             </div>
         </div>
     </div>
     <div class="row-top-buffer"></div>
     <div class="row">
-        <div class="col-md-10 col-lg-10">
+        <div class="col-md-12 col-lg-12">
             <div class="col-md-2 col-lg-2">
                 <label class="input-label" for="sl_acct">SL Account</label>
             </div>
@@ -58,14 +70,20 @@
                 </div>
             </div>
             <div class="col-md-4 col-lg-4 input-label">
-                <span style="color: red !important;" ng-show="errors.err_SLAccount">{{ errors.err_SLAccount }}</span>
+                <span style="color: red !important;" ng-show="errors.err_SLAccount">
+                    <ul class="error-list">
+                        <li ng-repeat="err in errors.err_SLAccount">
+                            {{ err }}
+                        </li>
+                    </ul>
+                </span>
             </div>
         </div>
     </div>
 
     <div class="row-top-buffer"></div>
     <div class="row">
-        <div class="col-md-10 col-lg-10">
+        <div class="col-md-12 col-lg-12">
             <div class="col-md-2 col-lg-2">
                 <label class="input-label" for="auxilliary_acct">Auxiliary Account</label>
             </div>
@@ -76,14 +94,20 @@
                 </div>
             </div>
             <div class="col-md-4 col-lg-4 input-label">
-                <span style="color: red !important;" ng-show="errors.err_auxiliaryAccount">{{ errors.err_auxiliaryAccount }}</span>
+                <span style="color: red !important;" ng-show="errors.err_auxiliaryAccount">
+                    <ul class="error-list">
+                        <li ng-repeat="err in errors.err_auxiliaryAccount">
+                            {{ err }}
+                        </li>
+                    </ul>
+                </span>
             </div>
         </div>
     </div>
 
     <div class="row-top-buffer"></div>
     <div class="row">
-        <div class="col-md-10 col-lg-10">
+        <div class="col-md-12 col-lg-12">
             <div class="col-md-2 col-lg-2">
                 <label class="input-label" for="normal_balance">Normal balance</label>
             </div>
@@ -97,18 +121,24 @@
                 </div>
             </div>
             <div class="col-md-4 col-lg-4 input-label">
-                <span style="color: red !important;" ng-show="errors.err_normalBalance">{{ errors.err_normalBalance }}</span>
+                <span style="color: red !important;" ng-show="errors.err_normalBalance">
+                    <ul class="error-list">
+                        <li ng-repeat="err in errors.err_normalBalance">
+                            {{ err }}
+                        </li>
+                    </ul>
+                </span>
             </div>
         </div>
     </div>
 
     <div class="row-top-buffer"></div>
     <div class="row">
-        <div class="col-md-10 col-lg-10">
+        <div class="col-md-12 col-lg-12">
             <div class="col-md-2 col-lg-2">
                 <label class="input-label" for="acct_group_id">Group</label>
             </div>
-            <div class="col-md-6 col-lg-6">
+            <div class="col-md-5 col-lg-5">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-filter"></i></span>
                     <select required ng-model="account.accountGroup.id" id="acct_group_id" name="acct_group_id" class="form-control">
@@ -120,7 +150,13 @@
                 </div>
             </div>
             <div class="col-md-4 col-lg-4 input-label">
-                <span style="color: red !important;" ng-show="errors.err_accountGroup">{{ errors.err_accountGroup }}</span>
+                <span style="color: red !important;" ng-show="errors.err_accountGroup">
+                    <ul class="error-list">
+                        <li ng-repeat="err in errors.err_accountGroup">
+                            {{ err }}
+                        </li>
+                    </ul>
+                </span>
             </div>
         </div>
     </div>
@@ -128,11 +164,11 @@
 
     <div class="row-top-buffer"></div>
     <div class="row">
-        <div class="col-md-10 col-lg-10">
+        <div class="col-md-12 col-lg-12">
             <div class="col-md-2 col-lg-2">
                 <label class="input-label" for="acct_type_id">Type</label>
             </div>
-            <div class="col-md-6 col-lg-6">
+            <div class="col-md-5 col-lg-5">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-filter"></i></span>
                     <select required ng-model="account.accountType.id" id="acct_type_id" name="acct_type_id" class="form-control">
@@ -146,7 +182,13 @@
                 </div>
             </div>
             <div class="col-md-4 col-lg-4 input-label">
-                <span style="color: red !important;" ng-show="errors.err_accountType">{{ errors.err_accountType }}</span>
+                <span style="color: red !important;" ng-show="errors.err_accountType">
+                    <ul class="error-list">
+                        <li ng-repeat="err in errors.err_accountType">
+                            {{ err }}
+                        </li>
+                    </ul>
+                </span>
             </div>
         </div>
     </div>
@@ -154,11 +196,11 @@
 
     <div class="row-top-buffer"></div>
     <div class="row">
-        <div class="col-md-10 col-lg-10">
+        <div class="col-md-12 col-lg-12">
             <div class="col-md-2 col-lg-2">
                 <label class="input-label" for="parent_acct_id">Parent account</label>
             </div>
-            <div class="col-md-6 col-lg-6">
+            <div class="col-md-5 col-lg-5">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-filter"></i></span>
                     <select ng-model="account.parentAccountId" id="parent_acct_id" name="parent_acct_id" class="form-control">
@@ -176,7 +218,13 @@
                 </div>
             </div>
             <div class="col-md-4 col-lg-4 input-label">
-                <span style="color: red !important;" ng-show="errors.err_parentAccountId">{{ errors.err_parentAccountId }}</span>
+                <span style="color: red !important;" ng-show="errors.err_parentAccountId">
+                    <ul class="error-list">
+                        <li ng-repeat="err in errors.err_parentAccountId">
+                            {{ err }}
+                        </li>
+                    </ul>
+                </span>
             </div>
         </div>
     </div>
@@ -184,8 +232,8 @@
 
     <div class="row-top-buffer"></div>
     <div class="row">
-        <div class="col-md-7 col-lg-7">
-            <div class="col-md-3 col-lg-3">
+        <div class="col-md-12 col-lg-12">
+            <div class="col-md-2 col-lg-2">
             </div>
             <div class="col-md-9 col-lg-9">
                 <div class="inline-group">
