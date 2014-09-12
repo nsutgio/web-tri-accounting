@@ -239,7 +239,7 @@
                 <div class="inline-group">
                     <label style="margin-right: 20px;"><input ng-model="account.hasSL" type="checkbox" id="has_sl" name="has_sl"> Has SL</label>
                     <label style="margin-right: 20px;"><input ng-model="account.isHeader" type="checkbox" id="is_header" name="is_header"> Is Header</label>
-                    <label><input ng-model="account.active" type="checkbox" id="isActive" name="isActive"> Active</label>
+                    <label><input ng-model="account.isActive" type="checkbox" id="isActive" name="isActive"> Active</label>
                 </div>
             </div>
         </div>

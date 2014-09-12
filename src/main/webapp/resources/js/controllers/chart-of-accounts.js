@@ -48,7 +48,7 @@ coaControllers.controller('newAccountController', ['$scope', '$routeParams', '$h
     $scope.account['accountGroup'] = accountGroup;
     $scope.account['accountType'] = accountType;
     $scope.account['parentAccountId'] = "0";
-    $scope.account['active'] = true;
+    $scope.account['isActive'] = true;
     $scope.errors = {};
     $scope.submitting = false;
     $scope.save ='Save';
@@ -64,6 +64,10 @@ coaControllers.controller('newAccountController', ['$scope', '$routeParams', '$h
             if (data === '') {    // not found
                 window.location.hash = '#/account/' + $scope.accountId;
             } else {
+                data.isActive = (data.isActive == 1);
+                data.isHeader = (data.isHeader == 1);
+                data.hasSL = (data.hasSL == 1);
+
                 $scope.account = data;
             }
         });
