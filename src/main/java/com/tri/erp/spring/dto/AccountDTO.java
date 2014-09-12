@@ -22,6 +22,7 @@ public class AccountDTO {
     private int level;
     private int hasSL;
     private String parentAccount;
+    private int parentAccountId;
     private int normalBalance;
     private int isHeader;
 
@@ -141,5 +142,13 @@ public class AccountDTO {
 
     public void setAccountGroup(AccountGroup accountGroup) {
         this.accountGroup = accountGroup;
+    }
+
+    public int getParentAccountId() {
+        return parentAccountId;
+    }
+
+    public void setParentAccountId(int parentAccountId) {
+        this.parentAccountId = parentAccountId;
     }
 }
