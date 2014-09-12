@@ -75,7 +75,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public Account update(Account account) {
-        return null;
+        return accountRepo.save(account);
     }
 
     @Override
@@ -146,9 +146,13 @@ public class AccountServiceImpl implements AccountService {
                     account.setLevel(parentAccount.getLevel() + 1);
                 }
             }
-            Account newAccount = create(account);
+            if (account.getId() > 0) {  // update mode
+                update(account);
+            } else {
+                account = create(account);
+            }
 
-            response.setModelId(newAccount.getId());
+            response.setModelId(account.getId());
             response.setSuccessMessage("Account successfully saved!");
             response.setSuccess(true);
         }
@@ -156,7 +160,12 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public Account findByTitle(String title) {
+    public List<Account> findByTitle(String title) {
         return accountRepo.findByTitle(title);
+    }
+
+    @Transactional
+    public Response processUpdate(Account account, BindingResult bindingResult, MessageSource messageSource) {
+        return processCreate(account, bindingResult, messageSource);
     }
 }

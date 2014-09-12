@@ -12,6 +12,7 @@ import org.springframework.validation.ObjectError;
 import org.springframework.validation.Validator;
 
 import javax.swing.*;
+import java.util.List;
 
 /**
  * Created by TSI Admin on 9/11/2014.
@@ -39,15 +40,27 @@ public class AccountValidator implements Validator {
             errors.rejectValue("accountType", null, "Must select account type");
         }
 
-        Account a = accountService.findByTitle(account.getTitle());
-        if (a != null) {
-            FieldError titleError = errors.getFieldError("title");
-            if (titleError != null) {
-//                String message = titleError.getDefaultMessage();
-//                message += "<br/>" + newMessage;
-                errors.rejectValue("title", "account.name.duplicate");
+        List<Account> accountList = accountService.findByTitle(account.getTitle());
+
+        if (accountList != null && accountList.size() > 0) {
+            Account a = accountList.get(0);
+            if (account.getId() > 0) { // is edit mode
+                if (a.getId() != account.getId()) { // compare itself
+                    // other accounts hold similar value and edit mode
+                    FieldError titleError = errors.getFieldError("title");
+                    if (titleError != null) {
+                        errors.rejectValue("title", "account.name.duplicate");
+                    } else {
+                        errors.rejectValue("title", "account.name.duplicate");
+                    }
+                }
             } else {
-                errors.rejectValue("title", "account.name.duplicate");
+                FieldError titleError = errors.getFieldError("title");
+                if (titleError != null) {
+                    errors.rejectValue("title", "account.name.duplicate");
+                } else {
+                    errors.rejectValue("title", "account.name.duplicate");
+                }
             }
         }
     }

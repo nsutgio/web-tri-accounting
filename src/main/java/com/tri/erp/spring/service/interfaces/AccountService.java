@@ -12,8 +12,9 @@ public interface AccountService {
     public Account create(Account shop);
     public Account delete(int id);
     public List<AccountDTO> findAll();
-    public Account update(Account shop);
+    public Account update(Account account);
     public AccountDTO findById(int id);
     public Response processCreate(Account account, BindingResult bindingResult, MessageSource messageSource);
-    public Account findByTitle(String title)
-;}
+    public Response processUpdate(Account account, BindingResult bindingResult, MessageSource messageSource);
+    public List<Account> findByTitle(String title);
+}

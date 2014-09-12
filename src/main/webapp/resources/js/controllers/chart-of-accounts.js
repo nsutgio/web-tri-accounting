@@ -49,6 +49,7 @@ coaControllers.controller('newAccountController', ['$scope', '$routeParams', '$h
     $scope.account['accountType'] = accountType;
     $scope.account['parentAccountId'] = "0";
     $scope.account['isActive'] = true;
+    $scope.account['parentAccount'] = ""; // workaround
     $scope.errors = {};
     $scope.submitting = false;
     $scope.save ='Save';
@@ -83,8 +84,8 @@ coaControllers.controller('newAccountController', ['$scope', '$routeParams', '$h
         $scope.submitting = true;
         $http.defaults.headers.post['X-CSRF-TOKEN'] = $('input[name=_csrf]').val();
 
-        if ($scope.account.hasOwnProperty('active')) {
-            $scope.account.active = 1;
+        if ($scope.account.hasOwnProperty('isActive')) {
+            $scope.account.isActive = 1;
         }
 
         if ($scope.account.hasOwnProperty('hasSL')) {

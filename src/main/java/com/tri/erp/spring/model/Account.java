@@ -91,7 +91,11 @@ public class Account {
     @JoinColumn(name="acct_group_id")
     private AccountGroup accountGroup;
 
-    public Account(String code, String title, String GLAccount, String SLAccount, String auxiliaryAccount, int normalBalance, int level, int active, int isHeader, int hasSL, int parentAccountId, AccountType accountType, AccountGroup accountGroup) {
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    @Transient
+    private String parentAccount;
+
+    public Account(String code, String title, String GLAccount, String SLAccount, String auxiliaryAccount, int normalBalance, int level, int active, int isHeader, int hasSL, int parentAccountId, AccountType accountType, AccountGroup accountGroup, String parentAccount) {
         this.code = code;
         this.title = title;
         this.GLAccount = GLAccount;
@@ -105,6 +109,7 @@ public class Account {
         this.parentAccountId = parentAccountId;
         this.accountType = accountType;
         this.accountGroup = accountGroup;
+        this.parentAccount = parentAccount;
     }
 
     public Account() {}
@@ -185,6 +190,7 @@ public class Account {
     /**
      * @return the active
      */
+    @JsonProperty("isActive")
     public int isActive() {
         return active;
     }
@@ -192,6 +198,7 @@ public class Account {
     /**
      * @param active the active to set
      */
+    @JsonProperty("isActive")
     public void setActive(int active) {
         this.active = active;
     }
@@ -312,5 +319,13 @@ public class Account {
 
     public void setParentAccountId(int parentAccountId) {
         this.parentAccountId = parentAccountId;
+    }
+
+    public String getParentAccount() {
+        return parentAccount;
+    }
+
+    public void setParentAccount(String parentAccount) {
+        this.parentAccount = parentAccount;
     }
 }

@@ -75,4 +75,11 @@ public class ChartOfAccountsController {
     public Response createAccount(@Valid @RequestBody Account account, BindingResult bindingResult) {
         return accountService.processCreate(account, bindingResult, messageSource);
     }
+
+    // create account
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    @ResponseBody
+    public Response updateAccount(@Valid @RequestBody Account account, BindingResult bindingResult) {
+        return accountService.processUpdate(account, bindingResult, messageSource);
+    }
 }
