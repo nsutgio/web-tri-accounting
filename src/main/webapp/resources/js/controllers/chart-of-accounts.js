@@ -149,7 +149,29 @@ coaControllers.controller('treeGridController', function($scope, $timeout) {
         {"DemographicId":18,"ParentId":8,"Title":"Long Island","Code":"Harbour to Atlantic","Type":362.9,"Id":0},
         {"DemographicId":51,"ParentId":1,"Title":"All_Other","Code":"All_Other demographics","Type":0,"Id":0},
         {"DemographicId":201,"ParentId":null,"Title":"India","Code":"Hydrabad tech city", "Type":9826675,"Id":318212000},
-        {"DemographicId":301,"ParentId":null,"Title":"Bangladesh","Code":"Country of love", "Type":9826675,"Id":318212000}
+        {"DemographicId":301,"ParentId":null,"Title":"Bangl2desh","Code":"Country of love", "Type":9826675,"Id":318212000},
+        {"DemographicId":303,"ParentId":null,"Title":"Bangl2desh","Code":"Country of love", "Type":9826675,"Id":318212000},
+        {"DemographicId":304,"ParentId":null,"Title":"Bangl2desh","Code":"Country of love", "Type":9826675,"Id":318212000},
+        {"DemographicId":305,"ParentId":null,"Title":"Bangl2desh","Code":"Country of love", "Type":9826675,"Id":318212000},
+        {"DemographicId":306,"ParentId":null,"Title":"Bangl2desh","Code":"Country of love", "Type":9826675,"Id":318212000},
+        {"DemographicId":307,"ParentId":null,"Title":"Bangl2desh","Code":"Country of love", "Type":9826675,"Id":318212000},
+        {"DemographicId":308,"ParentId":null,"Title":"Bangl2desh","Code":"Country of love", "Type":9826675,"Id":318212000},
+        {"DemographicId":3018,"ParentId":null,"Title":"Bangl2desh","Code":"Country of love", "Type":9826675,"Id":318212000},
+        {"DemographicId":3028,"ParentId":null,"Title":"Bangl2desh","Code":"Country of love", "Type":9826675,"Id":318212000},
+        {"DemographicId":3308,"ParentId":null,"Title":"Bangl2desh","Code":"Country of love", "Type":9826675,"Id":318212000},
+        {"DemographicId":3048,"ParentId":null,"Title":"Bangl2desh","Code":"Country of love", "Type":9826675,"Id":318212000},
+        {"DemographicId":3058,"ParentId":null,"Title":"Bangl2desh","Code":"Country of love", "Type":9826675,"Id":318212000},
+        {"DemographicId":3068,"ParentId":null,"Title":"Bangl2desh","Code":"Country of love", "Type":9826675,"Id":318212000},
+        {"DemographicId":309,"ParentId":null,"Title":"Bangl2desh","Code":"Country of love", "Type":9826675,"Id":318212000},
+        {"DemographicId":3109,"ParentId":null,"Title":"Bangl2desh","Code":"Country of love", "Type":9826675,"Id":318212000},
+        {"DemographicId":3209,"ParentId":null,"Title":"Bangl2desh","Code":"Country of love", "Type":9826675,"Id":318212000},
+        {"DemographicId":3039,"ParentId":null,"Title":"Bangl2desh","Code":"Country of love", "Type":9826675,"Id":318212000},
+        {"DemographicId":3049,"ParentId":null,"Title":"Bangl2desh","Code":"Country of love", "Type":9826675,"Id":318212000},
+        {"DemographicId":3069,"ParentId":null,"Title":"Bangl2desh","Code":"Country of love", "Type":9826675,"Id":318212000},
+        {"DemographicId":3059,"ParentId":null,"Title":"Bangl2desh","Code":"Country of love", "Type":9826675,"Id":318212000},
+        {"DemographicId":30439,"ParentId":null,"Title":"Bangl2desh","Code":"Country of love", "Type":9826675,"Id":318212000},
+        {"DemographicId":302,"ParentId":null,"Title":"Bangl21desh","Code":"Country of love", "Type":9826675,"Id":318212000}
+
     ];
 
     var myTreeData = getTree(rawTreeData, 'DemographicId', 'ParentId');

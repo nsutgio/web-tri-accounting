@@ -22,7 +22,7 @@
                 <div class=\"col-md-2 col-lg-2\"><span style=\"font-weight: bold\">Type</span></div>\
                 <div class=\"col-md-1 col-lg-1\"><span style=\"font-weight: bold\">&nbsp;</span></div>\
             </div>\
-              \
+            <div style='max-height: 500px; overflow: auto'>\
               <table class=\"table table-striped tree-grid table-hover\">\
                   <tbody>\
                   <tr ng-repeat=\"row in rows = (tree_rows | filter:q) | filter: {visible:true} track by row.branch.uid\"\
@@ -41,6 +41,7 @@
                   </tr>\
                   </tbody>\
               </table>\
+            </div>\
           </div>",
         replace: true,
         scope: {
