@@ -83,34 +83,34 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public AccountDTO findById(int id) {
-        Account account = accountRepo.findOne(id);
-
         AccountDTO accountDTO = new AccountDTO();
 
-        accountDTO.setId(account.getId());
-        accountDTO.setTitle(account.getTitle());
-        accountDTO.setCode(account.getCode());
-        if (account.getAccountType() != null) {
-            accountDTO.setAccountType(account.getAccountType());
-        }
-        accountDTO.setLevel(account.getLevel());
-        accountDTO.setAuxAccount(account.getAuxiliaryAccount());
-        accountDTO.setGLAccount(account.getGLAccount());
-        if (account.getAccountGroup() != null) {
-            accountDTO.setAccountGroup(account.getAccountGroup());
-        }
-        accountDTO.hasSL(account.hasSL());
-        accountDTO.isActive(account.isActive());
+        Account account = accountRepo.findOne(id);
+        if (account != null) {
+            accountDTO.setId(account.getId());
+            accountDTO.setTitle(account.getTitle());
+            accountDTO.setCode(account.getCode());
+            if (account.getAccountType() != null) {
+                accountDTO.setAccountType(account.getAccountType());
+            }
+            accountDTO.setLevel(account.getLevel());
+            accountDTO.setAuxAccount(account.getAuxiliaryAccount());
+            accountDTO.setGLAccount(account.getGLAccount());
+            if (account.getAccountGroup() != null) {
+                accountDTO.setAccountGroup(account.getAccountGroup());
+            }
+            accountDTO.hasSL(account.hasSL());
+            accountDTO.isActive(account.isActive());
 
-        Account parentAccount = accountRepo.findOne(account.getParentAccountId());
-        if (parentAccount != null) {
-            accountDTO.setParentAccount(parentAccount.getTitle());
-            accountDTO.setParentAccountId(parentAccount.getId());
+            Account parentAccount = accountRepo.findOne(account.getParentAccountId());
+            if (parentAccount != null) {
+                accountDTO.setParentAccount(parentAccount.getTitle());
+                accountDTO.setParentAccountId(parentAccount.getId());
+            }
+            accountDTO.setSLAccount(account.getSLAccount());
+            accountDTO.setNormalBalance(account.getNormalBalance());
+            accountDTO.setIsHeader(account.getIsHeader());
         }
-        accountDTO.setSLAccount(account.getSLAccount());
-        accountDTO.setNormalBalance(account.getNormalBalance());
-        accountDTO.setIsHeader(account.getIsHeader());
-
         return accountDTO;
     }
 

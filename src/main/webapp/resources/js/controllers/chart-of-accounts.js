@@ -27,7 +27,7 @@ coaControllers.controller('accountDetailsController', ['$scope', '$routeParams',
         $scope.accountId = $routeParams.accountId;
         $http.get(baseURL + '/account/'+ $scope.accountId).success(function(data) {
             console.log(data);
-            if (data === '') {    // not found
+            if (data === '' || data.id <= 0) {
                 window.location.hash = '#/accounts';
             } else {
                 $scope.account = data;
@@ -70,7 +70,7 @@ coaControllers.controller('newAccountController', ['$scope', '$routeParams', '$h
         $scope.accountId = $routeParams.accountId;
         $http.get(baseURL + '/account/'+ $scope.accountId).success(function(data) {
             console.log(data);
-            if (data === '') {    // not found
+            if (data === '' || data.id <= 0) {    // not found
                 window.location.hash = '#/account/' + $scope.accountId;
             } else {
                 data.isActive = (data.isActive == 1);
