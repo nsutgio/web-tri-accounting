@@ -8,6 +8,7 @@ coaControllers.controller('accountTreeController', ['$scope', '$http', '$sce',  
         return $sce.trustAsHtml(html);
     };
 
+
     $http.get(baseURL + '/accounts').success(function(data) {
         if (data.length > 0) {
             $scope.accounts = data;
@@ -208,8 +209,4 @@ coaControllers.controller('treeGridController', function($scope, $timeout) {
 
         return tree;
     }
-
-    $scope.init = function () {
-//        expand_all_parents();
-    };
 });
