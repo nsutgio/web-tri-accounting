@@ -22,7 +22,7 @@
 <div class="row">
     <div class="col-md-12 col-lg-12">
         <div style="max-height: 600px; overflow: auto">
-            <table class="table table-condensed table-responsive">
+            <table class="table table-condensed table-responsive table-hover">
                 <tbody>
                 <tr class="animate-repeat" ng-repeat="account in accounts | filter:q as results">
                     <td class="code-col">{{account.code}}</td>

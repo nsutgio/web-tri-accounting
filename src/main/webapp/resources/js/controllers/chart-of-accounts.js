@@ -4,7 +4,7 @@ coaControllers.controller('accountTreeController', ['$scope', '$http', '$locatio
     $scope.accounts = [{"code":"Loading data..."}];
     $scope.loaded = false;
 
-    $http.get(baseURL + '/accounts').success(function(data) { 
+    $http.get(baseURL + '/accounts').success(function(data) {
         if (data.length > 0) {
             $scope.accounts = data;
             $scope.loaded = true;
