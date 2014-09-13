@@ -35,8 +35,8 @@
                       </td>\
                       <td class='code-col'> {{row.branch['Code']}}</td>\
                       <td class='type-col'> {{row.branch['Type']}}</td>\
-                      <td style='width: 60px; padding: 0'><a style='padding: 0' title='View' href=\"#/account/{{account.id}}\"><i class='fa fa-search'></i></a>\
-                          <a style='padding: 0' title='Edit' href=\"#/account/{{account.id}}/edit\">&nbsp;&nbsp;<i class='fa fa-edit'></i></a>\
+                      <td style='width: 60px; padding: 0'><a style='padding: 0' title='View' href=\"#/account/{{row.branch['Id']}}\"><i class='fa fa-search'></i></a>\
+                          <a style='padding: 0' title='Edit' href=\"#/account/{{row.branch['Id']}}/edit\">&nbsp;&nbsp;<i class='fa fa-edit'></i></a>\
                       </td>\
                   </tr>\
                   </tbody>\

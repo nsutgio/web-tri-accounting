@@ -134,22 +134,22 @@ coaControllers.controller('treeGridController', function($scope, $timeout) {
     var tree;
 
     var rawTreeData = [
-        {"DemographicId":1,"ParentId":null,"Title":"United States of America","Code":"United States of America", "Type":9826675,"Action":318212000},
-        {"DemographicId":2,"ParentId":1,"Title":"California","Code":"The Tech State","Type":"Members’ Equity and Margins","Action":38340000},
-        {"DemographicId":3,"ParentId":2,"Title":"San Francisco","Code":"The happening city","Type":231,"Action":837442},
-        {"DemographicId":4,"ParentId":2,"Title":"Los Angeles","Code":"Disco city","Type":503,"Action":3904657},
-        {"DemographicId":5,"ParentId":1,"Title":"Illinois","Code":"Not so cool","Type":57914,"Action":12882135},
-        {"DemographicId":6,"ParentId":5,"Title":"Chicago","Code":"Financial City","Type":234,"Action":2695598},
-        {"DemographicId":7,"ParentId":1,"Title":"Texas","Code":"Rances, Oil & Gas","Type":268581,"Action":26448193},
-        {"DemographicId":8,"ParentId":1,"Title":"New York","Code":"The largest diverse city","Type":141300,"Action":19651127},
-        {"DemographicId":14,"ParentId":8,"Title":"Manhattan","Code":"Time Square is the place","Type":269.403,"Action":0},
-        {"DemographicId":15,"ParentId":14,"Title":"Manhattan City","Code":"Manhattan island","Type":33.77,"Action":0},
-        {"DemographicId":16,"ParentId":14,"Title":"Time Square","Code":"Time Square for new year","Type":269.40,"Action":0},
-        {"DemographicId":17,"ParentId":8,"Title":"Niagra water fall","Code":"Close to Canada","Type":65.7,"Action":0},
-        {"DemographicId":18,"ParentId":8,"Title":"Long Island","Code":"Harbour to Atlantic","Type":362.9,"Action":0},
-        {"DemographicId":51,"ParentId":1,"Title":"All_Other","Code":"All_Other demographics","Type":0,"Action":0},
-        {"DemographicId":201,"ParentId":null,"Title":"India","Code":"Hydrabad tech city", "Type":9826675,"Action":318212000},
-        {"DemographicId":301,"ParentId":null,"Title":"Bangladesh","Code":"Country of love", "Type":9826675,"Action":318212000}
+        {"DemographicId":1,"ParentId":null,"Title":"United States of America","Code":"United States of America", "Type":9826675,"Id":318212000},
+        {"DemographicId":2,"ParentId":1,"Title":"California","Code":"The Tech State","Type":"Members’ Equity and Margins","Id":38340000},
+        {"DemographicId":3,"ParentId":2,"Title":"San Francisco","Code":"The happening city","Type":231,"Id":837442},
+        {"DemographicId":4,"ParentId":2,"Title":"Los Angeles","Code":"Disco city","Type":503,"Id":3904657},
+        {"DemographicId":5,"ParentId":1,"Title":"Illinois","Code":"Not so cool","Type":57914,"Id":12882135},
+        {"DemographicId":6,"ParentId":5,"Title":"Chicago","Code":"Financial City","Type":234,"Id":2695598},
+        {"DemographicId":7,"ParentId":1,"Title":"Texas","Code":"Rances, Oil & Gas","Type":268581,"Id":26448193},
+        {"DemographicId":8,"ParentId":1,"Title":"New York","Code":"The largest diverse city","Type":141300,"Id":19651127},
+        {"DemographicId":14,"ParentId":8,"Title":"Manhattan","Code":"Time Square is the place","Type":269.403,"Id":0},
+        {"DemographicId":15,"ParentId":14,"Title":"Manhattan City","Code":"Manhattan island","Type":33.77,"Id":0},
+        {"DemographicId":16,"ParentId":14,"Title":"Time Square","Code":"Time Square for new year","Type":269.40,"Id":0},
+        {"DemographicId":17,"ParentId":8,"Title":"Niagra water fall","Code":"Close to Canada","Type":65.7,"Id":0},
+        {"DemographicId":18,"ParentId":8,"Title":"Long Island","Code":"Harbour to Atlantic","Type":362.9,"Id":0},
+        {"DemographicId":51,"ParentId":1,"Title":"All_Other","Code":"All_Other demographics","Type":0,"Id":0},
+        {"DemographicId":201,"ParentId":null,"Title":"India","Code":"Hydrabad tech city", "Type":9826675,"Id":318212000},
+        {"DemographicId":301,"ParentId":null,"Title":"Bangladesh","Code":"Country of love", "Type":9826675,"Id":318212000}
     ];
 
     var myTreeData = getTree(rawTreeData, 'DemographicId', 'ParentId');
@@ -159,7 +159,8 @@ coaControllers.controller('treeGridController', function($scope, $timeout) {
     $scope.expanding_property = "Title";
     $scope.col_defs = [
         { field: "Code"},
-        { field: "Type"}
+        { field: "Type"},
+        { field: "Id"}
     ];
     $scope.accounts_tree_handler = function(branch){
         console.log('you clicked on', branch)
