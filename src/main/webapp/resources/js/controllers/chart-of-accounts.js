@@ -2,11 +2,12 @@ var coaControllers = angular.module('coaControllers', ['ngResource']);
 
 coaControllers.controller('accountTreeController', ['$scope', '$http', '$location', function($scope, $http, $location) {
     $scope.accounts = [{"code":"Loading data..."}];
+    $scope.loaded = false;
 
-    $http.get(baseURL + '/accounts').success(function(data) {
-        console.log(data);
+    $http.get(baseURL + '/accounts').success(function(data) { 
         if (data.length > 0) {
             $scope.accounts = data;
+            $scope.loaded = true;
         }
     }).error(function(data) {
         alert("Something went wrong!");

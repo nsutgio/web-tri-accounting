@@ -15,8 +15,9 @@
 <div style="margin-top: 20px;"></div>
 <div class="row">
     <div class="col-md-2 col-lg-2"><span style="font-weight: bold; padding-left: 7px;">Code</span></div>
-    <div class="col-md-7 col-lg-7"><span style="font-weight: bold">Title</span></div>
+    <div class="col-md-6 col-lg-6"><span style="font-weight: bold">Title</span></div>
     <div class="col-md-3 col-lg-3"><span style="font-weight: bold">Type</span></div>
+    <div class="col-md-1 col-lg-1"><span style="font-weight: bold">&nbsp;</span></div>
 </div>
 <div class="row">
     <div class="col-md-12 col-lg-12">
@@ -27,6 +28,10 @@
                     <td class="code-col">{{account.code}}</td>
                     <td>{{account.title}}</td>
                     <td class="type-col">{{account.accountType.description}}</td>
+                    <td ng-show="loaded" style="font: 14px;">
+                        <a title="View" href="#/account/{{account.id}}"><i class="fa fa-search"></i></a>
+                        <a title="Edit" href="#/account/{{account.id}}/edit">&nbsp;&nbsp;<i class="fa fa-edit"></i></a>
+                    </td>
                 </tr>
                 <tr class="animate-repeat" ng-show="results.length == 0">
                     <td colspan="2">No records found.</td>

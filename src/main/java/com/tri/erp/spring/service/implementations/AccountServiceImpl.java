@@ -164,7 +164,6 @@ public class AccountServiceImpl implements AccountService {
         return accountRepo.findByTitle(title);
     }
 
-    @Transactional
     public Response processUpdate(Account account, BindingResult bindingResult, MessageSource messageSource) {
         return processCreate(account, bindingResult, messageSource);
     }
