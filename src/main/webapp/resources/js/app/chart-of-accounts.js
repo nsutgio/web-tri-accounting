@@ -2,7 +2,8 @@
 var baseURL = document.location.origin + document.location.pathname;
 var coaApp = angular.module('coaApp', [
     'ngRoute',
-    'coaControllers'
+    'coaControllers',
+    'treeGrid'
 ]);
 
 coaApp.config(['$routeProvider',
@@ -10,7 +11,7 @@ coaApp.config(['$routeProvider',
         $routeProvider.
             when('/accounts', {
                 templateUrl: 'coa/accounts-tree-page',
-                controller: 'accountTreeController'
+                controller: 'treeGridController'
             }).
             when('/new', {
                 templateUrl: 'coa/new-account-page',

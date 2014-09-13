@@ -12,3 +12,4 @@
 <script src="<c:url value="/resources/js/angular/angular.min.js" />"></script>
 <script src="<c:url value="/resources/js/angular/angular-route.min.js" />"></script>
 <script src="<c:url value="/resources/js/angular/angular-resource.min.js" />"></script>
+<script src="<c:url value="/resources/js/angular/angular-sanitize.min.js" />"></script>

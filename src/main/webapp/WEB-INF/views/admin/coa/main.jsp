@@ -4,7 +4,7 @@
 
 <mytag:master>
     <jsp:attribute name="head">
-        <%-- includes here --%>
+        <link href="<c:url value="/resources/css/treeGrid/treeGrid.css" />" rel="stylesheet">
     </jsp:attribute>
     <jsp:attribute name="body">
         <div ng-app="coaApp">
@@ -15,3 +15,4 @@
 
 <script src="<c:url value="/resources/js/app/chart-of-accounts.js" />"></script>
 <script src="<c:url value="/resources/js/controllers/chart-of-accounts.js" />"></script>
+<script src="<c:url value="/resources/js/treeGrid/tree-grid-directive.js" />"></script>

@@ -32,6 +32,9 @@ import java.util.List;
 @Service
 public class AccountServiceImpl implements AccountService {
 
+    private final String INDENTION = "&nbsp;&nbsp;";
+    private List<AccountDTO> accountsDtoList = new ArrayList<>();
+
     @Resource
     private AccountRepo accountRepo;
 
@@ -56,21 +59,21 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public List<AccountDTO> findAll() {
-        List<AccountDTO> accountsDtoList = new ArrayList<>();
-        List<Account> accounts = accountRepo.findAll();
-        if (accounts != null && accounts.size() > 0) {
-            for (Account account : accounts) {
-                AccountDTO accountDTO = new AccountDTO();
-                accountDTO.setCode(account.getCode());
-                accountDTO.setId(account.getId());
-                accountDTO.setTitle(account.getTitle());
-                if (account.getAccountType() != null) {
-                    accountDTO.setAccountType(account.getAccountType());
-                }
-                accountsDtoList.add(accountDTO);
+
+        List<Account> topLevelAccounts = findByParentAccountIdOrderByCodeAsc(0);// top level accounts
+        for(Account account : topLevelAccounts) {
+            AccountDTO accountDTO = new AccountDTO();
+            accountDTO.setCode(account.getCode());
+            accountDTO.setId(account.getId());
+            accountDTO.setTitle(account.getTitle());
+            if (account.getAccountType() != null) {
+                accountDTO.setAccountType(account.getAccountType());
             }
+            this.accountsDtoList.add(accountDTO);
+
+//            findDescendants(account, this.INDENTION);
         }
-        return accountsDtoList;
+        return this.accountsDtoList;
     }
 
     @Override
@@ -164,7 +167,34 @@ public class AccountServiceImpl implements AccountService {
         return accountRepo.findByTitle(title);
     }
 
+    @Override
+    public List<Account> findByParentAccountIdOrderByCodeAsc(Integer accountId) {
+        return accountRepo.findByParentAccountIdOrderByCodeAsc(accountId);
+    }
+
     public Response processUpdate(Account account, BindingResult bindingResult, MessageSource messageSource) {
         return processCreate(account, bindingResult, messageSource);
+    }
+
+    private void findDescendants(Account currentAccount, String indention) {
+        List<Account> children = accountRepo.findByParentAccountIdOrderByCodeAsc(currentAccount.getId());
+
+        for (Account childAccount : children) {
+            AccountDTO accountDTO = new AccountDTO();
+
+            childAccount.setCode(indention + childAccount.getCode());
+            childAccount.setTitle(indention + childAccount.getTitle());
+
+            accountDTO.setCode(childAccount.getCode());
+            accountDTO.setId(childAccount.getId());
+            accountDTO.setTitle(childAccount.getTitle());
+
+            if (childAccount.getAccountType() != null) {
+                accountDTO.setAccountType(childAccount.getAccountType());
+            }
+
+            this.accountsDtoList.add(accountDTO);
+            findDescendants(childAccount, indention + INDENTION);
+        }
     }
 }
