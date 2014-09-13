@@ -155,7 +155,7 @@ coaControllers.controller('treeGridController', function($scope, $timeout) {
     var myTreeData = getTree(rawTreeData, 'DemographicId', 'ParentId');
 
     $scope.tree_data = myTreeData;
-    $scope.my_tree = tree = {};
+    $scope.accounts_tree = tree = {};
     $scope.expanding_property = "Name";
     $scope.col_defs = [
         { field: "Description"},
@@ -163,7 +163,7 @@ coaControllers.controller('treeGridController', function($scope, $timeout) {
         { field: "Population"},
         { field: "TimeZone", displayName: "Time Zone"}
     ];
-    $scope.my_tree_handler = function(branch){
+    $scope.accounts_tree_handler = function(branch){
         console.log('you clicked on', branch)
     }
 
@@ -209,4 +209,7 @@ coaControllers.controller('treeGridController', function($scope, $timeout) {
         return tree;
     }
 
+    $scope.init = function () {
+//        expand_all_parents();
+    };
 });

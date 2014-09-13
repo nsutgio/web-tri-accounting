@@ -12,7 +12,12 @@
         //template:"<div><table class=\"table table-bordered table-striped tree-grid\"><thead class=\"text-primary\"><tr><th>{{expandingProperty}}</th><th ng-repeat=\"col in colDefinitions\">{{col.displayName || col.field}}</th></tr></thead><tbody><tr ng-repeat=\"row in tree_rows | filter:{visible:true} track by row.branch.uid\" ng-class=\"'level-' + {{ row.level }} + (row.branch.selected ? ' active':'')\" class=\"tree-grid-row\"><td class=\"text-primary\"><a ng-click=\"user_clicks_branch(row.branch)\"><i ng-class=\"row.tree_icon\" ng-click=\"row.branch.expanded = !row.branch.expanded\" class=\"indented tree-icon\"></i></a><span class=\"indented tree-label\">{{row.branch[expandingProperty]}}</span></td><td ng-repeat=\"col in colDefinitions\">{{row.branch[col.field]}}</td></tr></tbody><table></div>",
         template:
           "<div>\
-              <table class=\"table table-bordered table-striped tree-grid\">\
+            <div class='row' id=\"search-div\" style='margin-bottom: 10px;'>\
+                <div class='col-md-3 col-lg-3'>\
+                <input class=\"pull-right form-control\" type=\"search\" ng-model=\"q\" placeholder=\"filter accounts...\" /></div>\
+            </div>\
+              \
+              <table class=\"table table-bordered table-striped tree-grid table-hover\">\
                   <thead class=\"text-primary\">\
                   <tr>\
                       <th>{{expandingProperty}}</th>\
@@ -20,7 +25,7 @@
                   </tr>\
                   </thead>\
                   <tbody>\
-                  <tr ng-repeat=\"row in tree_rows | filter:{visible:true} track by row.branch.uid\"\
+                  <tr ng-repeat=\"row in rows = (tree_rows | filter:q) | filter: {visible:true} track by row.branch.uid\"\
                       ng-class=\"'level-' + {{ row.level }} + (row.branch.selected ? ' active':'')\" class=\"tree-grid-row\">\
                       <td class=\"text-primary\"><a ng-click=\"user_clicks_branch(row.branch)\"><i ng-class=\"row.tree_icon\"\
                                  ng-click=\"row.branch.expanded = !row.branch.expanded\"\

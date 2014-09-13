@@ -8,11 +8,17 @@
     <div class="col-md-12 col-lg-12">
         <div ng-model="showMinDir" ng-value="false">
             <div ng-show="!showMinDir">
-                <div class="pull-right" style="margin-bottom: 20px;">
-                    <button ng-click="my_tree.expand_all()" class="btn btn-default btn-sm">Expand All</button>
-                    <button ng-click="my_tree.collapse_all()" class="btn btn-default btn-sm">Collapse All</button>
+                <div class="row">
+                    <div id="search-div" class="col-md-4 col-lg-4">
+                    </div>
+                    <div class="col-md-8 col-lg-8">
+                        <div id="collapse-btns" class="pull-right">
+                            <button data-ng-init="init()" ng-click="accounts_tree.expand_all()" class="btn btn-default btn-sm">Expand All</button>
+                            <button ng-click="accounts_tree.collapse_all()" class="btn btn-default btn-sm">Collapse All</button>
+                        </div>
+                    </div>
                 </div>
-                <tree-grid tree-data="tree_data" tree-control="my_tree" col-defs="col_defs" expand-on="expanding_property" on-select="my_tree_handler(branch)" expand-level="2" icon-leaf= "glyphicon glyphicon-globe"></tree-grid>
+                <tree-grid tree-data="tree_data" tree-control="accounts_tree" col-defs="col_defs" expand-on="expanding_property" on-select="accounts_tree_handler(branch)" expand-level="2" icon-leaf= "glyphicon glyphicon-globe"></tree-grid>
             </div>
             <div style="margin-top: 20px;"></div>
             <div ng-show="showMinDir">
@@ -59,4 +65,3 @@
         <%--</div>--%>
     <%--</div>--%>
 <%--</div>--%>
-
