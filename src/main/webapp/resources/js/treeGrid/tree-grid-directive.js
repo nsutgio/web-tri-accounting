@@ -16,14 +16,14 @@
                 <div class='col-md-3 col-lg-3'>\
                 <input class=\"pull-right form-control\" type=\"search\" ng-model=\"q\" placeholder=\"filter accounts...\" /></div>\
             </div>\
+            <div class='row'>\
+                <div class=\"col-md-7 col-lg-7\"><span style=\"font-weight: bold; padding-left: 80px;\">Title</span></div>\
+                <div class=\"col-md-2 col-lg-2\"><span style=\"font-weight: bold; padding-left: 7px;\">Code</span></div>\
+                <div class=\"col-md-2 col-lg-2\"><span style=\"font-weight: bold\">Type</span></div>\
+                <div class=\"col-md-1 col-lg-1\"><span style=\"font-weight: bold\">&nbsp;</span></div>\
+            </div>\
               \
-              <table class=\"table table-bordered table-striped tree-grid table-hover\">\
-                  <thead class=\"text-primary\">\
-                  <tr>\
-                      <th>{{expandingProperty}}</th>\
-                      <th ng-repeat=\"col in colDefinitions\">{{col.displayName || col.field}}</th>\
-                  </tr>\
-                  </thead>\
+              <table class=\"table table-striped tree-grid table-hover\">\
                   <tbody>\
                   <tr ng-repeat=\"row in rows = (tree_rows | filter:q) | filter: {visible:true} track by row.branch.uid\"\
                       ng-class=\"'level-' + {{ row.level }} + (row.branch.selected ? ' active':'')\" class=\"tree-grid-row\">\
@@ -33,7 +33,11 @@
                           </a><span class=\"indented tree-label\" ng-click=\"user_clicks_branch(row.branch)\">\
                             {{row.branch[expandingProperty]}}</span>\
                       </td>\
-                      <td ng-repeat=\"col in colDefinitions\">{{row.branch[col.field]}}</td>\
+                      <td class='code-col'> {{row.branch['Code']}}</td>\
+                      <td class='type-col'> {{row.branch['Type']}}</td>\
+                      <td style='width: 60px; padding: 0'><a style='padding: 0' title='View' href=\"#/account/{{account.id}}\"><i class='fa fa-search'></i></a>\
+                          <a style='padding: 0' title='Edit' href=\"#/account/{{account.id}}/edit\">&nbsp;&nbsp;<i class='fa fa-edit'></i></a>\
+                      </td>\
                   </tr>\
                   </tbody>\
               </table>\

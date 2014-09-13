@@ -4,6 +4,7 @@
     </div>
 </div>
 <div style="margin-top: 20px;"></div>
+<div style="margin-top: 20px;"></div>
 <div class="row">
     <div class="col-md-12 col-lg-12">
         <div ng-model="showMinDir" ng-value="false">
@@ -18,7 +19,9 @@
                         </div>
                     </div>
                 </div>
-                <tree-grid tree-data="tree_data" tree-control="accounts_tree" col-defs="col_defs" expand-on="expanding_property" on-select="accounts_tree_handler(branch)" expand-level="5" icon-leaf= "glyphicon glyphicon-globe"></tree-grid>
+                <tree-grid tree-data="tree_data" tree-control="accounts_tree" col-defs="col_defs" expand-on="expanding_property"
+                           on-select="accounts_tree_handler(branch)" expand-level="5" icon-expand="glyphicon glyphicon-tag"
+                           icon-collapse="glyphicon glyphicon-tags" icon-leaf="glyphicon glyphicon-list-alt"></tree-grid>
             </div>
             <div style="margin-top: 20px;"></div>
             <div ng-show="showMinDir">

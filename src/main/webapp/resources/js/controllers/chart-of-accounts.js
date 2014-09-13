@@ -134,35 +134,32 @@ coaControllers.controller('treeGridController', function($scope, $timeout) {
     var tree;
 
     var rawTreeData = [
-        {"DemographicId":1,"ParentId":null,"Name":"United States of America","Description":"United States of America", "Area":9826675,"Population":318212000,"TimeZone":"UTC -5 to -10"},
-        {"DemographicId":2,"ParentId":1,"Name":"California","Description":"The Tech State","Area":423970,"Population":38340000,"TimeZone":"Pacific Time"},
-        {"DemographicId":3,"ParentId":2,"Name":"San Francisco","Description":"The happening city","Area":231,"Population":837442,"TimeZone":"PST"},
-        {"DemographicId":4,"ParentId":2,"Name":"Los Angeles","Description":"Disco city","Area":503,"Population":3904657,"TimeZone":"PST"},
-        {"DemographicId":5,"ParentId":1,"Name":"Illinois","Description":"Not so cool","Area":57914,"Population":12882135,"TimeZone":"Central Time Zone"},
-        {"DemographicId":6,"ParentId":5,"Name":"Chicago","Description":"Financial City","Area":234,"Population":2695598,"TimeZone":"CST"},
-        {"DemographicId":7,"ParentId":1,"Name":"Texas","Description":"Rances, Oil & Gas","Area":268581,"Population":26448193,"TimeZone":"Mountain"},
-        {"DemographicId":8,"ParentId":1,"Name":"New York","Description":"The largest diverse city","Area":141300,"Population":19651127,"TimeZone":"Eastern Time Zone"},
-        {"DemographicId":14,"ParentId":8,"Name":"Manhattan","Description":"Time Square is the place","Area":269.403,"Population":0,"TimeZone":"EST"},
-        {"DemographicId":15,"ParentId":14,"Name":"Manhattan City","Description":"Manhattan island","Area":33.77,"Population":0,"TimeZone":"EST"},
-        {"DemographicId":16,"ParentId":14,"Name":"Time Square","Description":"Time Square for new year","Area":269.40,"Population":0,"TimeZone":"EST"},
-        {"DemographicId":17,"ParentId":8,"Name":"Niagra water fall","Description":"Close to Canada","Area":65.7,"Population":0,"TimeZone":"EST"},
-        {"DemographicId":18,"ParentId":8,"Name":"Long Island","Description":"Harbour to Atlantic","Area":362.9,"Population":0,"TimeZone":"EST"},
-        {"DemographicId":51,"ParentId":1,"Name":"All_Other","Description":"All_Other demographics","Area":0,"Population":0,"TimeZone":0},
-        {"DemographicId":201,"ParentId":null,"Name":"India","Description":"Hydrabad tech city", "Area":9826675,"Population":318212000,"TimeZone":"IST"},
-        {"DemographicId":301,"ParentId":null,"Name":"Bangladesh","Description":"Country of love", "Area":9826675,"Population":318212000,"TimeZone":"BST"}
+        {"DemographicId":1,"ParentId":null,"Title":"United States of America","Code":"United States of America", "Type":9826675,"Action":318212000},
+        {"DemographicId":2,"ParentId":1,"Title":"California","Code":"The Tech State","Type":"Members’ Equity and Margins","Action":38340000},
+        {"DemographicId":3,"ParentId":2,"Title":"San Francisco","Code":"The happening city","Type":231,"Action":837442},
+        {"DemographicId":4,"ParentId":2,"Title":"Los Angeles","Code":"Disco city","Type":503,"Action":3904657},
+        {"DemographicId":5,"ParentId":1,"Title":"Illinois","Code":"Not so cool","Type":57914,"Action":12882135},
+        {"DemographicId":6,"ParentId":5,"Title":"Chicago","Code":"Financial City","Type":234,"Action":2695598},
+        {"DemographicId":7,"ParentId":1,"Title":"Texas","Code":"Rances, Oil & Gas","Type":268581,"Action":26448193},
+        {"DemographicId":8,"ParentId":1,"Title":"New York","Code":"The largest diverse city","Type":141300,"Action":19651127},
+        {"DemographicId":14,"ParentId":8,"Title":"Manhattan","Code":"Time Square is the place","Type":269.403,"Action":0},
+        {"DemographicId":15,"ParentId":14,"Title":"Manhattan City","Code":"Manhattan island","Type":33.77,"Action":0},
+        {"DemographicId":16,"ParentId":14,"Title":"Time Square","Code":"Time Square for new year","Type":269.40,"Action":0},
+        {"DemographicId":17,"ParentId":8,"Title":"Niagra water fall","Code":"Close to Canada","Type":65.7,"Action":0},
+        {"DemographicId":18,"ParentId":8,"Title":"Long Island","Code":"Harbour to Atlantic","Type":362.9,"Action":0},
+        {"DemographicId":51,"ParentId":1,"Title":"All_Other","Code":"All_Other demographics","Type":0,"Action":0},
+        {"DemographicId":201,"ParentId":null,"Title":"India","Code":"Hydrabad tech city", "Type":9826675,"Action":318212000},
+        {"DemographicId":301,"ParentId":null,"Title":"Bangladesh","Code":"Country of love", "Type":9826675,"Action":318212000}
     ];
-
 
     var myTreeData = getTree(rawTreeData, 'DemographicId', 'ParentId');
 
     $scope.tree_data = myTreeData;
     $scope.accounts_tree = tree = {};
-    $scope.expanding_property = "Name";
+    $scope.expanding_property = "Title";
     $scope.col_defs = [
-        { field: "Description"},
-        { field: "Area"},
-        { field: "Population"},
-        { field: "TimeZone", displayName: "Time Zone"}
+        { field: "Code"},
+        { field: "Type"}
     ];
     $scope.accounts_tree_handler = function(branch){
         console.log('you clicked on', branch)
