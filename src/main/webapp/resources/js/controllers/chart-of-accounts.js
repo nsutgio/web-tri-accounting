@@ -130,60 +130,31 @@ coaControllers.controller('newAccountController', ['$scope', '$routeParams', '$h
     };
 }]);
 
-coaControllers.controller('treeGridController', function($scope, $timeout) {
-    var tree;
+coaControllers.controller('treeGridController',  ['$scope', '$http', '$sce', function($scope, $http, $sce) {
+    var tree, myTreeData;
+    var rawTreeData;
 
-    var rawTreeData = [
-        {"DemographicId":1,"ParentId":null,"Title":"United States of America","Code":"United States of America", "Type":9826675,"Id":318212000},
-        {"DemographicId":2,"ParentId":1,"Title":"California","Code":"The Tech State","Type":"Members’ Equity and Margins","Id":38340000},
-        {"DemographicId":3,"ParentId":2,"Title":"San Francisco","Code":"The happening city","Type":231,"Id":837442},
-        {"DemographicId":4,"ParentId":2,"Title":"Los Angeles","Code":"Disco city","Type":503,"Id":3904657},
-        {"DemographicId":5,"ParentId":1,"Title":"Illinois","Code":"Not so cool","Type":57914,"Id":12882135},
-        {"DemographicId":6,"ParentId":5,"Title":"Chicago","Code":"Financial City","Type":234,"Id":2695598},
-        {"DemographicId":7,"ParentId":1,"Title":"Texas","Code":"Rances, Oil & Gas","Type":268581,"Id":26448193},
-        {"DemographicId":8,"ParentId":1,"Title":"New York","Code":"The largest diverse city","Type":141300,"Id":19651127},
-        {"DemographicId":14,"ParentId":8,"Title":"Manhattan","Code":"Time Square is the place","Type":269.403,"Id":0},
-        {"DemographicId":15,"ParentId":14,"Title":"Manhattan City","Code":"Manhattan island","Type":33.77,"Id":0},
-        {"DemographicId":16,"ParentId":14,"Title":"Time Square","Code":"Time Square for new year","Type":269.40,"Id":0},
-        {"DemographicId":17,"ParentId":8,"Title":"Niagra water fall","Code":"Close to Canada","Type":65.7,"Id":0},
-        {"DemographicId":18,"ParentId":8,"Title":"Long Island","Code":"Harbour to Atlantic","Type":362.9,"Id":0},
-        {"DemographicId":51,"ParentId":1,"Title":"All_Other","Code":"All_Other demographics","Type":0,"Id":0},
-        {"DemographicId":201,"ParentId":null,"Title":"India","Code":"Hydrabad tech city", "Type":9826675,"Id":318212000},
-        {"DemographicId":301,"ParentId":null,"Title":"Bangl2desh","Code":"Country of love", "Type":9826675,"Id":318212000},
-        {"DemographicId":303,"ParentId":null,"Title":"Bangl2desh","Code":"Country of love", "Type":9826675,"Id":318212000},
-        {"DemographicId":304,"ParentId":null,"Title":"Bangl2desh","Code":"Country of love", "Type":9826675,"Id":318212000},
-        {"DemographicId":305,"ParentId":null,"Title":"Bangl2desh","Code":"Country of love", "Type":9826675,"Id":318212000},
-        {"DemographicId":306,"ParentId":null,"Title":"Bangl2desh","Code":"Country of love", "Type":9826675,"Id":318212000},
-        {"DemographicId":307,"ParentId":null,"Title":"Bangl2desh","Code":"Country of love", "Type":9826675,"Id":318212000},
-        {"DemographicId":308,"ParentId":null,"Title":"Bangl2desh","Code":"Country of love", "Type":9826675,"Id":318212000},
-        {"DemographicId":3018,"ParentId":null,"Title":"Bangl2desh","Code":"Country of love", "Type":9826675,"Id":318212000},
-        {"DemographicId":3028,"ParentId":null,"Title":"Bangl2desh","Code":"Country of love", "Type":9826675,"Id":318212000},
-        {"DemographicId":3308,"ParentId":null,"Title":"Bangl2desh","Code":"Country of love", "Type":9826675,"Id":318212000},
-        {"DemographicId":3048,"ParentId":null,"Title":"Bangl2desh","Code":"Country of love", "Type":9826675,"Id":318212000},
-        {"DemographicId":3058,"ParentId":null,"Title":"Bangl2desh","Code":"Country of love", "Type":9826675,"Id":318212000},
-        {"DemographicId":3068,"ParentId":null,"Title":"Bangl2desh","Code":"Country of love", "Type":9826675,"Id":318212000},
-        {"DemographicId":309,"ParentId":null,"Title":"Bangl2desh","Code":"Country of love", "Type":9826675,"Id":318212000},
-        {"DemographicId":3109,"ParentId":null,"Title":"Bangl2desh","Code":"Country of love", "Type":9826675,"Id":318212000},
-        {"DemographicId":3209,"ParentId":null,"Title":"Bangl2desh","Code":"Country of love", "Type":9826675,"Id":318212000},
-        {"DemographicId":3039,"ParentId":null,"Title":"Bangl2desh","Code":"Country of love", "Type":9826675,"Id":318212000},
-        {"DemographicId":3049,"ParentId":null,"Title":"Bangl2desh","Code":"Country of love", "Type":9826675,"Id":318212000},
-        {"DemographicId":3069,"ParentId":null,"Title":"Bangl2desh","Code":"Country of love", "Type":9826675,"Id":318212000},
-        {"DemographicId":3059,"ParentId":null,"Title":"Bangl2desh","Code":"Country of love", "Type":9826675,"Id":318212000},
-        {"DemographicId":30439,"ParentId":null,"Title":"Bangl2desh","Code":"Country of love", "Type":9826675,"Id":318212000},
-        {"DemographicId":302,"ParentId":null,"Title":"Bangl21desh","Code":"Country of love", "Type":9826675,"Id":318212000}
+    $.ajax({
+        url: baseURL + '/accounts',
+        type: 'GET',
+        async: false
+    }).done(function(data) {
+        rawTreeData = data;
+    }).error(function() {
+        alert("Something went wrong!");
+    });
 
-    ];
-
-    var myTreeData = getTree(rawTreeData, 'DemographicId', 'ParentId');
-
+    myTreeData = getTree(rawTreeData, 'id', 'parentAccountId');
     $scope.tree_data = myTreeData;
     $scope.accounts_tree = tree = {};
-    $scope.expanding_property = "Title";
+    $scope.expanding_property = "title";
+    $scope.data_loaded = true;
     $scope.col_defs = [
-        { field: "Code"},
-        { field: "Type"},
-        { field: "Id"}
+        { field: "code"},
+        { field: "accountType"},
+        { field: "id"}
     ];
+
     $scope.accounts_tree_handler = function(branch){
         console.log('you clicked on', branch)
     }
@@ -229,4 +200,4 @@ coaControllers.controller('treeGridController', function($scope, $timeout) {
 
         return tree;
     }
-});
+}]);

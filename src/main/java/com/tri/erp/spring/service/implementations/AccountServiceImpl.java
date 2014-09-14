@@ -21,8 +21,6 @@ import org.springframework.validation.BindingResult;
 import javax.annotation.Resource;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,7 +30,6 @@ import java.util.List;
 @Service
 public class AccountServiceImpl implements AccountService {
 
-    private final String INDENTION = "&nbsp;&nbsp;";
     private List<AccountDTO> accountsDtoList = new ArrayList<>();
 
     @Resource
@@ -59,19 +56,18 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public List<AccountDTO> findAll() {
+        List<Account> accountList = accountRepo.findAll();
 
-        List<Account> topLevelAccounts = findByParentAccountIdOrderByCodeAsc(0);// top level accounts
-        for(Account account : topLevelAccounts) {
+        for(Account account : accountList) {
             AccountDTO accountDTO = new AccountDTO();
             accountDTO.setCode(account.getCode());
+            accountDTO.setParentAccountId(account.getParentAccountId());
             accountDTO.setId(account.getId());
             accountDTO.setTitle(account.getTitle());
             if (account.getAccountType() != null) {
                 accountDTO.setAccountType(account.getAccountType());
             }
             this.accountsDtoList.add(accountDTO);
-
-//            findDescendants(account, this.INDENTION);
         }
         return this.accountsDtoList;
     }
@@ -176,14 +172,11 @@ public class AccountServiceImpl implements AccountService {
         return processCreate(account, bindingResult, messageSource);
     }
 
-    private void findDescendants(Account currentAccount, String indention) {
+    private void findDescendants(Account currentAccount, AccountDTO currentAccountDTO) {
         List<Account> children = accountRepo.findByParentAccountIdOrderByCodeAsc(currentAccount.getId());
 
         for (Account childAccount : children) {
             AccountDTO accountDTO = new AccountDTO();
-
-            childAccount.setCode(indention + childAccount.getCode());
-            childAccount.setTitle(indention + childAccount.getTitle());
 
             accountDTO.setCode(childAccount.getCode());
             accountDTO.setId(childAccount.getId());
@@ -192,9 +185,7 @@ public class AccountServiceImpl implements AccountService {
             if (childAccount.getAccountType() != null) {
                 accountDTO.setAccountType(childAccount.getAccountType());
             }
-
-            this.accountsDtoList.add(accountDTO);
-            findDescendants(childAccount, indention + INDENTION);
+            findDescendants(childAccount, accountDTO);
         }
     }
 }

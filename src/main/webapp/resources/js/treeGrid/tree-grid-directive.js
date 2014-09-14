@@ -5,7 +5,7 @@
   module = angular.module('treeGrid', []);
 
   module.directive('treeGrid', [
-    '$timeout', function($timeout) {
+    '$timeout', '$http', function($timeout, $http) {
       return {
         restrict: 'E',
         //templateUrl:'tree-grid-template.html',
@@ -25,7 +25,7 @@
             <div style='max-height: 500px; overflow: auto'>\
               <table class=\"table table-striped tree-grid table-hover\">\
                   <tbody>\
-                  <tr ng-repeat=\"row in rows = (tree_rows | filter:q) | filter: {visible:true} track by row.branch.uid\"\
+                  <tr ng-repeat=\"row in rows = (tree_rows | filter:q) | filter: {visible:true} track by row.branch['id'] \"\
                       ng-class=\"'level-' + {{ row.level }} + (row.branch.selected ? ' active':'')\" class=\"tree-grid-row\">\
                       <td class=\"text-primary\"><a ng-click=\"user_clicks_branch(row.branch)\"><i ng-class=\"row.tree_icon\"\
                                  ng-click=\"row.branch.expanded = !row.branch.expanded\"\
@@ -33,10 +33,10 @@
                           </a><span class=\"indented tree-label\" ng-click=\"user_clicks_branch(row.branch)\">\
                             {{row.branch[expandingProperty]}}</span>\
                       </td>\
-                      <td class='code-col'> {{row.branch['Code']}}</td>\
-                      <td class='type-col'> {{row.branch['Type']}}</td>\
-                      <td style='width: 60px; padding: 0'><a style='padding: 0' title='View' href=\"#/account/{{row.branch['Id']}}\"><i class='fa fa-search'></i></a>\
-                          <a style='padding: 0' title='Edit' href=\"#/account/{{row.branch['Id']}}/edit\">&nbsp;&nbsp;<i class='fa fa-edit'></i></a>\
+                      <td class='code-col'> {{row.branch['code']}}</td>\
+                      <td class='type-col'> {{row.branch['accountType'].description}}</td>\
+                      <td style='width: 60px; padding: 0'><a style='padding: 0' title='View' href=\"#/account/{{row.branch['id']}}\"><i class='fa fa-search'></i></a>\
+                          <a style='padding: 0' title='Edit' href=\"#/account/{{row.branch['id']}}/edit\">&nbsp;&nbsp;<i class='fa fa-edit'></i></a>\
                       </td>\
                   </tr>\
                   </tbody>\
@@ -75,11 +75,11 @@
           }
 
           expand_level = parseInt(attrs.expandLevel, 10);
-
           if (!scope.treeData) {
             alert('no treeData defined for the tree!');
             return;
           }
+
           if (scope.treeData.length == null) {
             if (treeData.label != null) {
               scope.treeData = [treeData];
@@ -88,12 +88,13 @@
               return;
             }
           }
-          if(attrs.expandOn){            
+
+          if(attrs.expandOn){
             expandingProperty = scope.expandOn;
             scope.expandingProperty = scope.expandOn;
           }
           else{
-            var _firstRow = scope.treeData[0], 
+            var _firstRow = scope.treeData[0],
                 _keys = Object.keys(_firstRow);
             for(var i =0, len = _keys.length; i<len; i++){
               if(typeof(_firstRow[_keys[i]])=='string'){
@@ -110,11 +111,10 @@
             for(var idx in _firstRow){
               if(_unwantedColumn.indexOf(idx)==-1)
                 _col_defs.push({field:idx});
-            }            
+            }
             scope.colDefinitions = _col_defs;
           }
           else{
-            console.log(scope.colDefs);
             scope.colDefinitions = scope.colDefs;
           }
 
@@ -271,8 +271,8 @@
               branch.level = level;
               scope.tree_rows.push({
                 level: level,
-                branch: branch,                
-                label: branch[expandingProperty],                
+                branch: branch,
+                label: branch[expandingProperty],
                 tree_icon: tree_icon,
                 visible: visible
               });
