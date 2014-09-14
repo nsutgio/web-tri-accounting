@@ -30,8 +30,6 @@ import java.util.List;
 @Service
 public class AccountServiceImpl implements AccountService {
 
-    private List<AccountDTO> accountsDtoList = new ArrayList<>();
-
     @Resource
     private AccountRepo accountRepo;
 
@@ -56,6 +54,8 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public List<AccountDTO> findAll() {
+        List<AccountDTO> accountsDtoList = new ArrayList<>();
+
         List<Account> accountList = accountRepo.findAll();
 
         for(Account account : accountList) {
@@ -67,9 +67,9 @@ public class AccountServiceImpl implements AccountService {
             if (account.getAccountType() != null) {
                 accountDTO.setAccountType(account.getAccountType());
             }
-            this.accountsDtoList.add(accountDTO);
+            accountsDtoList.add(accountDTO);
         }
-        return this.accountsDtoList;
+        return accountsDtoList;
     }
 
     @Override
