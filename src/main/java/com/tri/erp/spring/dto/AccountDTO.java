@@ -4,9 +4,12 @@ import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import com.google.common.base.Objects;
 import com.tri.erp.spring.model.AccountGroup;
 import com.tri.erp.spring.model.AccountType;
+import com.tri.erp.spring.model.SegmentAccount;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by arjayadong on 9/9/14.
@@ -28,6 +31,7 @@ public class AccountDTO {
     private int parentAccountId;
     private int normalBalance;
     private int isHeader;
+    private List<SegmentAccount> segmentAccounts = new ArrayList<>();
 
     public int getId() {
         return id;
@@ -153,5 +157,13 @@ public class AccountDTO {
 
     public void setParentAccountId(int parentAccountId) {
         this.parentAccountId = parentAccountId;
+    }
+
+    public List<SegmentAccount> getSegmentAccounts() {
+        return segmentAccounts;
+    }
+
+    public void setSegmentAccounts(List<SegmentAccount> segmentAccounts) {
+        this.segmentAccounts = segmentAccounts;
     }
 }

@@ -10,4 +10,5 @@ import java.util.List;
  * Created by TSI Admin on 9/9/2014.
  */
 public interface SegmentAccountRepo extends JpaRepository<SegmentAccount, Integer> {
+    public List<SegmentAccount> findByAccountId(Integer accountId);
 }

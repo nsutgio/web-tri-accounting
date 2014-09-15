@@ -88,11 +88,24 @@ coaControllers.controller('newAccountController', ['$scope', '$routeParams', '$h
                 data.isHeader = (data.isHeader == 1);
                 data.hasSL = (data.hasSL == 1);
 
+                // segments
+                angular.forEach(data.segmentAccounts, function(segmentAccount, key) {
+                    $scope.checkAssignedSegment(segmentAccount.businessSegment.id);
+                });
+                console.log($scope.segments);
                 $scope.account = data;
             }
         });
-
         resourceURI = baseURL + '/update';
+    }
+    $scope.checkAssignedSegment = function (businessSegmentId) {
+        angular.forEach($scope.segments, function(segment, key) {
+            if (segment.id == businessSegmentId) {
+                segment.selected = true;
+                $scope.segments[key] = segment;
+                return;
+            }
+        });
     }
 
     $scope.toggleSegment = function(segment) {

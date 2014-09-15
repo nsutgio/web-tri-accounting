@@ -27,19 +27,15 @@ public class BusinessSegment implements java.io.Serializable {
     private
     String code;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "businessSegment", cascade=CascadeType.ALL)
-    private Set<SegmentAccount> segmentAccounts = new HashSet<>();
-
     @JsonIgnoreProperties(ignoreUnknown = true)
     @NotFound(action = NotFoundAction.IGNORE)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="bus_act_id")
     private BusinessActivity businessActivity;
 
-    public BusinessSegment(String description, String code, Set<SegmentAccount> segmentAccounts, BusinessActivity businessActivity) {
+    public BusinessSegment(String description, String code, BusinessActivity businessActivity) {
         this.description = description;
         this.code = code;
-        this.segmentAccounts = segmentAccounts;
         this.businessActivity = businessActivity;
     }
 
@@ -78,11 +74,4 @@ public class BusinessSegment implements java.io.Serializable {
         this.businessActivity = businessActivity;
     }
 
-    public Set<SegmentAccount> getSegmentAccounts() {
-        return segmentAccounts;
-    }
-
-    public void setSegmentAccounts(Set<SegmentAccount> segmentAccounts) {
-        this.segmentAccounts = segmentAccounts;
-    }
 }

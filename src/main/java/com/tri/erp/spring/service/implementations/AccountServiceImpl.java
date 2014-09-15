@@ -106,6 +106,10 @@ public class AccountServiceImpl implements AccountService {
                 accountDTO.setParentAccount(parentAccount.getTitle());
                 accountDTO.setParentAccountId(parentAccount.getId());
             }
+
+            List<SegmentAccount> segmentAccounts = segmentAccountRepo.findByAccountId(account.getId());
+
+            accountDTO.setSegmentAccounts(segmentAccounts);
             accountDTO.setSLAccount(account.getSLAccount());
             accountDTO.setNormalBalance(account.getNormalBalance());
             accountDTO.setIsHeader(account.getIsHeader());
@@ -183,23 +187,6 @@ public class AccountServiceImpl implements AccountService {
 
     public Response processUpdate(Account account, BindingResult bindingResult, MessageSource messageSource) {
         return processCreate(account, bindingResult, messageSource);
-    }
-
-    private void findDescendants(Account currentAccount, AccountDTO currentAccountDTO) {
-        List<Account> children = accountRepo.findByParentAccountIdOrderByCodeAsc(currentAccount.getId());
-
-        for (Account childAccount : children) {
-            AccountDTO accountDTO = new AccountDTO();
-
-            accountDTO.setCode(childAccount.getCode());
-            accountDTO.setId(childAccount.getId());
-            accountDTO.setTitle(childAccount.getTitle());
-
-            if (childAccount.getAccountType() != null) {
-                accountDTO.setAccountType(childAccount.getAccountType());
-            }
-            findDescendants(childAccount, accountDTO);
-        }
     }
 
     private String generateSegmentAccountCode(BusinessSegment businessSegment, Account account) {
