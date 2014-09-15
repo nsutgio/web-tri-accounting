@@ -114,9 +114,10 @@ coaControllers.controller('newAccountController', ['$scope', '$routeParams', '$h
         var segmentAccounts = [];
         angular.forEach($scope.segments, function(segment, key) {
             if (segment.selected) {
+                delete segment['selected']; // hibernate will complain, so delete it
+
                 var segmentAccount = {
                     "accountCode" : "later",
-                    "account" : $scope.account,
                     "businessSegment" :segment
                 };
                 segmentAccounts.push(segmentAccount);

@@ -27,8 +27,8 @@ public class BusinessSegment implements java.io.Serializable {
     private
     String code;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.businessSegment")
-    private Set<SegmentAccount> segmentAccounts = new HashSet<>(0);
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "businessSegment", cascade=CascadeType.ALL)
+    private Set<SegmentAccount> segmentAccounts = new HashSet<>();
 
     @JsonIgnoreProperties(ignoreUnknown = true)
     @NotFound(action = NotFoundAction.IGNORE)
@@ -47,6 +47,9 @@ public class BusinessSegment implements java.io.Serializable {
         this.code = code;
         this.segmentAccounts = segmentAccounts;
         this.businessActivity = businessActivity;
+    }
+
+    public BusinessSegment() {
     }
 
     public int getId() {

@@ -78,10 +78,10 @@ public class Account  implements java.io.Serializable {
     @Column(name = "parent_acct_id")
     private Integer parentAccountId;
 
+    @Transient
     @JsonIgnoreProperties(ignoreUnknown = true)
     @NotFound(action = NotFoundAction.IGNORE)
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.account", cascade=CascadeType.ALL)
-    private List<SegmentAccount> segmentAccounts = new ArrayList<>();
+    private Set<SegmentAccount> segmentAccounts = new HashSet<>();
 
     @JsonIgnoreProperties(ignoreUnknown = true)
     @NotFound(action = NotFoundAction.IGNORE)
@@ -99,7 +99,7 @@ public class Account  implements java.io.Serializable {
     @Transient
     private String parentAccount;
 
-    public Account(String code, String title, String GLAccount, String SLAccount, String auxiliaryAccount, int normalBalance, int level, int active, int isHeader, int hasSL, Integer parentAccountId, AccountType accountType, AccountGroup accountGroup, String parentAccount) {
+    public Account(String code, String title, String GLAccount, String SLAccount, String auxiliaryAccount, int normalBalance, int level, int active, int isHeader, int hasSL, Integer parentAccountId, Set<SegmentAccount> segmentAccounts, AccountType accountType, AccountGroup accountGroup, String parentAccount) {
         this.code = code;
         this.title = title;
         this.GLAccount = GLAccount;
@@ -111,24 +111,7 @@ public class Account  implements java.io.Serializable {
         this.isHeader = isHeader;
         this.hasSL = hasSL;
         this.parentAccountId = parentAccountId;
-        this.accountType = accountType;
-        this.accountGroup = accountGroup;
-        this.parentAccount = parentAccount;
-    }
-
-    public Account(String code, String title, String GLAccount, String SLAccount, String auxiliaryAccount, int normalBalance, int level, int active, int isHeader, int hasSL, Integer parentAccountId, List<SegmentAccount> segmentAccounts, AccountType accountType, AccountGroup accountGroup, String parentAccount) {
-        this.code = code;
-        this.title = title;
-        this.GLAccount = GLAccount;
-        this.SLAccount = SLAccount;
-        this.auxiliaryAccount = auxiliaryAccount;
-        this.normalBalance = normalBalance;
-        this.level = level;
-        this.active = active;
-        this.isHeader = isHeader;
-        this.hasSL = hasSL;
-        this.parentAccountId = parentAccountId;
-        this.setSegmentAccounts(segmentAccounts);
+        this.segmentAccounts = segmentAccounts;
         this.accountType = accountType;
         this.accountGroup = accountGroup;
         this.parentAccount = parentAccount;
@@ -351,11 +334,11 @@ public class Account  implements java.io.Serializable {
         this.parentAccount = parentAccount;
     }
 
-    public List<SegmentAccount> getSegmentAccounts() {
+    public Set<SegmentAccount> getSegmentAccounts() {
         return segmentAccounts;
     }
 
-    public void setSegmentAccounts(List<SegmentAccount> segmentAccounts) {
+    public void setSegmentAccounts(Set<SegmentAccount> segmentAccounts) {
         this.segmentAccounts = segmentAccounts;
     }
 }

@@ -5,12 +5,11 @@ import com.tri.erp.spring.commons.beans.CreateAccountResponse;
 import com.tri.erp.spring.commons.helpers.MessageFormatter;
 import com.tri.erp.spring.commons.helpers.StringFormatter;
 import com.tri.erp.spring.dto.AccountDTO;
-import com.tri.erp.spring.model.Account;
-import com.tri.erp.spring.model.AccountGroup;
-import com.tri.erp.spring.model.AccountType;
+import com.tri.erp.spring.model.*;
 import com.tri.erp.spring.repo.AccountGroupRepo;
 import com.tri.erp.spring.repo.AccountRepo;
 import com.tri.erp.spring.repo.AccountTypeRepo;
+import com.tri.erp.spring.repo.SegmentAccountRepo;
 import com.tri.erp.spring.service.interfaces.AccountService;
 import com.tri.erp.spring.validator.AccountValidator;
 import org.springframework.context.MessageSource;
@@ -23,6 +22,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by TSI Admin on 9/9/2014.
@@ -38,6 +38,9 @@ public class AccountServiceImpl implements AccountService {
 
     @Resource
     private AccountGroupRepo accountGroupRepo;
+
+    @Resource
+    private SegmentAccountRepo segmentAccountRepo;
 
     @PersistenceContext
     private EntityManager em;
@@ -149,6 +152,14 @@ public class AccountServiceImpl implements AccountService {
                 update(account);
             } else {
                 account = create(account);
+                if (account.getSegmentAccounts() != null && account.getSegmentAccounts().size() > 0) {
+                    Set<SegmentAccount> segmentAccounts = account.getSegmentAccounts();
+                    for(SegmentAccount segmentAccount : segmentAccounts) {
+                        segmentAccount.setAccount(account);
+                        segmentAccountRepo.save(segmentAccount);
+                    }
+                }
+                System.out.println("Account id: " + account.getId());
             }
 
             response.setModelId(account.getId());
