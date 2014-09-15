@@ -13,7 +13,7 @@ import java.util.Set;
 
 @Entity
 @Table(name="account_type")
-public class AccountType {
+public class AccountType implements java.io.Serializable {
 
     @Id
     @GeneratedValue
@@ -91,8 +91,8 @@ public class AccountType {
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 97 * hash + Objects.hashCode(this.code);
-        return hash;
+        int result = id;
+        result = 31 * result + code.hashCode();
+        return result;
     }
 }

@@ -9,12 +9,11 @@ import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
-import javax.validation.Valid;
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by TSI Admin on 9/9/2014.
@@ -22,7 +21,7 @@ import java.util.List;
 
 @Entity
 @Table(name="accounts")
-public class Account {
+public class Account  implements java.io.Serializable {
     @Id
     @GeneratedValue
     @Column(name = "acct_id")
@@ -81,6 +80,11 @@ public class Account {
 
     @JsonIgnoreProperties(ignoreUnknown = true)
     @NotFound(action = NotFoundAction.IGNORE)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.account", cascade=CascadeType.ALL)
+    private List<SegmentAccount> segmentAccounts = new ArrayList<>();
+
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    @NotFound(action = NotFoundAction.IGNORE)
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="acct_type_id")
     private AccountType accountType;
@@ -107,6 +111,24 @@ public class Account {
         this.isHeader = isHeader;
         this.hasSL = hasSL;
         this.parentAccountId = parentAccountId;
+        this.accountType = accountType;
+        this.accountGroup = accountGroup;
+        this.parentAccount = parentAccount;
+    }
+
+    public Account(String code, String title, String GLAccount, String SLAccount, String auxiliaryAccount, int normalBalance, int level, int active, int isHeader, int hasSL, Integer parentAccountId, List<SegmentAccount> segmentAccounts, AccountType accountType, AccountGroup accountGroup, String parentAccount) {
+        this.code = code;
+        this.title = title;
+        this.GLAccount = GLAccount;
+        this.SLAccount = SLAccount;
+        this.auxiliaryAccount = auxiliaryAccount;
+        this.normalBalance = normalBalance;
+        this.level = level;
+        this.active = active;
+        this.isHeader = isHeader;
+        this.hasSL = hasSL;
+        this.parentAccountId = parentAccountId;
+        this.setSegmentAccounts(segmentAccounts);
         this.accountType = accountType;
         this.accountGroup = accountGroup;
         this.parentAccount = parentAccount;
@@ -327,5 +349,13 @@ public class Account {
 
     public void setParentAccount(String parentAccount) {
         this.parentAccount = parentAccount;
+    }
+
+    public List<SegmentAccount> getSegmentAccounts() {
+        return segmentAccounts;
+    }
+
+    public void setSegmentAccounts(List<SegmentAccount> segmentAccounts) {
+        this.segmentAccounts = segmentAccounts;
     }
 }

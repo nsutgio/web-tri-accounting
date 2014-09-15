@@ -249,12 +249,12 @@
     <div class="row">
         <div class="col-md-12 col-lg-12">
             <div class="col-md-2 col-lg-2">
-                <label class="input-label">Segments</label>
+                <label>Segments</label>
             </div>
-            <div class="col-md-9 col-lg-9">
-                <ul style="list-style: none; padding-left:  0">
+            <div class="col-md-5 col-lg-5">
+                <ul style="list-style: none; padding-left: 2px; border: 1px solid lightgray">
                     <li ng-repeat="segment in segments">
-                        <label ><input type="checkbox" ng-model="segment.id" /> {{segment.description}}</label>
+                        <label ><input ng-model="segment.selected" type="checkbox" ng-change="toggleSegment(segment)" /> {{segment.description}}</label>
                     </li>
                 </ul>
             </div>

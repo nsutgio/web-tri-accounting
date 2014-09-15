@@ -51,15 +51,16 @@ coaControllers.controller('newAccountController', ['$scope', '$routeParams', '$h
     var accountType = {"id" : ""};
 
     $scope.segments = [
-        {"id" : 1, "description" : "Electricity Generation and Provision for Ancillary Services"},
-        {"id" : 2, "description" : "Supply Service"},
-        {"id" : 3, "description" : "Distribution Services"},
-        {"id" : 4, "description" : "Distribution Connection Services"},
-        {"id" : 5, "description" : "Regulated Retail Services"},
-        {"id" : 6, "description" : "Non-Regulated Retail Services"},
-        {"id" : 7, "description" : "Supplier of Last Resort"}
+        {"id" : 1, "description" : "Electricity Generation and Provision for Ancillary Services", "selected" : false},
+        {"id" : 2, "description" : "Supply Service", "selected" : false},
+        {"id" : 3, "description" : "Distribution Services", "selected" : false},
+        {"id" : 4, "description" : "Distribution Connection Services", "selected" : false},
+        {"id" : 5, "description" : "Regulated Retail Services", "selected" : false},
+        {"id" : 6, "description" : "Non-Regulated Retail Services", "selected" : false},
+        {"id" : 7, "description" : "Supplier of Last Resort", "selected" : false}
     ];
 
+    $scope.segmentsEnabled = [];
     $scope.account['normalBalance'] = "1";
     $scope.account['accountGroup'] = accountGroup;
     $scope.account['accountType'] = accountType;
@@ -94,6 +95,10 @@ coaControllers.controller('newAccountController', ['$scope', '$routeParams', '$h
         resourceURI = baseURL + '/update';
     }
 
+    $scope.toggleSegment = function(segment) {
+        console.log(segment.description + " => " + segment.selected);
+    };
+
     $scope.processForm = function() {
 
         $scope.save ='Saving...';
@@ -105,6 +110,19 @@ coaControllers.controller('newAccountController', ['$scope', '$routeParams', '$h
         $scope.account.isActive = $scope.account.isActive ? 1 : 0;
         $scope.account.hasSL = $scope.account.hasSL ? 1 : 0;
         $scope.account.isHeader = $scope.account.isHeader ? 1 : 0;
+
+        var segmentAccounts = [];
+        angular.forEach($scope.segments, function(segment, key) {
+            if (segment.selected) {
+                var segmentAccount = {
+                    "accountCode" : "later",
+                    "account" : $scope.account,
+                    "businessSegment" :segment
+                };
+                segmentAccounts.push(segmentAccount);
+            }
+        });
+        $scope.account.segmentAccounts = segmentAccounts;
 
         console.log($scope.account);
 
