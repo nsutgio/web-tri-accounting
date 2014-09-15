@@ -229,7 +229,6 @@
         </div>
     </div>
 
-
     <div class="row-top-buffer"></div>
     <div class="row">
         <div class="col-md-12 col-lg-12">
@@ -241,6 +240,23 @@
                     <label style="margin-right: 20px;"><input ng-model="account.isHeader" type="checkbox" id="is_header" name="is_header"> Is Header</label>
                     <label><input ng-model="account.isActive" type="checkbox" id="isActive" name="isActive"> Active</label>
                 </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row-top-buffer"></div>
+    <div class="row">
+        <div class="col-md-12 col-lg-12">
+            <div class="col-md-2 col-lg-2">
+                <label class="input-label">Segments</label>
+            </div>
+            <div class="col-md-9 col-lg-9">
+                <ul style="list-style: none; padding-left:  0">
+                    <li ng-repeat="segment in segments">
+                        <label ><input type="checkbox" ng-model="segment.id" /> {{segment.description}}</label>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>

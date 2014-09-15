@@ -50,6 +50,16 @@ coaControllers.controller('newAccountController', ['$scope', '$routeParams', '$h
     var accountGroup = {"id" : ""};
     var accountType = {"id" : ""};
 
+    $scope.segments = [
+        {"id" : 1, "description" : "Electricity Generation and Provision for Ancillary Services"},
+        {"id" : 2, "description" : "Supply Service"},
+        {"id" : 3, "description" : "Distribution Services"},
+        {"id" : 4, "description" : "Distribution Connection Services"},
+        {"id" : 5, "description" : "Regulated Retail Services"},
+        {"id" : 6, "description" : "Non-Regulated Retail Services"},
+        {"id" : 7, "description" : "Supplier of Last Resort"}
+    ];
+
     $scope.account['normalBalance'] = "1";
     $scope.account['accountGroup'] = accountGroup;
     $scope.account['accountType'] = accountType;
