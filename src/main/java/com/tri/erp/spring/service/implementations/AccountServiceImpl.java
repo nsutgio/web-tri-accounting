@@ -6,10 +6,7 @@ import com.tri.erp.spring.commons.helpers.MessageFormatter;
 import com.tri.erp.spring.commons.helpers.StringFormatter;
 import com.tri.erp.spring.dto.AccountDTO;
 import com.tri.erp.spring.model.*;
-import com.tri.erp.spring.repo.AccountGroupRepo;
-import com.tri.erp.spring.repo.AccountRepo;
-import com.tri.erp.spring.repo.AccountTypeRepo;
-import com.tri.erp.spring.repo.SegmentAccountRepo;
+import com.tri.erp.spring.repo.*;
 import com.tri.erp.spring.service.interfaces.AccountService;
 import com.tri.erp.spring.validator.AccountValidator;
 import org.springframework.context.MessageSource;
@@ -41,6 +38,9 @@ public class AccountServiceImpl implements AccountService {
 
     @Resource
     private SegmentAccountRepo segmentAccountRepo;
+
+    @Resource
+    private BusinessSegmentRepo businessSegmentRepo;
 
     @PersistenceContext
     private EntityManager em;
@@ -155,11 +155,13 @@ public class AccountServiceImpl implements AccountService {
                 if (account.getSegmentAccounts() != null && account.getSegmentAccounts().size() > 0) {
                     Set<SegmentAccount> segmentAccounts = account.getSegmentAccounts();
                     for(SegmentAccount segmentAccount : segmentAccounts) {
+                        BusinessSegment businessSegment = businessSegmentRepo.findOne(segmentAccount.getBusinessSegment().getId());
+                        String code = generateSegmentAccountCode(businessSegment, account);
                         segmentAccount.setAccount(account);
+                        segmentAccount.setAccountCode(code);
                         segmentAccountRepo.save(segmentAccount);
                     }
                 }
-                System.out.println("Account id: " + account.getId());
             }
 
             response.setModelId(account.getId());
@@ -198,5 +200,9 @@ public class AccountServiceImpl implements AccountService {
             }
             findDescendants(childAccount, accountDTO);
         }
+    }
+
+    private String generateSegmentAccountCode(BusinessSegment businessSegment, Account account) {
+        return businessSegment.getBusinessActivity().getCode() + businessSegment.getCode() + "-" + account.getCode();
     }
 }

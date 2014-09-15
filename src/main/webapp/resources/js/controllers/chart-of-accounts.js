@@ -117,7 +117,7 @@ coaControllers.controller('newAccountController', ['$scope', '$routeParams', '$h
                 delete segment['selected']; // hibernate will complain, so delete it
 
                 var segmentAccount = {
-                    "accountCode" : "later",
+                    "accountCode" : "",
                     "businessSegment" :segment
                 };
                 segmentAccounts.push(segmentAccount);

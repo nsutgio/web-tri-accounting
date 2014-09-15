@@ -21,11 +21,14 @@ public class BusinessActivity implements java.io.Serializable {
     private
     String code;
 
-    public BusinessActivity(String description, String ode) {
+    public BusinessActivity(String description, String code) {
         this.description = description;
-        this.code = ode;
+        this.code = code;
     }
 
+    public BusinessActivity() {
+
+    }
     public int getId() {
         return id;
     }
@@ -42,7 +45,7 @@ public class BusinessActivity implements java.io.Serializable {
         this.description = description;
     }
 
-    public String getOde() {
+    public String getCode() {
         return code;
     }
 

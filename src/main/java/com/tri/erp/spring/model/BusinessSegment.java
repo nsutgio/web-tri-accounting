@@ -36,12 +36,6 @@ public class BusinessSegment implements java.io.Serializable {
     @JoinColumn(name="bus_act_id")
     private BusinessActivity businessActivity;
 
-    public BusinessSegment(String description, String ode, BusinessActivity businessActivity) {
-        this.description = description;
-        this.code = ode;
-        this.businessActivity = businessActivity;
-    }
-
     public BusinessSegment(String description, String code, Set<SegmentAccount> segmentAccounts, BusinessActivity businessActivity) {
         this.description = description;
         this.code = code;
@@ -68,11 +62,11 @@ public class BusinessSegment implements java.io.Serializable {
         this.description = description;
     }
 
-    public String getOde() {
+    public String getCode() {
         return code;
     }
 
-    public void setOde(String ode) {
+    public void setCode(String ode) {
         this.code = ode;
     }
 
