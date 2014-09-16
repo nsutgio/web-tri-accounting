@@ -51,18 +51,6 @@ coaControllers.controller('newAccountController', ['$scope', '$routeParams', '$h
     // setup defaults
     var accountGroup = {"id" : ""};
     var accountType = {"id" : ""};
-
-    $scope.segments = [
-        {"id" : 1, "description" : "Electricity Generation and Provision for Ancillary Services", "selected" : false},
-        {"id" : 2, "description" : "Supply Service", "selected" : false},
-        {"id" : 3, "description" : "Distribution Services", "selected" : false},
-        {"id" : 4, "description" : "Distribution Connection Services", "selected" : false},
-        {"id" : 5, "description" : "Regulated Retail Services", "selected" : false},
-        {"id" : 6, "description" : "Non-Regulated Retail Services", "selected" : false},
-        {"id" : 7, "description" : "Supplier of Last Resort", "selected" : false}
-    ];
-
-    $scope.segmentsEnabled = [];
     $scope.account['normalBalance'] = "1";
     $scope.account['accountGroup'] = accountGroup;
     $scope.account['accountType'] = accountType;
@@ -113,6 +101,14 @@ coaControllers.controller('newAccountController', ['$scope', '$routeParams', '$h
             }
         });
     }
+
+    $http.get('/json/bus-seg').success(function(data) {
+        if (data.length > 0) {
+            $scope.segments = data;
+        }
+    }).error(function(data) {
+        alert("Failed to fetch business segments.");
+    });
 
     $scope.toggleSegment = function(idx, segment) {
         console.log(idx + " => " + segment.description + " => " + segment.selected);
