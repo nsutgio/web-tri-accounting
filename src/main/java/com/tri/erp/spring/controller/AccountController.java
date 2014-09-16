@@ -30,8 +30,14 @@ public class AccountController {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ResponseBody
     public AccountDTO getAccount(@PathVariable Integer id) {
-        AccountDTO shop = accountService.findById(id);
-        return shop;
+        AccountDTO account = accountService.findById(id);
+        return account;
+    }
+
+    @RequestMapping(value = "/{id}/except", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Account> getAccountsExcept(@PathVariable Integer id) {
+        return accountService.findByIdNotIn(id);
     }
 
     // create account
@@ -41,7 +47,7 @@ public class AccountController {
         return accountService.processCreate(account, bindingResult, messageSource);
     }
 
-    // create account
+    // update account
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     @ResponseBody
     public Response updateAccount(@Valid @RequestBody Account account, BindingResult bindingResult) {

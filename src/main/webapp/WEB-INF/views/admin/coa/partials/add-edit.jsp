@@ -197,17 +197,10 @@
             <div class="col-md-5 col-lg-5">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-filter"></i></span>
-                    <select ng-model="account.parentAccountId" id="parent_acct_id" name="parent_acct_id" class="form-control">
-                        <option value="0">Select parent</option>
-                        <option value="19">ASSETS</option>
-                        <option value="20">NON-CURRENT ASSETS</option>
-                        <option value="32">CURRENT ASSETS</option>
-                        <option value="147">LIABILITIES</option>
-                        <option value="149">NON CURRENT LIABILITIES</option>
-                        <option value="227">CURRENT LIABILITIES</option>
-                        <option value="286">MARGINS</option>
-                        <option value="303">REVENUES</option>
-                        <option value="331">COST AND EXPENSES</option>
+
+                    <select required class="form-control" id="parent_acct_id" ng-model="parentAccount"
+                            ng-options="parentAccount.title for parentAccount in parentAccounts track by parentAccount.id">
+                        <option value="">Select parent account</option>
                     </select>
                 </div>
             </div>

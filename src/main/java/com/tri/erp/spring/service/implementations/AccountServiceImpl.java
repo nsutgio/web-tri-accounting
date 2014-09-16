@@ -196,6 +196,11 @@ public class AccountServiceImpl implements AccountService {
         return accountRepo.findByParentAccountIdOrderByCodeAsc(accountId);
     }
 
+    @Override
+    public List<Account> findByIdNotIn(Integer... accountId) {
+        return accountRepo.findByIdNotIn(accountId);
+    }
+
     public Response processUpdate(Account account, BindingResult bindingResult, MessageSource messageSource) {
         return processCreate(account, bindingResult, messageSource);
     }

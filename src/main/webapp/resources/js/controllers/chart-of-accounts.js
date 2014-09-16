@@ -68,6 +68,7 @@ coaControllers.controller('newAccountController', ['$scope', '$routeParams', '$h
     $scope.title = 'Add an account';
     var resourceURI = '/account/create';
 
+
     $http.get('/json/bus-seg').success(function(data) {
         if (data.length > 0) {
             $scope.segments = data;
@@ -98,6 +99,13 @@ coaControllers.controller('newAccountController', ['$scope', '$routeParams', '$h
         $scope.accountId = $routeParams.accountId;
 
 
+        $http.get('/account/' + $scope.accountId + '/except').success(function(data) {
+            if (data.length > 0) {
+                $scope.parentAccounts = data;
+            }
+        });
+
+
         $http.get('/account/'+ $scope.accountId).success(function(data) {
             console.log(data);
             if (data === '' || data.id <= 0) {    // not found
@@ -122,6 +130,12 @@ coaControllers.controller('newAccountController', ['$scope', '$routeParams', '$h
             window.location.hash = '#/accounts';
         });
         resourceURI = '/account/update';
+    } else {
+        $http.get('/account/list').success(function(data) {
+            if (data.length > 0) {
+                $scope.parentAccounts = data;
+            }
+        });
     }
     $scope.checkAssignedSegment = function (businessSegmentId) {
         angular.forEach($scope.segments, function(segment, key) {

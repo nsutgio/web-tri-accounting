@@ -8,7 +8,8 @@ import java.util.List;
 /**
  * Created by TSI Admin on 9/9/2014.
  */
-public interface AccountRepo  extends JpaRepository<Account, Integer> {
+public interface AccountRepo extends JpaRepository<Account, Integer> {
     public List<Account> findByTitle(String title);
     public List<Account> findByParentAccountIdOrderByCodeAsc(Integer accountId);
+    public List<Account> findByIdNotIn(Integer... accountId);
 }
