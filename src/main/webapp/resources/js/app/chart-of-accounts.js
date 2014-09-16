@@ -1,5 +1,4 @@
-// get application's base URL
-var baseURL = document.location.origin + document.location.pathname;
+
 var coaApp = angular.module('coaApp', [
     'ngRoute',
     'coaControllers',

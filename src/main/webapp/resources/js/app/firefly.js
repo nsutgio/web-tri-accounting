@@ -1,3 +1,5 @@
+// get application's base URL
+var baseURL = document.location.origin + document.location.pathname;
 
 function bindErrorsToElements(data, scopeErrors) {
     var fields = [];

@@ -19,7 +19,6 @@ coaControllers.controller('accountTreeController', ['$scope', '$http', '$sce',  
     });
 }]);
 
-
 coaControllers.controller('accountDetailsController', ['$scope', '$routeParams', '$http', '$location', function($scope,  $routeParams, $http, $location) {
     if(!($routeParams.accountId === undefined)) {
         $scope.title = 'Account details';
@@ -32,6 +31,9 @@ coaControllers.controller('accountDetailsController', ['$scope', '$routeParams',
             } else {
                 $scope.account = data;
             }
+        }).error(function(data){
+            alert("Something went wrong!");
+            window.location.hash = '#/accounts';
         });
     } else {
         window.location.hash = '#/accounts';
@@ -95,6 +97,9 @@ coaControllers.controller('newAccountController', ['$scope', '$routeParams', '$h
                 console.log($scope.segments);
                 $scope.account = data;
             }
+        }).error(function(data){
+            alert("Something went wrong!");
+            window.location.hash = '#/accounts';
         });
         resourceURI = baseURL + '/update';
     }
@@ -195,7 +200,7 @@ coaControllers.controller('treeGridController',  ['$scope', '$http', '$sce', fun
         { field: "code"},
         { field: "accountType"},
         { field: "id"}
-    ];
+    ]; 
 
     $scope.accounts_tree_handler = function(branch){
         console.log('you clicked on', branch)
