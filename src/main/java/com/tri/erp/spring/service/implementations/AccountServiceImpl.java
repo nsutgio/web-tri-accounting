@@ -69,6 +69,7 @@ public class AccountServiceImpl implements AccountService {
             accountDTO.setParentAccountId(account.getParentAccountId());
             accountDTO.setId(account.getId());
             accountDTO.setTitle(account.getTitle());
+            accountDTO.setLevel(account.getLevel());
             if (account.getAccountType() != null) {
                 accountDTO.setAccountType(account.getAccountType());
             }
@@ -149,8 +150,8 @@ public class AccountServiceImpl implements AccountService {
                     )
             );
 
-            if (account.getParentAccountId() > 0) {
-                Account parentAccount = accountRepo.findOne(account.getParentAccountId());
+            if (account.getParentAccount() != null) {
+                Account parentAccount = accountRepo.findOne(account.getParentAccount().getId());
                 if (parentAccount != null && parentAccount instanceof Account) {
                     account.setLevel(parentAccount.getLevel() + 1);
                 }

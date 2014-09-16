@@ -51,6 +51,7 @@ coaControllers.controller('newAccountController', ['$scope', '$routeParams', '$h
     // setup defaults
     var accountGroup = {"id" : "1"};
     var accountType = {"id" : "1"};
+    var parentAccount = {"id" : "1"};
     $scope.segments = [];
     $scope.accountGroup = accountGroup;
     $scope.accountType = accountType;
@@ -61,7 +62,7 @@ coaControllers.controller('newAccountController', ['$scope', '$routeParams', '$h
     $scope.account['isActive'] = true;
     $scope.account['hasSL'] = false;
     $scope.account['isHeader'] = false;
-    $scope.account['parentAccount'] = ""; // workaround
+    $scope.account['parentAccount'] = parentAccount;
     $scope.errors = {};
     $scope.submitting = false;
     $scope.save ='Save';
@@ -188,13 +189,13 @@ coaControllers.controller('newAccountController', ['$scope', '$routeParams', '$h
         $scope.account.segmentAccounts = segmentAccounts;
         $scope.account.accountGroup = $scope.accountGroup;
         $scope.account.accountType = $scope.accountType;
+        $scope.account.parentAccount = $scope.parentAccount;
 
         console.log($scope.account);
 
         var res = $http.post(resourceURI, $scope.account);
         res.success(function(data) {
             if (!data.success) {
-                console.log($scope.account.segmentAccounts);
 
                 // retain state
                 $scope.account.isActive = $scope.account.isActive == 1;

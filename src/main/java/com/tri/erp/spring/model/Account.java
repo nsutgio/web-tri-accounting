@@ -59,7 +59,7 @@ public class Account  implements java.io.Serializable {
     private int normalBalance;
 
     @Range(min = 0, max = 999)
-    @Column
+    @Column(name = "level")
     private int level;
 
     @Range(min = 0, max = 1)
@@ -97,9 +97,9 @@ public class Account  implements java.io.Serializable {
 
     @JsonIgnoreProperties(ignoreUnknown = true)
     @Transient
-    private String parentAccount;
+    private Account parentAccount;
 
-    public Account(String code, String title, String GLAccount, String SLAccount, String auxiliaryAccount, int normalBalance, int level, int active, int isHeader, int hasSL, Integer parentAccountId, Set<SegmentAccount> segmentAccounts, AccountType accountType, AccountGroup accountGroup, String parentAccount) {
+    public Account(String code, String title, String GLAccount, String SLAccount, String auxiliaryAccount, int normalBalance, int level, int active, int isHeader, int hasSL, Integer parentAccountId, Set<SegmentAccount> segmentAccounts, AccountType accountType, AccountGroup accountGroup, Account parentAccount) {
         this.code = code;
         this.title = title;
         this.GLAccount = GLAccount;
@@ -326,19 +326,19 @@ public class Account  implements java.io.Serializable {
         this.parentAccountId = parentAccountId;
     }
 
-    public String getParentAccount() {
-        return parentAccount;
-    }
-
-    public void setParentAccount(String parentAccount) {
-        this.parentAccount = parentAccount;
-    }
-
     public Set<SegmentAccount> getSegmentAccounts() {
         return segmentAccounts;
     }
 
     public void setSegmentAccounts(Set<SegmentAccount> segmentAccounts) {
         this.segmentAccounts = segmentAccounts;
+    }
+
+    public Account getParentAccount() {
+        return parentAccount;
+    }
+
+    public void setParentAccount(Account parentAccount) {
+        this.parentAccount = parentAccount;
     }
 }
