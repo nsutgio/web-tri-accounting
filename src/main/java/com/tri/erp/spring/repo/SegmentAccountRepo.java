@@ -17,6 +17,7 @@ public interface SegmentAccountRepo extends JpaRepository<SegmentAccount, Intege
     public List<SegmentAccount> findByAccountId(Integer accountId);
 
     @Modifying
+    @Transactional
     @Query(value = "INSERT INTO segment_accounts  (bus_seg_id, acct_id, acct_code) "
             + "(SELECT :businessSegmentId, :accountId, :segmentAccountCode "
             + "FROM segment_accounts s1 "

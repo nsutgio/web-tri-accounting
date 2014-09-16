@@ -23,7 +23,7 @@ import com.jolbox.bonecp.BoneCPDataSource;
 
 
 @PropertySource(value = "classpath:application.properties")
-@EnableTransactionManagement(proxyTargetClass = true)
+@EnableTransactionManagement()
 @EnableJpaRepositories("com.tri.erp.spring.repo")
 @Configuration
 public class DbConfig {
@@ -44,7 +44,7 @@ public class DbConfig {
 		boneCPDataSource.setMinConnectionsPerPartition(10);
 		boneCPDataSource.setPartitionCount(3);
 		boneCPDataSource.setAcquireIncrement(5);
-		boneCPDataSource.setStatementsCacheSize(100); 
+		boneCPDataSource.setStatementsCacheSize(100);
 		
 		return boneCPDataSource; 
 	}
