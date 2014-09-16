@@ -107,14 +107,15 @@ coaControllers.controller('newAccountController', ['$scope', '$routeParams', '$h
         angular.forEach($scope.segments, function(segment, key) {
             if (segment.id == businessSegmentId) {
                 segment.selected = true;
+                segment.assigned = true;
                 $scope.segments[key] = segment;
                 return;
             }
         });
     }
 
-    $scope.toggleSegment = function(segment) {
-        console.log(segment.description + " => " + segment.selected);
+    $scope.toggleSegment = function(idx, segment) {
+        console.log(idx + " => " + segment.description + " => " + segment.selected);
     };
 
     $scope.processForm = function() {
@@ -133,6 +134,7 @@ coaControllers.controller('newAccountController', ['$scope', '$routeParams', '$h
         angular.forEach($scope.segments, function(segment, key) {
             if (segment.selected) {
                 delete segment['selected']; // hibernate will complain, so delete it
+                delete segment['assigned'];
 
                 var segmentAccount = {
                     "accountCode" : "",
