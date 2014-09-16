@@ -126,7 +126,9 @@ coaControllers.controller('newAccountController', ['$scope', '$routeParams', '$h
         angular.forEach($scope.segments, function(segment, key) {
             if (segment.id == businessSegmentId) {
                 segment.selected = true;
-                segment.assigned = true;
+                if ($scope.account.id > 0) { 
+                    segment.assigned = true;
+                }
                 $scope.segments[key] = segment;
                 return;
             }
