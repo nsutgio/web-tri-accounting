@@ -169,11 +169,9 @@
             <div class="col-md-5 col-lg-5">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-filter"></i></span>
-                    <select required ng-model="account.accountType.id" id="acct_type_id" name="acct_type_id" class="form-control">
-                        <option value="">Select account type</option>
-                        <option ng-repeat="accountType in accountTypes" value="{{accountType.id}}">
-                            {{accountType.description}}
-                        </option>
+                    <select required class="form-control" id="acct_type_id" ng-model="accountType"
+                            ng-options="accountType.description for accountType in accountTypes track by accountType.id">
+                        <option value="">Select type</option>
                     </select>
                 </div>
             </div>

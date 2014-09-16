@@ -53,6 +53,7 @@ coaControllers.controller('newAccountController', ['$scope', '$routeParams', '$h
     var accountType = {"id" : "1"};
     $scope.segments = [];
     $scope.accountGroup = accountGroup;
+    $scope.accountType = accountType;
     $scope.account['normalBalance'] = "1";
     $scope.account['accountGroup'] = accountGroup;
     $scope.account['accountType'] = accountType;
@@ -103,7 +104,9 @@ coaControllers.controller('newAccountController', ['$scope', '$routeParams', '$h
                     $scope.checkAssignedSegment(segmentAccount.businessSegment.id);
                 });
                 $scope.account = data;
+                $scope.accountType = data.accountType;
                 $scope.accountGroup = data.accountGroup;
+
             }
         }).error(function(data){
             alert("Something went wrong!");
@@ -161,6 +164,7 @@ coaControllers.controller('newAccountController', ['$scope', '$routeParams', '$h
         });
         $scope.account.segmentAccounts = segmentAccounts;
         $scope.account.accountGroup = $scope.accountGroup;
+        $scope.account.accountType = $scope.accountType;
 
         console.log($scope.account);
 
