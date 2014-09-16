@@ -111,7 +111,7 @@
                     <label class="input-label">Parent Account</label>
                 </div>
                 <div class="col-md-9 col-lg-9">
-                    <label class="value-label">{{ account.parentAccount }}</label>
+                    <label class="value-label">{{ account.parentAccount.title }}</label>
                 </div>
             </div>
         </div>

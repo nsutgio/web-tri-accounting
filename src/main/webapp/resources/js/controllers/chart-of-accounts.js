@@ -120,6 +120,7 @@ coaControllers.controller('newAccountController', ['$scope', '$routeParams', '$h
 
                 $scope.accountType = data.accountType;
                 $scope.accountGroup = data.accountGroup;
+                $scope.parentAccount = data.parentAccount;
                 // segments
                 angular.forEach(data.segmentAccounts, function(segmentAccount, key) {
                     $scope.checkAssignedSegment(segmentAccount.businessSegment.id);
@@ -186,9 +187,13 @@ coaControllers.controller('newAccountController', ['$scope', '$routeParams', '$h
                 segmentAccounts.push(segmentAccount);
             }
         });
+
+        // TODO: use appropriate binding technique
+        // TODO: work with parent account in hibernate to avoid workarounds
         $scope.account.segmentAccounts = segmentAccounts;
         $scope.account.accountGroup = $scope.accountGroup;
         $scope.account.accountType = $scope.accountType;
+        $scope.account.parentAccountId = $scope.parentAccount.id;
         $scope.account.parentAccount = $scope.parentAccount;
 
         console.log($scope.account);

@@ -2,6 +2,7 @@ package com.tri.erp.spring.dto;
 
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import com.google.common.base.Objects;
+import com.tri.erp.spring.model.Account;
 import com.tri.erp.spring.model.AccountGroup;
 import com.tri.erp.spring.model.AccountType;
 import com.tri.erp.spring.model.SegmentAccount;
@@ -27,7 +28,7 @@ public class AccountDTO {
     private int isActive;
     private int level;
     private int hasSL;
-    private String parentAccount;
+    private Account parentAccount;
     private int parentAccountId;
     private int normalBalance;
     private int isHeader;
@@ -111,11 +112,11 @@ public class AccountDTO {
         this.hasSL = hasSL;
     }
 
-    public String getParentAccount() {
+    public Account getParentAccount() {
         return parentAccount;
     }
 
-    public void setParentAccount(String parentAccount) {
+    public void setParentAccount(Account parentAccount) {
         this.parentAccount = parentAccount;
     }
 

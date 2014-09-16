@@ -107,8 +107,7 @@ public class AccountServiceImpl implements AccountService {
 
             Account parentAccount = accountRepo.findOne(account.getParentAccountId());
             if (parentAccount != null) {
-                accountDTO.setParentAccount(parentAccount.getTitle());
-                accountDTO.setParentAccountId(parentAccount.getId());
+                accountDTO.setParentAccount(parentAccount);
             }
 
             List<SegmentAccount> segmentAccounts = segmentAccountRepo.findByAccountId(account.getId());
