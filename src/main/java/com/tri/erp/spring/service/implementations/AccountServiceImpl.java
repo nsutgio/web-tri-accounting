@@ -2,6 +2,7 @@ package com.tri.erp.spring.service.implementations;
 
 import com.tri.erp.spring.commons.Response;
 import com.tri.erp.spring.commons.beans.CreateAccountResponse;
+import com.tri.erp.spring.commons.helpers.Checker;
 import com.tri.erp.spring.commons.helpers.MessageFormatter;
 import com.tri.erp.spring.commons.helpers.StringFormatter;
 import com.tri.erp.spring.dto.AccountDTO;
@@ -56,6 +57,7 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<AccountDTO> findAll() {
         List<AccountDTO> accountsDtoList = new ArrayList<>();
 
@@ -81,6 +83,7 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public AccountDTO findById(int id) {
         AccountDTO accountDTO = new AccountDTO();
 
@@ -154,11 +157,20 @@ public class AccountServiceImpl implements AccountService {
             }
             if (account.getId() > 0) {  // update mode
                 update(account);
-                List<SegmentAccount> segmentAccountList = segmentAccountRepo.findByAccountId(account.getId());
-                if (segmentAccountList.size() == 0) {   // fresh insert
-                    persistSegmentAccounts(account);
-                } else { // add up
 
+                if(!Checker.collectionIsEmpty(account.getSegmentAccounts())) {
+                    List<SegmentAccount> segmentAccountList = segmentAccountRepo.findByAccountId(account.getId());
+                    if (Checker.collectionIsEmpty(segmentAccountList)) {
+                        // fresh insert
+                        persistSegmentAccounts(account);
+                    } else { // add up
+                        Set<SegmentAccount> segmentAccounts = account.getSegmentAccounts();
+                        for(SegmentAccount segmentAccount : segmentAccounts) {
+                            BusinessSegment businessSegment = businessSegmentRepo.findOne(segmentAccount.getBusinessSegment().getId());
+                            String code = generateSegmentAccountCode(businessSegment, account);
+                            segmentAccountRepo.saveWithExistenceCheck(businessSegment.getId(), account.getId(), code);
+                        }
+                    }
                 }
             } else {
                 account = create(account);
@@ -173,11 +185,13 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Account> findByTitle(String title) {
         return accountRepo.findByTitle(title);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Account> findByParentAccountIdOrderByCodeAsc(Integer accountId) {
         return accountRepo.findByParentAccountIdOrderByCodeAsc(accountId);
     }
@@ -191,7 +205,7 @@ public class AccountServiceImpl implements AccountService {
     }
 
     private void persistSegmentAccounts(Account account) {
-        if (account.getSegmentAccounts() != null && account.getSegmentAccounts().size() > 0) {
+        if (!Checker.collectionIsEmpty(account.getSegmentAccounts())) {
             Set<SegmentAccount> segmentAccounts = account.getSegmentAccounts();
             for(SegmentAccount segmentAccount : segmentAccounts) {
                 BusinessSegment businessSegment = businessSegmentRepo.findOne(segmentAccount.getBusinessSegment().getId());
