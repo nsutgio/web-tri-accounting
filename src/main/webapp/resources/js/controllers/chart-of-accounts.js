@@ -24,7 +24,7 @@ coaControllers.controller('accountDetailsController', ['$scope', '$routeParams',
         $scope.title = 'Account details';
 
         $scope.accountId = $routeParams.accountId;
-        $http.get(baseURL + '/account/'+ $scope.accountId).success(function(data) {
+        $http.get('/account/'+ $scope.accountId).success(function(data) {
             console.log(data);
             if (data === '' || data.id <= 0) {
                 window.location.hash = '#/accounts';
@@ -51,6 +51,7 @@ coaControllers.controller('newAccountController', ['$scope', '$routeParams', '$h
     // setup defaults
     var accountGroup = {"id" : ""};
     var accountType = {"id" : ""};
+    $scope.segments = [];
     $scope.account['normalBalance'] = "1";
     $scope.account['accountGroup'] = accountGroup;
     $scope.account['accountType'] = accountType;
@@ -63,13 +64,13 @@ coaControllers.controller('newAccountController', ['$scope', '$routeParams', '$h
     $scope.submitting = false;
     $scope.save ='Save';
     $scope.title = 'Add an account';
-    var resourceURI = baseURL + '/create';
+    var resourceURI = '/account/create';
 
     if(!($routeParams.accountId === undefined)) {  // update mode
         $scope.title = 'Update account';
 
         $scope.accountId = $routeParams.accountId;
-        $http.get(baseURL + '/account/'+ $scope.accountId).success(function(data) {
+        $http.get('/account/'+ $scope.accountId).success(function(data) {
             console.log(data);
             if (data === '' || data.id <= 0) {    // not found
                 window.location.hash = '#/account/' + $scope.accountId;
@@ -89,7 +90,7 @@ coaControllers.controller('newAccountController', ['$scope', '$routeParams', '$h
             alert("Something went wrong!");
             window.location.hash = '#/accounts';
         });
-        resourceURI = baseURL + '/update';
+        resourceURI = '/account/update';
     }
     $scope.checkAssignedSegment = function (businessSegmentId) {
         angular.forEach($scope.segments, function(segment, key) {
@@ -196,7 +197,7 @@ coaControllers.controller('treeGridController',  ['$scope', '$http', '$sce', fun
     var rawTreeData;
 
     $.ajax({
-        url:  '/json/accounts',
+        url:  '/account/list',
         type: 'GET',
         async: false
     }).done(function(data) {

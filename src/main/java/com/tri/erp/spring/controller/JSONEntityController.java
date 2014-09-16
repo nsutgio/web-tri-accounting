@@ -66,11 +66,6 @@ public class JSONEntityController {
     }
 
 
-    @RequestMapping(value = "/accounts", method = RequestMethod.GET)
-    @ResponseBody
-    public List<AccountDTO> accountList() {
-        List<AccountDTO> accountList = accountService.findAll();
-        return accountList;
-    }
+
 
 }

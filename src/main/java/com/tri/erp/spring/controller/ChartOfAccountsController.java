@@ -25,12 +25,6 @@ import java.util.List;
 public class ChartOfAccountsController {
     private final String BASE_PATH = "admin/coa/partials/";
 
-    @Autowired
-    AccountService accountService;
-
-    @Autowired
-    MessageSource messageSource;
-
     // view providers
     @RequestMapping(method = RequestMethod.GET)
     public String index() {
@@ -52,34 +46,4 @@ public class ChartOfAccountsController {
         return BASE_PATH + "account-details";
     }
     // end: view providers
-
-    // json providers
-    @RequestMapping(value = "/accounts", method = RequestMethod.GET)
-    @ResponseBody
-    public List<AccountDTO> accountList() {
-        List<AccountDTO> accountList = accountService.findAll();
-        return accountList;
-    }
-
-    @RequestMapping(value = "/account/{id}", method = RequestMethod.GET)
-    @ResponseBody
-    public AccountDTO getAccount(@PathVariable Integer id) {
-        AccountDTO shop = accountService.findById(id);
-        return shop;
-    }
-    // end: json provides
-
-    // create account
-    @RequestMapping(value = "/create", method = RequestMethod.POST)
-    @ResponseBody
-    public Response createAccount(@Valid @RequestBody Account account, BindingResult bindingResult) {
-        return accountService.processCreate(account, bindingResult, messageSource);
-    }
-
-    // create account
-    @RequestMapping(value = "/update", method = RequestMethod.POST)
-    @ResponseBody
-    public Response updateAccount(@Valid @RequestBody Account account, BindingResult bindingResult) {
-        return accountService.processUpdate(account, bindingResult, messageSource);
-    }
 }
