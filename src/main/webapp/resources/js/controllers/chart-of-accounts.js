@@ -76,6 +76,14 @@ coaControllers.controller('newAccountController', ['$scope', '$routeParams', '$h
         alert("Failed to fetch business segments.");
     });
 
+    $http.get('/json/account-types').success(function(data) {
+        if (data.length > 0) {
+            $scope.accountTypes = data;
+        }
+    }).error(function(data) {
+        alert("Failed to fetch account types.");
+    });
+
     $http.get('/json/account-groups').success(function(data) {
         if (data.length > 0) {
             $scope.accountGroups = data;
@@ -125,14 +133,6 @@ coaControllers.controller('newAccountController', ['$scope', '$routeParams', '$h
         });
     }
 
-    $http.get('/json/account-types').success(function(data) {
-        if (data.length > 0) {
-            $scope.accountTypes = data;
-        }
-    }).error(function(data) {
-        alert("Failed to fetch account types.");
-    });
-
     $scope.toggleSegment = function(idx, segment) {
         console.log(idx + " => " + segment.description + " => " + segment.selected);
     };
@@ -171,12 +171,17 @@ coaControllers.controller('newAccountController', ['$scope', '$routeParams', '$h
         var res = $http.post(resourceURI, $scope.account);
         res.success(function(data) {
             if (!data.success) {
-                console.log(data);
+                console.log($scope.account.segmentAccounts);
 
                 // retain state
                 $scope.account.isActive = $scope.account.isActive == 1;
                 $scope.account.hasSL = $scope.account.hasSL  == 1;
                 $scope.account.isHeader = $scope.account.isHeader == 1;
+
+                // retain segments
+                angular.forEach($scope.account.segmentAccounts, function(segmentAccount, key) {
+                    $scope.checkAssignedSegment(segmentAccount.businessSegment.id);
+                });
 
                 $scope.errors = bindErrorsToElements(data, $scope.errors);
                 $scope.save ='Save';
