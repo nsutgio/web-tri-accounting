@@ -110,6 +110,22 @@ coaControllers.controller('newAccountController', ['$scope', '$routeParams', '$h
         alert("Failed to fetch business segments.");
     });
 
+    $http.get('/json/account-groups').success(function(data) {
+        if (data.length > 0) {
+            $scope.accountGroups = data;
+        }
+    }).error(function(data) {
+        alert("Failed to fetch account groups.");
+    });
+
+    $http.get('/json/account-types').success(function(data) {
+        if (data.length > 0) {
+            $scope.accountTypes = data;
+        }
+    }).error(function(data) {
+        alert("Failed to fetch account types.");
+    });
+
     $scope.toggleSegment = function(idx, segment) {
         console.log(idx + " => " + segment.description + " => " + segment.selected);
     };
@@ -180,7 +196,7 @@ coaControllers.controller('treeGridController',  ['$scope', '$http', '$sce', fun
     var rawTreeData;
 
     $.ajax({
-        url: baseURL + '/accounts',
+        url:  '/json/accounts',
         type: 'GET',
         async: false
     }).done(function(data) {

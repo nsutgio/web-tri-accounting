@@ -141,11 +141,11 @@
             <div class="col-md-5 col-lg-5">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-filter"></i></span>
-                    <select required ng-model="account.accountGroup.id" id="acct_group_id" name="acct_group_id" class="form-control">
+                    <select required class="form-control" id="acct_group_id" ng-model="account.accountGroup.id">
                         <option value="">Select group</option>
-                        <option value="29">Accounts Payable</option>
-                        <option value="14">Accounts Receivable Items-Under Litigation</option>
-                        <option value="32">Accrued Interest</option>
+                        <option ng-repeat="accountGroup in accountGroups" value="{{accountGroup.id}}">
+                            {{accountGroup.description}}
+                        </option>
                     </select>
                 </div>
             </div>
@@ -172,12 +172,10 @@
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-filter"></i></span>
                     <select required ng-model="account.accountType.id" id="acct_type_id" name="acct_type_id" class="form-control">
-                        <option value="">Select type</option>
-                        <option value="1">Asset</option>
-                        <option value="2">Liabilities</option>
-                        <option value="3">Members' Equity and Margins</option>
-                        <option value="4">Revenue</option>
-                        <option value="5">Cost and Expenses</option>
+                        <option value="">Select account type</option>
+                        <option ng-repeat="accountType in accountTypes" value="{{accountType.id}}">
+                            {{accountType.description}}
+                        </option>
                     </select>
                 </div>
             </div>
@@ -254,7 +252,7 @@
             <div class="col-md-5 col-lg-5">
                 <ul style="list-style: none; padding-left: 2px; border: 1px solid lightgray">
                     <li ng-repeat="segment in segments">
-                        <label><input ng-disabled="segment.assigned" ng-model="segment.selected" type="checkbox" ng-change="toggleSegment($index, segment)" /> {{segment.description}}</label>
+                        <label><input ng-disabled="segment.ass" ng-model="segment.selected" type="checkbox" ng-change="toggleSegment($index, segment)" /> {{segment.description}}</label>
                     </li>
                 </ul>
             </div>
