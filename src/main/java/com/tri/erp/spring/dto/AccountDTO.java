@@ -150,7 +150,11 @@ public class AccountDTO {
 
     public void setAccountGroup(AccountGroup accountGroup) {
         this.accountGroup = accountGroup;
-    } 
+    }
+
+    public int getParentAccountId() {
+        return parentAccountId;
+    }
 
     public void setParentAccountId(int parentAccountId) {
         this.parentAccountId = parentAccountId;
