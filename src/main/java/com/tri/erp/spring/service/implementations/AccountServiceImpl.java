@@ -154,18 +154,15 @@ public class AccountServiceImpl implements AccountService {
             }
             if (account.getId() > 0) {  // update mode
                 update(account);
+                List<SegmentAccount> segmentAccountList = segmentAccountRepo.findByAccountId(account.getId());
+                if (segmentAccountList.size() == 0) {   // fresh insert
+                    persistSegmentAccounts(account);
+                } else { // add up
+
+                }
             } else {
                 account = create(account);
-                if (account.getSegmentAccounts() != null && account.getSegmentAccounts().size() > 0) {
-                    Set<SegmentAccount> segmentAccounts = account.getSegmentAccounts();
-                    for(SegmentAccount segmentAccount : segmentAccounts) {
-                        BusinessSegment businessSegment = businessSegmentRepo.findOne(segmentAccount.getBusinessSegment().getId());
-                        String code = generateSegmentAccountCode(businessSegment, account);
-                        segmentAccount.setAccount(account);
-                        segmentAccount.setAccountCode(code);
-                        segmentAccountRepo.save(segmentAccount);
-                    }
-                }
+                persistSegmentAccounts(account);
             }
 
             response.setModelId(account.getId());
@@ -191,5 +188,18 @@ public class AccountServiceImpl implements AccountService {
 
     private String generateSegmentAccountCode(BusinessSegment businessSegment, Account account) {
         return businessSegment.getBusinessActivity().getCode() + businessSegment.getCode() + "-" + account.getCode();
+    }
+
+    private void persistSegmentAccounts(Account account) {
+        if (account.getSegmentAccounts() != null && account.getSegmentAccounts().size() > 0) {
+            Set<SegmentAccount> segmentAccounts = account.getSegmentAccounts();
+            for(SegmentAccount segmentAccount : segmentAccounts) {
+                BusinessSegment businessSegment = businessSegmentRepo.findOne(segmentAccount.getBusinessSegment().getId());
+                String code = generateSegmentAccountCode(businessSegment, account);
+                segmentAccount.setAccount(account);
+                segmentAccount.setAccountCode(code);
+                segmentAccountRepo.save(segmentAccount);
+            }
+        }
     }
 }
