@@ -153,7 +153,11 @@
     <div class="col-md-5 col-lg-5">
         <div class="row"><label class="input-label">Segments</label></div>
         <div class="row">
-            Segments here...
+            <ul style="list-style: disc; padding-left: 10px;">
+                <li ng-repeat="sa in account.segmentAccounts">
+                    {{sa.businessSegment.description}}
+                </li>
+            </ul>
         </div>
     </div>
 </div>
