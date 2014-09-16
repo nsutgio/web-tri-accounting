@@ -77,7 +77,7 @@ coaControllers.controller('newAccountController', ['$scope', '$routeParams', '$h
 
     $http.get('/json/account-groups').success(function(data) {
         if (data.length > 0) {
-            $scope.accountGroups = data; 
+            $scope.accountGroups = data;
         }
     }).error(function(data) {
         alert("Failed to fetch account groups.");
@@ -160,6 +160,7 @@ coaControllers.controller('newAccountController', ['$scope', '$routeParams', '$h
             }
         });
         $scope.account.segmentAccounts = segmentAccounts;
+        $scope.account.accountGroup = $scope.accountGroup;
 
         console.log($scope.account);
 
