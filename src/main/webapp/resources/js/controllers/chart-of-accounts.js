@@ -52,6 +52,7 @@ coaControllers.controller('newAccountController', ['$scope', '$routeParams', '$h
     var accountGroup = {"id" : "1"};
     var accountType = {"id" : "1"};
     $scope.segments = [];
+    $scope.accountGroup = accountGroup;
     $scope.account['normalBalance'] = "1";
     $scope.account['accountGroup'] = accountGroup;
     $scope.account['accountType'] = accountType;
@@ -76,7 +77,7 @@ coaControllers.controller('newAccountController', ['$scope', '$routeParams', '$h
 
     $http.get('/json/account-groups').success(function(data) {
         if (data.length > 0) {
-            $scope.accountGroups = data;
+            $scope.accountGroups = data; 
         }
     }).error(function(data) {
         alert("Failed to fetch account groups.");
@@ -101,8 +102,8 @@ coaControllers.controller('newAccountController', ['$scope', '$routeParams', '$h
                 angular.forEach(data.segmentAccounts, function(segmentAccount, key) {
                     $scope.checkAssignedSegment(segmentAccount.businessSegment.id);
                 });
-                console.log($scope.segments);
                 $scope.account = data;
+                $scope.accountGroup = data.accountGroup;
             }
         }).error(function(data){
             alert("Something went wrong!");
