@@ -107,13 +107,14 @@ coaControllers.controller('newAccountController', ['$scope', '$routeParams', '$h
                 data.isHeader = (data.isHeader == 1);
                 data.hasSL = (data.hasSL == 1);
 
+                $scope.account = data;
+
+                $scope.accountType = data.accountType;
+                $scope.accountGroup = data.accountGroup;
                 // segments
                 angular.forEach(data.segmentAccounts, function(segmentAccount, key) {
                     $scope.checkAssignedSegment(segmentAccount.businessSegment.id);
                 });
-                $scope.account = data;
-                $scope.accountType = data.accountType;
-                $scope.accountGroup = data.accountGroup;
 
             }
         }).error(function(data){
@@ -126,8 +127,12 @@ coaControllers.controller('newAccountController', ['$scope', '$routeParams', '$h
         angular.forEach($scope.segments, function(segment, key) {
             if (segment.id == businessSegmentId) {
                 segment.selected = true;
-                if ($scope.account.id > 0) { 
-                    segment.assigned = true;
+                if ($scope.account.id > 0) {
+                    // check if is in newly selected segments
+                    var index = newSelectedSegment.indexOf(businessSegmentId);
+                    if (index < 0) { // not found
+                        segment.assigned = true;
+                    }
                 }
                 $scope.segments[key] = segment;
                 return;
@@ -135,8 +140,10 @@ coaControllers.controller('newAccountController', ['$scope', '$routeParams', '$h
         });
     }
 
+    var newSelectedSegment = [];
     $scope.toggleSegment = function(idx, segment) {
-        console.log(idx + " => " + segment.description + " => " + segment.selected);
+        newSelectedSegment.push(segment.id);
+        console.log(segment.id + " => " + segment.description + " => " + segment.selected);
     };
 
     $scope.processForm = function() {
