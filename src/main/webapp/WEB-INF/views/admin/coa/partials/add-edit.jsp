@@ -252,7 +252,7 @@
             <div class="col-md-5 col-lg-5">
                 <ul style="list-style: none; padding-left: 2px; border: 1px solid lightgray">
                     <li ng-repeat="segment in segments">
-                        <label><input ng-disabled="segment.ass" ng-model="segment.selected" type="checkbox" ng-change="toggleSegment($index, segment)" /> {{segment.description}}</label>
+                        <label><input ng-disabled="segment.assigned" ng-model="segment.selected" type="checkbox" ng-change="toggleSegment($index, segment)" /> {{segment.description}}</label>
                     </li>
                 </ul>
             </div>

@@ -49,8 +49,8 @@ coaControllers.controller('newAccountController', ['$scope', '$routeParams', '$h
 
     $scope.account = {};
     // setup defaults
-    var accountGroup = {"id" : ""};
-    var accountType = {"id" : ""};
+    var accountGroup = {"id" : "1"};
+    var accountType = {"id" : "1"};
     $scope.segments = [];
     $scope.account['normalBalance'] = "1";
     $scope.account['accountGroup'] = accountGroup;
@@ -66,10 +66,28 @@ coaControllers.controller('newAccountController', ['$scope', '$routeParams', '$h
     $scope.title = 'Add an account';
     var resourceURI = '/account/create';
 
+    $http.get('/json/bus-seg').success(function(data) {
+        if (data.length > 0) {
+            $scope.segments = data;
+        }
+    }).error(function(data) {
+        alert("Failed to fetch business segments.");
+    });
+
+    $http.get('/json/account-groups').success(function(data) {
+        if (data.length > 0) {
+            $scope.accountGroups = data;
+        }
+    }).error(function(data) {
+        alert("Failed to fetch account groups.");
+    });
+
     if(!($routeParams.accountId === undefined)) {  // update mode
         $scope.title = 'Update account';
 
         $scope.accountId = $routeParams.accountId;
+
+
         $http.get('/account/'+ $scope.accountId).success(function(data) {
             console.log(data);
             if (data === '' || data.id <= 0) {    // not found
@@ -102,22 +120,6 @@ coaControllers.controller('newAccountController', ['$scope', '$routeParams', '$h
             }
         });
     }
-
-    $http.get('/json/bus-seg').success(function(data) {
-        if (data.length > 0) {
-            $scope.segments = data;
-        }
-    }).error(function(data) {
-        alert("Failed to fetch business segments.");
-    });
-
-    $http.get('/json/account-groups').success(function(data) {
-        if (data.length > 0) {
-            $scope.accountGroups = data;
-        }
-    }).error(function(data) {
-        alert("Failed to fetch account groups.");
-    });
 
     $http.get('/json/account-types').success(function(data) {
         if (data.length > 0) {
