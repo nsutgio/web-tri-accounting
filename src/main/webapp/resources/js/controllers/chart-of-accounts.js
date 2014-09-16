@@ -200,7 +200,7 @@ coaControllers.controller('treeGridController',  ['$scope', '$http', '$sce', fun
         { field: "code"},
         { field: "accountType"},
         { field: "id"}
-    ]; 
+    ];
 
     $scope.accounts_tree_handler = function(branch){
         console.log('you clicked on', branch)
