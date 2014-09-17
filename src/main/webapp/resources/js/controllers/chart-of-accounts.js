@@ -69,8 +69,7 @@ coaControllers.controller('newAccountController', ['$scope', '$routeParams', '$h
     $scope.title = 'Add an account';
     var resourceURI = '/account/create';
 
-
-    $http.get('/json/bus-seg').success(function(data) {
+    $http.get('/bus-seg/list').success(function(data) {
         if (data.length > 0) {
             $scope.segments = data;
         }
@@ -78,7 +77,7 @@ coaControllers.controller('newAccountController', ['$scope', '$routeParams', '$h
         alert("Failed to fetch business segments.");
     });
 
-    $http.get('/json/account-types').success(function(data) {
+    $http.get('/account/type/list').success(function(data) {
         if (data.length > 0) {
             $scope.accountTypes = data;
         }
@@ -86,7 +85,7 @@ coaControllers.controller('newAccountController', ['$scope', '$routeParams', '$h
         alert("Failed to fetch account types.");
     });
 
-    $http.get('/json/account-groups').success(function(data) {
+    $http.get('/account/group/list').success(function(data) {
         if (data.length > 0) {
             $scope.accountGroups = data;
         }
@@ -99,13 +98,11 @@ coaControllers.controller('newAccountController', ['$scope', '$routeParams', '$h
 
         $scope.accountId = $routeParams.accountId;
 
-
         $http.get('/account/' + $scope.accountId + '/except').success(function(data) {
             if (data.length > 0) {
                 $scope.parentAccounts = data;
             }
         });
-
 
         $http.get('/account/'+ $scope.accountId).success(function(data) {
             console.log(data);
@@ -159,7 +156,6 @@ coaControllers.controller('newAccountController', ['$scope', '$routeParams', '$h
     var newSelectedSegment = [];
     $scope.toggleSegment = function(idx, segment) {
         newSelectedSegment.push(segment.id);
-        console.log(segment.id + " => " + segment.description + " => " + segment.selected);
     };
 
     $scope.processForm = function() {
