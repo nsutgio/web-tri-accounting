@@ -27,6 +27,7 @@ import java.util.Set;
  */
 @Service
 public class AccountServiceImpl implements AccountService {
+    private List<AccountDTO> accountsDtoList;
 
     @Resource
     private AccountRepo accountRepo;
@@ -59,7 +60,7 @@ public class AccountServiceImpl implements AccountService {
     @Override
     @Transactional(readOnly = true)
     public List<AccountDTO> findAll() {
-        List<AccountDTO> accountsDtoList = new ArrayList<>();
+        this.accountsDtoList = new ArrayList<>();
 
         List<Account> accountList = accountRepo.findAllByOrderByCodeAsc();
 
@@ -76,6 +77,26 @@ public class AccountServiceImpl implements AccountService {
             accountsDtoList.add(accountDTO);
         }
         return accountsDtoList;
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<AccountDTO> findAllTree() {
+        this.accountsDtoList = new ArrayList<>();
+
+        List<Account> topLevelAccounts = accountRepo.findByParentAccountIdOrderByCodeAsc(0);// top level accounts
+        for(Account account : topLevelAccounts) {
+            AccountDTO accountDTO = new AccountDTO();
+            accountDTO.setCode(account.getCode());
+            accountDTO.setId(account.getId());
+            accountDTO.setTitle(account.getTitle());
+            if (account.getAccountType() != null) {
+                accountDTO.setAccountType(account.getAccountType());
+            }
+            this.accountsDtoList.add(accountDTO);
+            findDescendants(account);
+        }
+        return this.accountsDtoList;
     }
 
     @Override
@@ -216,6 +237,26 @@ public class AccountServiceImpl implements AccountService {
                 segmentAccount.setAccountCode(code);
                 segmentAccountRepo.save(segmentAccount);
             }
+        }
+    }
+
+    private void findDescendants(Account currentAccount) {
+        List<Account> children = accountRepo.findByParentAccountIdOrderByCodeAsc(currentAccount.getId());
+
+        for (Account childAccount : children) {
+            AccountDTO accountDTO = new AccountDTO();
+
+            accountDTO.setCode(childAccount.getCode());
+            accountDTO.setId(childAccount.getId());
+            accountDTO.setTitle(childAccount.getTitle());
+            accountDTO.setParentAccountId(childAccount.getParentAccountId());
+
+            if (childAccount.getAccountType() != null) {
+                accountDTO.setAccountType(childAccount.getAccountType());
+            }
+
+            this.accountsDtoList.add(accountDTO);
+            findDescendants(childAccount);
         }
     }
 }

@@ -103,10 +103,11 @@ coaControllers.controller('newAccountController', ['$scope', '$routeParams', '$h
             }
         });
 
+
         $http.get('/account/'+ $scope.accountId).success(function(data) {
             console.log(data);
             if (data === '' || data.id <= 0) {    // not found
-                window.location.hash = '#/account/' + $scope.accountId;
+//                window.location.hash = '#/account/' + $scope.accountId;
             } else {
                 data.isActive = (data.isActive == 1);
                 data.isHeader = (data.isHeader == 1);
@@ -123,9 +124,9 @@ coaControllers.controller('newAccountController', ['$scope', '$routeParams', '$h
                 });
 
             }
-        }).error(function(data){
+        }).error(function(a,b,c){
             alert("Something went wrong!");
-            window.location.hash = '#/accounts';
+//            window.location.hash = '#/accounts';
         });
         resourceURI = '/account/update';
     } else {
@@ -224,10 +225,11 @@ coaControllers.controller('treeGridController',  ['$scope', '$http', '$sce', fun
     var rawTreeData;
 
     $.ajax({
-        url:  '/account/list',
+        url:  '/account/list/tree',
         type: 'GET',
         async: false
     }).done(function(data) {
+        console.log(data);
         rawTreeData = data;
     }).error(function() {
         alert("Something went wrong!");

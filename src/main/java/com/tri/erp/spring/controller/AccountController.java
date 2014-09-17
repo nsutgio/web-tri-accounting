@@ -31,6 +31,8 @@ public class AccountController {
     @ResponseBody
     public AccountDTO getAccount(@PathVariable Integer id) {
         AccountDTO account = accountService.findById(id);
+        System.out.println("Account");
+        System.out.println(account);
         return account;
     }
 
@@ -58,6 +60,13 @@ public class AccountController {
     @ResponseBody
     public List<AccountDTO> accountList() {
         List<AccountDTO> accountList = accountService.findAll();
+        return accountList;
+    }
+
+    @RequestMapping(value = "/list/tree", method = RequestMethod.GET)
+    @ResponseBody
+    public List<AccountDTO> accountListTree() {
+        List<AccountDTO> accountList = accountService.findAllTree();
         return accountList;
     }
 }
