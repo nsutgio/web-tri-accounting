@@ -47,3 +47,5 @@ public class ChartOfAccountsController {
     }
     // end: view providers
 }
+
+// TODO: work with parent account in hibernate to avoid workarounds

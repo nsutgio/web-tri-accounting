@@ -74,7 +74,7 @@ public class Account  implements java.io.Serializable {
     @Column(name = "has_sl")
     private int hasSL;
 
-    @Range(min = 0, max = 999,  message = "Select a valid account")
+    @Range(min = 0, max = 999, message = "Select a valid account")
     @Column(name = "parent_acct_id")
     private Integer parentAccountId;
 

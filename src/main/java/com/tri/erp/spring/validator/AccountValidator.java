@@ -40,6 +40,10 @@ public class AccountValidator implements Validator {
             errors.rejectValue("accountType", null, "Must select account type");
         }
 
+        if (account.getParentAccountId() == null || account.getParentAccountId() < 0) {
+            errors.rejectValue("parentAccountId", null, "This is empty");
+        }
+
         List<Account> accountList = accountService.findByTitle(account.getTitle());
 
         if (accountList != null && accountList.size() > 0) {

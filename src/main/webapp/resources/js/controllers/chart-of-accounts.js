@@ -58,7 +58,6 @@ coaControllers.controller('newAccountController', ['$scope', '$routeParams', '$h
     $scope.account['normalBalance'] = "1";
     $scope.account['accountGroup'] = accountGroup;
     $scope.account['accountType'] = accountType;
-    $scope.account['parentAccountId'] = "0";
     $scope.account['isActive'] = true;
     $scope.account['hasSL'] = false;
     $scope.account['isHeader'] = false;
@@ -166,12 +165,20 @@ coaControllers.controller('newAccountController', ['$scope', '$routeParams', '$h
         $scope.submitting = true;
         $http.defaults.headers.post['X-CSRF-TOKEN'] = $('input[name=_csrf]').val();
 
-        $scope.account.isActive = $scope.account.isActive ? 1 : 0;
-        $scope.account.hasSL = $scope.account.hasSL ? 1 : 0;
-        $scope.account.isHeader = $scope.account.isHeader ? 1 : 0;
+        // create json to be posted to the server
+        var jAccount = angular.copy($scope.account);
+        jAccount.isActive = jAccount.isActive ? 1 : 0;
+        jAccount.hasSL =jAccount.hasSL ? 1 : 0;
+        jAccount.isHeader = jAccount.isHeader ? 1 : 0;
+
+        jAccount.accountGroup = angular.copy($scope.accountGroup);
+        jAccount.accountType = angular.copy($scope.accountType);
+        jAccount.parentAccount = angular.copy($scope.parentAccount);
+        jAccount.parentAccountId = jAccount.parentAccount == null ? 0 : jAccount.parentAccount.id;
 
         var segmentAccounts = [];
-        angular.forEach($scope.segments, function(segment, key) {
+        var scopeSegments = angular.copy($scope.segments);
+        angular.forEach(scopeSegments, function(segment, key) {
             if (segment.selected) {
                 delete segment['selected']; // hibernate will complain, so delete it
                 delete segment['assigned'];
@@ -183,31 +190,13 @@ coaControllers.controller('newAccountController', ['$scope', '$routeParams', '$h
                 segmentAccounts.push(segmentAccount);
             }
         });
+        jAccount.segmentAccounts = segmentAccounts;
 
-        // TODO: use appropriate binding technique
-        // TODO: work with parent account in hibernate to avoid workarounds
-        $scope.account.segmentAccounts = segmentAccounts;
-        $scope.account.accountGroup = $scope.accountGroup;
-        $scope.account.accountType = $scope.accountType;
-        $scope.account.parentAccountId = $scope.parentAccount.id;
-        $scope.account.parentAccount = $scope.parentAccount;
+        console.log(jAccount);
 
-        console.log($scope.account);
-
-        var res = $http.post(resourceURI, $scope.account);
+        var res = $http.post(resourceURI, jAccount);
         res.success(function(data) {
             if (!data.success) {
-
-                // retain state
-                $scope.account.isActive = $scope.account.isActive == 1;
-                $scope.account.hasSL = $scope.account.hasSL  == 1;
-                $scope.account.isHeader = $scope.account.isHeader == 1;
-
-                // retain segments
-                angular.forEach($scope.account.segmentAccounts, function(segmentAccount, key) {
-                    $scope.checkAssignedSegment(segmentAccount.businessSegment.id);
-                });
-
                 $scope.errors = bindErrorsToElements(data, $scope.errors);
                 $scope.save ='Save';
                 $scope.submitting = false;

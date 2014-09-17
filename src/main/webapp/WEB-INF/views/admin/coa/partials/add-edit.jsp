@@ -197,8 +197,7 @@
             <div class="col-md-5 col-lg-5">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-filter"></i></span>
-
-                    <select required class="form-control" id="parent_acct_id" ng-model="parentAccount"
+                    <select class="form-control" id="parent_acct_id" ng-model="parentAccount"
                             ng-options="parentAccount.title for parentAccount in parentAccounts track by parentAccount.id">
                         <option value="">Select parent account</option>
                     </select>

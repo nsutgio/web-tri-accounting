@@ -154,7 +154,10 @@ public class AccountServiceImpl implements AccountService {
                 if (parentAccount != null && parentAccount instanceof Account) {
                     account.setLevel(parentAccount.getLevel() + 1);
                 }
+            } else {
+                account.setParentAccountId(0);
             }
+
             if (account.getId() > 0) {  // update mode
                 update(account);
 
