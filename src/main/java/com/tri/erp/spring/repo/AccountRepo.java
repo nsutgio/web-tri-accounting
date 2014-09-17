@@ -10,6 +10,7 @@ import java.util.List;
  */
 public interface AccountRepo extends JpaRepository<Account, Integer> {
     public List<Account> findByTitle(String title);
+    public List<Account> findAllByOrderByCodeAsc();
     public List<Account> findByParentAccountIdOrderByCodeAsc(Integer accountId);
     public List<Account> findByIdNotIn(Integer... accountId);
 }

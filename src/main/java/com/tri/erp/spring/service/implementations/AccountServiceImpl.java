@@ -61,7 +61,7 @@ public class AccountServiceImpl implements AccountService {
     public List<AccountDTO> findAll() {
         List<AccountDTO> accountsDtoList = new ArrayList<>();
 
-        List<Account> accountList = accountRepo.findAll();
+        List<Account> accountList = accountRepo.findAllByOrderByCodeAsc();
 
         for(Account account : accountList) {
             AccountDTO accountDTO = new AccountDTO();
@@ -191,12 +191,6 @@ public class AccountServiceImpl implements AccountService {
     @Transactional(readOnly = true)
     public List<Account> findByTitle(String title) {
         return accountRepo.findByTitle(title);
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public List<Account> findByParentAccountIdOrderByCodeAsc(Integer accountId) {
-        return accountRepo.findByParentAccountIdOrderByCodeAsc(accountId);
     }
 
     @Override
