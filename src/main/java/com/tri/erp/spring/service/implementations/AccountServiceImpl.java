@@ -62,7 +62,7 @@ public class AccountServiceImpl implements AccountService {
     public List<AccountDTO> findAll() {
         this.accountsDtoList = new ArrayList<>();
 
-        List<Account> accountList = accountRepo.findAllByOrderByCodeAsc();
+        List<Account> accountList = accountRepo.findAllByOrderByTitleAsc();
 
         for(Account account : accountList) {
             AccountDTO accountDTO = new AccountDTO();
@@ -216,7 +216,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public List<Account> findByIdNotIn(Integer... accountId) {
-        return accountRepo.findByIdNotIn(accountId);
+        return accountRepo.findByIdNotInOrderByTitleAsc(accountId);
     }
 
     public Response processUpdate(Account account, BindingResult bindingResult, MessageSource messageSource) {
