@@ -1,8 +1,9 @@
 
 var coaApp = angular.module('coaApp', [
     'ngRoute',
-    'coaControllers',
-    'treeGrid'
+    'coaCtrls',
+    'treeGrid',
+    'accountBrowser'
 ]);
 
 coaApp.config(['$routeProvider',
@@ -10,19 +11,19 @@ coaApp.config(['$routeProvider',
         $routeProvider.
             when('/accounts', {
                 templateUrl: 'coa/accounts-tree-page',
-                controller: 'treeGridController'
+                controller: 'treeGridCtrl'
             }).
             when('/new', {
                 templateUrl: 'coa/new-account-page',
-                controller: 'newAccountController'
+                controller: 'newAccountCtrl'
             }).
             when('/account/:accountId', {
                 templateUrl: 'coa/account-details-page',
-                controller: 'accountDetailsController'
+                controller: 'accountDetailsCtrl'
             }).
             when('/account/:accountId/edit', {
                 templateUrl: 'coa/new-account-page',
-                controller: 'newAccountController'
+                controller: 'newAccountCtrl'
             }).
             otherwise({
                 redirectTo:  '/accounts'

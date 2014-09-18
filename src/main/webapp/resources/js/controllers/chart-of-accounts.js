@@ -1,25 +1,6 @@
-var coaControllers = angular.module('coaControllers', ['ngResource', 'ngSanitize']);
+var coaControllers = angular.module('coaCtrls', ['ngResource', 'ngSanitize']);
 
-coaControllers.controller('accountTreeController', ['$scope', '$http', '$sce',  function($scope, $http, $sce) {
-    $scope.accounts = [{"code":"Loading data..."}];
-    $scope.loaded = false;
-
-    $scope.unsanitizedHtml = function(html) {
-        return $sce.trustAsHtml(html);
-    };
-
-
-    $http.get(baseURL + '/accounts').success(function(data) {
-        if (data.length > 0) {
-            $scope.accounts = data;
-            $scope.loaded = true;
-        }
-    }).error(function(data) {
-        alert("Something went wrong!");
-    });
-}]);
-
-coaControllers.controller('accountDetailsController', ['$scope', '$routeParams', '$http', '$location', function($scope,  $routeParams, $http, $location) {
+coaControllers.controller('accountDetailsCtrl', ['$scope', '$routeParams', '$http', '$location', function($scope,  $routeParams, $http, $location) {
     if(!($routeParams.accountId === undefined)) {
         $scope.title = 'Account details';
 
@@ -45,7 +26,7 @@ coaControllers.controller('accountDetailsController', ['$scope', '$routeParams',
 }]);
 
 
-coaControllers.controller('newAccountController', ['$scope', '$routeParams', '$http', function($scope, $routeParams, $http) {
+coaControllers.controller('newAccountCtrl', ['$scope', '$routeParams', '$http', function($scope, $routeParams, $http) {
 
     $scope.account = {};
     // setup defaults
@@ -67,6 +48,14 @@ coaControllers.controller('newAccountController', ['$scope', '$routeParams', '$h
     $scope.save ='Save';
     $scope.title = 'Add an account';
     var resourceURI = '/account/create';
+
+    $scope.header = 'Put here your header';
+    $scope.body = 'Put here your body';
+    $scope.footer = 'Put here your footer';
+
+    $scope.myRightButton = function (bool) {
+        alert('!!! first function call!');
+    };
 
     $http.get('/bus-seg/list').success(function(data) {
         if (data.length > 0) {
@@ -219,7 +208,7 @@ coaControllers.controller('newAccountController', ['$scope', '$routeParams', '$h
     };
 }]);
 
-coaControllers.controller('treeGridController',  ['$scope', '$http', '$sce', function($scope, $http, $sce) {
+coaControllers.controller('treeGridCtrl',  ['$scope', '$http', '$sce', function($scope, $http, $sce) {
     var tree, myTreeData;
     var rawTreeData;
 

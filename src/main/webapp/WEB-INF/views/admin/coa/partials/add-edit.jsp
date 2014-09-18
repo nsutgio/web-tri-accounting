@@ -203,7 +203,14 @@
                     </select>
                 </div>
             </div>
-            <div class="col-md-4 col-lg-4 input-label">
+            <div class="col-md-2 col-lg-2" style="padding-left: 0">
+                    <modal lolo="modal1" modal-body="body" modal-footer="footer" modal-header="header" data-ng-click-right-button="myRightButton()"></modal>
+                    <div>
+                        <button title="browse account" type="button" class="btn btn-primary glyphicon glyphicon-new-window" data-toggle="modal" data-target="#pop"></button>
+                        <button title="clear account" type="button" class="btn btn-primary glyphicon glyphicon-remove"></button>
+                    </div>
+            </div>
+            <div class="col-md-3 col-lg-3 input-label">
                 <span style="color: red !important;" ng-show="errors.err_parentAccountId">
                     <ul class="error-list">
                         <li ng-repeat="err in errors.err_parentAccountId">
