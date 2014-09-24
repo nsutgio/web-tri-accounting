@@ -204,11 +204,9 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-md-2 col-lg-2" style="padding-left: 0" ng-controller="accountBrowserCtrl">
-                        <modal lolo="modal1" modal-body="body" modal-header="header" data-ng-click-right-button="myRightButton()"></modal>
+                <div class="col-md-2 col-lg-2" style="padding-left: 0">
                         <div>
-                            <button title="browse account" type="button" class="btn btn-primary glyphicon glyphicon-new-window" data-toggle="modal" data-target="#pop"></button>
-                            <button title="clear account" type="button" class="btn btn-primary glyphicon glyphicon-remove"></button>
+                            <button title="browse account" type="button" class="btn btn-primary glyphicon glyphicon-new-window" ng-click="showAccountBrowser()"></button>
                         </div>
                 </div>
                 <div class="col-md-3 col-lg-3 input-label">
@@ -269,4 +267,7 @@
             </div>
         </div>
     </form>
+    <div ng-include="modalBodyTemplateUrl" class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true"></div>
 </div>
+
+

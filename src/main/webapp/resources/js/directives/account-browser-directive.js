@@ -2,14 +2,16 @@
     var accountBrowser;
     accountBrowser = angular.module('accountBrowser', []);
 
-    accountBrowser.controller('accountBrowserCtrl', function ($scope) {
+    accountBrowser.controller('accountBrowserCtrl',  ['$scope', '$http', function($scope, $http) {
+        $scope.accounts = [];
+        $scope.selectedAccount = {};
         $scope.header = 'Browse accounts';
         $scope.body = 'Accounts';
 
         $scope.myRightButton = function (bool) {
             alert('first function call!');
         };
-    });
+    }]);
 
     accountBrowser.directive('modal', function () {
         return {

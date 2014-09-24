@@ -46,6 +46,8 @@ coaControllers.controller('newAccountCtrl', ['$scope', '$routeParams', '$http', 
     $scope.submitting = false;
     $scope.save ='Save';
     $scope.title = 'Add an account';
+
+    $scope.modalBodyTemplateUrl = "/common/account-browser";
     var resourceURI = '/account/create';
 
     $http.get('/bus-seg/list').success(function(data) {
@@ -130,6 +132,11 @@ coaControllers.controller('newAccountCtrl', ['$scope', '$routeParams', '$http', 
                 return;
             }
         });
+    }
+
+    $scope.showAccountBrowser = function () {
+        // jquery way
+        $('#myModal').modal('show');
     }
 
     var newSelectedSegment = [];
