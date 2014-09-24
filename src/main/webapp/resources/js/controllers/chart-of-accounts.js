@@ -25,7 +25,6 @@ coaControllers.controller('accountDetailsCtrl', ['$scope', '$routeParams', '$htt
     }
 }]);
 
-
 coaControllers.controller('newAccountCtrl', ['$scope', '$routeParams', '$http', function($scope, $routeParams, $http) {
 
     $scope.account = {};
@@ -48,14 +47,6 @@ coaControllers.controller('newAccountCtrl', ['$scope', '$routeParams', '$http', 
     $scope.save ='Save';
     $scope.title = 'Add an account';
     var resourceURI = '/account/create';
-
-    $scope.header = 'Put here your header';
-    $scope.body = 'Put here your body';
-    $scope.footer = 'Put here your footer';
-
-    $scope.myRightButton = function (bool) {
-        alert('!!! first function call!');
-    };
 
     $http.get('/bus-seg/list').success(function(data) {
         if (data.length > 0) {

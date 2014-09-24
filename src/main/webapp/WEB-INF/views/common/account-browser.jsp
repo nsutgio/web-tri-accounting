@@ -11,9 +11,6 @@
 
             </div>
             <div class="modal-footer">
-
-                <p class="text-left">{{footer}}</p>
-
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary" data-ng-click="callbackbuttonright(); $event.stopPropagation()">Launch Alert</button>
 

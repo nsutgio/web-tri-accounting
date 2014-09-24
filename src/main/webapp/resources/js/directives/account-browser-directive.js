@@ -2,6 +2,15 @@
     var accountBrowser;
     accountBrowser = angular.module('accountBrowser', []);
 
+    accountBrowser.controller('accountBrowserCtrl', function ($scope) {
+        $scope.header = 'Browse accounts';
+        $scope.body = 'Accounts';
+
+        $scope.myRightButton = function (bool) {
+            alert('first function call!');
+        };
+    });
+
     accountBrowser.directive('modal', function () {
         return {
             restrict: 'EA',
@@ -9,7 +18,6 @@
                 title: '=modalTitle',
                 header: '=modalHeader',
                 body: '=modalBody',
-                footer: '=modalFooter',
                 callbackbuttonleft: '&ngClickLeftButton',
                 callbackbuttonright: '&ngClickRightButton',
                 handler: '=lolo'

@@ -14,16 +14,14 @@ coaApp.config(['$routeProvider',
                 controller: 'treeGridCtrl'
             }).
             when('/new', {
-                templateUrl: 'coa/new-account-page',
-                controller: 'newAccountCtrl'
+                templateUrl: 'coa/new-account-page'
             }).
             when('/account/:accountId', {
                 templateUrl: 'coa/account-details-page',
                 controller: 'accountDetailsCtrl'
             }).
             when('/account/:accountId/edit', {
-                templateUrl: 'coa/new-account-page',
-                controller: 'newAccountCtrl'
+                templateUrl: 'coa/new-account-page'
             }).
             otherwise({
                 redirectTo:  '/accounts'
