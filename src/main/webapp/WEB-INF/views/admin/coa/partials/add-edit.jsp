@@ -204,7 +204,7 @@
                 <div class="col-md-2 col-lg-2" style="padding-left: 0">
                         <div>
                             <button title="browse account" type="button" class="btn btn-primary glyphicon glyphicon-new-window" ng-click="showAccountBrowser()"></button>
-                            <button title="clear account" type="button" class="btn btn-primary glyphicon glyphicon-remove"></button>
+                            <button title="clear account" type="button" class="btn btn-primary glyphicon glyphicon-remove" ng-click="clearAccountSelectedFromBrowser()"></button>
                         </div>
                 </div>
                 <div class="col-md-3 col-lg-3 input-label">

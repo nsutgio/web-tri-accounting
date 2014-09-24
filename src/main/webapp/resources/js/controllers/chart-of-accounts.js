@@ -31,7 +31,7 @@ coaControllers.controller('newAccountCtrl', ['$scope', '$routeParams', '$http', 
     // setup defaults
     var accountGroup = {"id" : "1"};
     var accountType = {"id" : "1"};
-    var parentAccount = {"id" : "1"};
+    var initParentAccount = {"id" : "1"};
     $scope.segments = [];
     $scope.accountGroup = accountGroup;
     $scope.accountType = accountType;
@@ -41,7 +41,7 @@ coaControllers.controller('newAccountCtrl', ['$scope', '$routeParams', '$http', 
     $scope.account['isActive'] = true;
     $scope.account['hasSL'] = false;
     $scope.account['isHeader'] = false;
-    $scope.account['parentAccount'] = parentAccount;
+    $scope.account['parentAccount'] = initParentAccount;
     $scope.errors = {};
     $scope.submitting = false;
     $scope.save ='Save';
@@ -145,6 +145,10 @@ coaControllers.controller('newAccountCtrl', ['$scope', '$routeParams', '$http', 
             // jquery way
             $('#myModal').modal('hide');
         }
+    }
+
+    $scope.clearAccountSelectedFromBrowser = function () {
+        $scope.parentAccount = initParentAccount;
     }
 
     var newSelectedSegment = [];
