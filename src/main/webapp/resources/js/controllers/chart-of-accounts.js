@@ -139,6 +139,14 @@ coaControllers.controller('newAccountCtrl', ['$scope', '$routeParams', '$http', 
         $('#myModal').modal('show');
     }
 
+    $scope.accountSelectedFromBrowser = function (selectedAccount) {
+        if (!angular.isUndefined(selectedAccount)) {
+            $scope.parentAccount = selectedAccount;
+            // jquery way
+            $('#myModal').modal('hide');
+        }
+    }
+
     var newSelectedSegment = [];
     $scope.toggleSegment = function(idx, segment) {
         newSelectedSegment.push(segment.id);

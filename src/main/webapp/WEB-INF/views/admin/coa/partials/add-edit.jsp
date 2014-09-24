@@ -198,15 +198,13 @@
                 <div class="col-md-5 col-lg-5">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-filter"></i></span>
-                        <select class="form-control" id="parent_acct_id" ng-model="parentAccount"
-                                ng-options="parentAccount.title for parentAccount in parentAccounts track by parentAccount.id">
-                            <option value="">Select parent account</option>
-                        </select>
+                        <input disabled ng-model="parentAccount.title" id="parent_acct_id" name="parent_acct_id" class="form-control"  type="text" placeholder="Browse an account"/>
                     </div>
                 </div>
                 <div class="col-md-2 col-lg-2" style="padding-left: 0">
                         <div>
                             <button title="browse account" type="button" class="btn btn-primary glyphicon glyphicon-new-window" ng-click="showAccountBrowser()"></button>
+                            <button title="clear account" type="button" class="btn btn-primary glyphicon glyphicon-remove"></button>
                         </div>
                 </div>
                 <div class="col-md-3 col-lg-3 input-label">
