@@ -14,6 +14,6 @@
 </mytag:master>
 
 <script src="<c:url value="/resources/js/app/chart-of-accounts.js" />"></script>
+<script src="<c:url value="/resources/js/app/common/services.js" />"></script>
 <script src="<c:url value="/resources/js/controllers/chart-of-accounts.js" />"></script>
 <script src="<c:url value="/resources/js/directives/tree-grid-directive.js" />"></script>
-<script src="<c:url value="/resources/js/directives/account-browser-directive.js" />"></script>

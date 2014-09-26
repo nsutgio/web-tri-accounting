@@ -25,7 +25,7 @@ coaControllers.controller('accountDetailsCtrl', ['$scope', '$routeParams', '$htt
     }
 }]);
 
-coaControllers.controller('newAccountCtrl', ['$scope', '$routeParams', '$http', function($scope, $routeParams, $http) {
+coaControllers.controller('newAccountCtrl', ['$scope', '$routeParams', '$http', 'errorService', function($scope, $routeParams, $http, errorService) {
 
     $scope.account = {};
     // setup defaults
@@ -196,7 +196,7 @@ coaControllers.controller('newAccountCtrl', ['$scope', '$routeParams', '$http', 
         var res = $http.post(resourceURI, jAccount);
         res.success(function(data) {
             if (!data.success) {
-                $scope.errors = firefly.bindErrorsToElements(data, $scope.errors);
+                $scope.errors = errorService.bindErrorsToElements(data, $scope.errors);
                 $scope.save ='Save';
                 $scope.submitting = false;
             } else {
