@@ -196,7 +196,7 @@ coaControllers.controller('newAccountCtrl', ['$scope', '$routeParams', '$http', 
         var res = $http.post(resourceURI, jAccount);
         res.success(function(data) {
             if (!data.success) {
-                $scope.errors = bindErrorsToElements(data, $scope.errors);
+                $scope.errors = firefly.bindErrorsToElements(data, $scope.errors);
                 $scope.save ='Save';
                 $scope.submitting = false;
             } else {
