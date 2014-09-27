@@ -15,6 +15,6 @@
 
 <script src="<c:url value="/resources/js/app/chart-of-accounts.js" />"></script>
 <script src="<c:url value="/resources/js/app/common/service/error-handler-service.js" />"></script>
-<script src="<c:url value="/resources/js/app/common/factory/account-factory.js" />"></script>
+<script src="<c:url value="/resources/js/app/common/factory/json-factory.js" />"></script>
 <script src="<c:url value="/resources/js/controllers/chart-of-accounts.js" />"></script>
 <script src="<c:url value="/resources/js/directives/tree-grid-directive.js" />"></script>
