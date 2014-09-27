@@ -3,7 +3,8 @@ var coaApp = angular.module('coaApp', [
     'ngRoute',
     'coaCtrls',
     'treeGrid',
-    'errorHandlerService'
+    'errorHandlerService',
+    'jsonFactory'
 ]);
 
 coaApp.config(['$routeProvider',
