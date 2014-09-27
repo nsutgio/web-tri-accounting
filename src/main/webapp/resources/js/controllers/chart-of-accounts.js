@@ -25,7 +25,7 @@ coaControllers.controller('accountDetailsCtrl', ['$scope', '$routeParams', '$htt
     }
 }]);
 
-coaControllers.controller('newAccountCtrl', ['$scope', '$routeParams', '$http', 'errorService', function($scope, $routeParams, $http, errorService) {
+coaControllers.controller('newAccountCtrl', ['$scope', '$routeParams', '$http', 'errorToElementBinder', function($scope, $routeParams, $http, errorToElementBinder) {
 
     $scope.account = {};
     // setup defaults
@@ -196,7 +196,7 @@ coaControllers.controller('newAccountCtrl', ['$scope', '$routeParams', '$http', 
         var res = $http.post(resourceURI, jAccount);
         res.success(function(data) {
             if (!data.success) {
-                $scope.errors = errorService.bindErrorsToElements(data, $scope.errors);
+                $scope.errors = errorToElementBinder.bindToElements(data, $scope.errors);
                 $scope.save ='Save';
                 $scope.submitting = false;
             } else {

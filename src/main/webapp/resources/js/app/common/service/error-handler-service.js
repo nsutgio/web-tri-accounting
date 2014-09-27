@@ -1,7 +1,7 @@
-var fireflyServices = angular.module('fireflyServices', []);
+var errorHandlerService = angular.module('errorHandlerService', []);
 
-fireflyServices.service('errorService', function() {
-    this.bindErrorsToElements = function(data, scopeErrors) {
+errorHandlerService.service('errorToElementBinder', function() {
+    this.bindToElements = function(data, scopeErrors) {
         var fields = [];
         try {
             var messages = data.messages;
