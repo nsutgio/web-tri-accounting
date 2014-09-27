@@ -25,12 +25,12 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr ng-show="!parentAccounts"><td colspan="3" align="center">No records</td></tr>
-                    <tr ng-repeat="account in parentAccounts | filter:query" style="cursor: pointer" ng-click="accountSelectedFromBrowser(account)">
+                    <tr ng-repeat="account in accounts = (parentAccounts | filter:query)" style="cursor: pointer" ng-click="accountSelectedFromBrowser(account)">
                         <td class='code-col'>{{account.code}}</td>
                         <td>{{account.title}}</td>
                         <td class='type-col'>{{account.accountType.description}}</td>
                     </tr>
+                    <tr ng-show="!parentAccounts || accounts.length == 0"><td colspan="3" align="center">No records found</td></tr>
                     </tbody>
                 </table>
             </div>

@@ -119,7 +119,7 @@ coaControllers.controller('newAccountCtrl', ['$scope', '$routeParams', '$http', 
                 }
             })
             .error(function (error) {
-                alert('Something went wrong.');
+                alert('Failed to load accounts.');
             });
     }
     $scope.checkAssignedSegment = function (businessSegmentId) {
