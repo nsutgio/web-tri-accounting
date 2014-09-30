@@ -7,14 +7,14 @@
         <link href="<c:url value="/resources/css/treeGrid/treeGrid.css" />" rel="stylesheet">
     </jsp:attribute>
     <jsp:attribute name="body">
-        <div ng-app="coaApp">
+        <div ng-app="account">
             <div id="coa-content" ng-view>Loading...</div>
         </div>
     </jsp:attribute>
 </mytag:master>
 
-<script src="<c:url value="/resources/js/app/chart-of-accounts.js" />"></script>
-<script src="<c:url value="/resources/js/app/common/service/error-handler-service.js" />"></script>
-<script src="<c:url value="/resources/js/app/common/factory/json-factory.js" />"></script>
-<script src="<c:url value="/resources/js/controllers/chart-of-accounts.js" />"></script>
-<script src="<c:url value="/resources/js/directives/tree-grid-directive.js" />"></script>
+<script src="<c:url value="/resources/js/app/routes/account-route.js" />"></script>
+<script src="<c:url value="/resources/js/app/services/error-handler-service.js" />"></script>
+<script src="<c:url value="/resources/js/app/controllers/account-ctrl.js" />"></script>
+<script src="<c:url value="/resources/js/app/directives/tree-grid-directive.js" />"></script>
+<%--<script src="<c:url value="/resources/js/app/factories/account-factory.js" />"></script>--%>

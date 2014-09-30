@@ -6,10 +6,4 @@
 <title>Firely</title>
 <link href="<c:url value="/resources/css/custom/app.css" />" rel="stylesheet">
 <link href="<c:url value="/resources/css/bootstrap/bootstrap.min.css" />" rel="stylesheet">
-<link href="<c:url value="/resources/css/bootstrap/bootstrap.min.css" />" rel="stylesheet">
 <link href="<c:url value="/resources/css/fa/font-awesome.min.css" />" rel="stylesheet">
-
-<script src="<c:url value="/resources/js/angular/angular.min.js" />"></script>
-<script src="<c:url value="/resources/js/angular/angular-route.min.js" />"></script>
-<script src="<c:url value="/resources/js/angular/angular-resource.min.js" />"></script>
-<script src="<c:url value="/resources/js/angular/angular-sanitize.min.js" />"></script>

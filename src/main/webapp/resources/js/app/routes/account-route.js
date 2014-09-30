@@ -1,10 +1,10 @@
 
-var coaApp = angular.module('coaApp', [
+var coaApp = angular.module('account', [
     'ngRoute',
-    'coaCtrls',
+    'accountCtrl',
     'treeGrid',
-    'errorHandlerService',
-    'jsonFactory'
+    'errorHandlerService'
+
 ]);
 
 coaApp.config(['$routeProvider',
