@@ -14,7 +14,7 @@
 </mytag:master>
 
 <script src="<c:url value="/resources/js/app/routes/account-route.js" />"></script>
+<script src="<c:url value="/resources/js/app/factories/account-factory.js" />"></script>
 <script src="<c:url value="/resources/js/app/services/error-handler-service.js" />"></script>
 <script src="<c:url value="/resources/js/app/controllers/account-ctrl.js" />"></script>
 <script src="<c:url value="/resources/js/app/directives/tree-grid-directive.js" />"></script>
-<%--<script src="<c:url value="/resources/js/app/factories/account-factory.js" />"></script>--%>

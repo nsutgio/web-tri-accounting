@@ -3,7 +3,9 @@ var coaApp = angular.module('account', [
     'ngRoute',
     'accountCtrl',
     'treeGrid',
-    'errorHandlerService'
+    'errorHandlerService',
+    'accountFactory'
+
 
 ]);
 

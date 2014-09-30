@@ -25,8 +25,8 @@ coaControllers.controller('accountDetailsCtrl', ['$scope', '$routeParams', '$htt
     }
 }]);
 
-coaControllers.controller('newAccountCtrl', ['$scope', '$routeParams', '$http', 'errorToElementBinder',
-    function($scope, $routeParams, $http, errorToElementBinder) {
+coaControllers.controller('newAccountCtrl', ['$scope', '$routeParams', '$http', 'errorToElementBinder', 'accountFactory',
+    function($scope, $routeParams, $http, errorToElementBinder, accountFactory) {
 
     $scope.account = {};
     // setup defaults
@@ -112,15 +112,15 @@ coaControllers.controller('newAccountCtrl', ['$scope', '$routeParams', '$http', 
         });
         resourceURI = '/account/update';
     } else {
-//        accountFactory.getAccounts()
-//            .success(function (data) {
-//                if (data.length > 0) {
-//                    $scope.parentAccounts = data;
-//                }
-//            })
-//            .error(function (error) {
-//                alert('Failed to load accounts.');
-//            });
+        accountFactory.getAccounts()
+            .success(function (data) {
+                if (data.length > 0) {
+                    $scope.parentAccounts = data;
+                }
+            })
+            .error(function (error) {
+                alert('Failed to load accounts.');
+            });
     }
     $scope.checkAssignedSegment = function (businessSegmentId) {
         angular.forEach($scope.segments, function(segment, key) {
