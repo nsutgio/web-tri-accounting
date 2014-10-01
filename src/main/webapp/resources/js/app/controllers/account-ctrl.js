@@ -29,8 +29,10 @@ coaControllers.controller('accountDetailsCtrl', ['$scope', '$routeParams', '$htt
     }
 }]);
 
-coaControllers.controller('newAccountCtrl', ['$scope', '$routeParams', '$http', 'errorToElementBinder', 'accountFactory', 'modalToggler',
-    function($scope, $routeParams, $http, errorToElementBinder, accountFactory, modalToggler) {
+coaControllers.controller('newAccountCtrl', ['$scope', '$routeParams', '$http', 'errorToElementBinder', 'accountFactory',
+    'modalToggler', 'businessSegmentFactory', 'accountService',
+    function($scope, $routeParams, $http, errorToElementBinder, accountFactory, modalToggler, businessSegmentFactory,
+             accountService) {
 
     $scope.account = {};
     // setup defaults
@@ -55,14 +57,7 @@ coaControllers.controller('newAccountCtrl', ['$scope', '$routeParams', '$http', 
     $scope.modalBodyTemplateUrl = "/common/account-browser";
     var resourceURI = '/account/create';
 
-    $http.get('/bus-seg/list').success(function(data) {
-        if (data.length > 0) {
-            $scope.segments = data;
-        }
-    }).error(function(data) {
-        alert("Failed to fetch business segments.");
-    });
-
+    businessSegmentFactory.getSegments().success(function (data) { $scope.segments = data; });
     accountFactory.getAccountTypes().success(function (data) { $scope.accountTypes = data; });
     accountFactory.getAccountGroups().success(function (data) { $scope.accountGroups = data; });
 
@@ -160,31 +155,7 @@ coaControllers.controller('newAccountCtrl', ['$scope', '$routeParams', '$http', 
         $http.defaults.headers.post['X-CSRF-TOKEN'] = $('input[name=_csrf]').val();
 
         // create json to be posted to the server
-        var jAccount = angular.copy($scope.account);
-        jAccount.isActive = jAccount.isActive ? 1 : 0;
-        jAccount.hasSL =jAccount.hasSL ? 1 : 0;
-        jAccount.isHeader = jAccount.isHeader ? 1 : 0;
-
-        jAccount.accountGroup = angular.copy($scope.accountGroup);
-        jAccount.accountType = angular.copy($scope.accountType);
-        jAccount.parentAccount = angular.copy($scope.parentAccount);
-        jAccount.parentAccountId = jAccount.parentAccount == null ? 0 : jAccount.parentAccount.id;
-
-        var segmentAccounts = [];
-        var scopeSegments = angular.copy($scope.segments);
-        angular.forEach(scopeSegments, function(segment, key) {
-            if (segment.selected) {
-                delete segment['selected']; // hibernate will complain, so delete it
-                delete segment['assigned'];
-
-                var segmentAccount = {
-                    "accountCode" : "",
-                    "businessSegment" :segment
-                };
-                segmentAccounts.push(segmentAccount);
-            }
-        });
-        jAccount.segmentAccounts = segmentAccounts;
+        var jAccount = accountService.createAccountJson($scope);
 
         var res = $http.post(resourceURI, jAccount);
         res.success(function(data) {
