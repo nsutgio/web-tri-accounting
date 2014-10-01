@@ -175,19 +175,11 @@ coaControllers.controller('newAccountCtrl', ['$scope', '$routeParams', '$http', 
     };
 }]);
 
-coaControllers.controller('treeGridCtrl',  ['$scope', '$http', '$sce', function($scope, $http, $sce) {
+coaControllers.controller('treeGridCtrl',  ['$scope', 'accountFactory', function($scope, accountFactory) {
     var tree, myTreeData;
     var rawTreeData;
 
-    $.ajax({
-        url:  '/account/list/tree',
-        type: 'GET',
-        async: false
-    }).done(function(data) {
-        rawTreeData = data;
-    }).error(function() {
-        alert("Something went wrong!");
-    });
+    rawTreeData = accountFactory.getTreeAccounts().data;
 
     myTreeData = getTree(rawTreeData, 'id', 'parentAccountId');
     $scope.tree_data = myTreeData;

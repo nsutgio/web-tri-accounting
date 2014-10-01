@@ -20,5 +20,19 @@ accountFactory.factory('accountFactory', ['$http', function($http) {
     this.getAccountGroups = function () {
         return $http.get('/account/group/list');
     };
+
+    this.getTreeAccounts = function () {
+        var response = {};
+
+        // jquery ajax
+        $.ajax({
+            url:  '/account/list/tree',
+            type: 'GET',
+            async: false
+        }).done(function(data) {
+            response.data = data;
+        });
+        return response;
+    };
     return this;
 }]);
