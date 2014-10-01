@@ -4,9 +4,8 @@ var coaApp = angular.module('account', [
     'accountCtrl',
     'treeGrid',
     'errorHandlerService',
-    'accountFactory'
-
-
+    'accountFactory',
+    'jQueryFnWrapperService'
 ]);
 
 coaApp.config(['$routeProvider',

@@ -25,8 +25,8 @@ coaControllers.controller('accountDetailsCtrl', ['$scope', '$routeParams', '$htt
     }
 }]);
 
-coaControllers.controller('newAccountCtrl', ['$scope', '$routeParams', '$http', 'errorToElementBinder', 'accountFactory',
-    function($scope, $routeParams, $http, errorToElementBinder, accountFactory) {
+coaControllers.controller('newAccountCtrl', ['$scope', '$routeParams', '$http', 'errorToElementBinder', 'accountFactory', 'modalToggler',
+    function($scope, $routeParams, $http, errorToElementBinder, accountFactory, modalToggler) {
 
     $scope.account = {};
     // setup defaults
@@ -80,43 +80,44 @@ coaControllers.controller('newAccountCtrl', ['$scope', '$routeParams', '$http', 
 
         $scope.accountId = $routeParams.accountId;
 
-        $http.get('/account/' + $scope.accountId + '/except').success(function(data) {
-            if (data.length > 0) {
+        accountFactory.getAccountsExcept($scope.accountId)
+            .success(function (data) {
                 $scope.parentAccounts = data;
-            }
-        });
+            })
+            .error(function (error) {
+                alert('Failed to load accounts.');
+            });
 
-        $http.get('/account/'+ $scope.accountId).success(function(data) {
-            console.log(data);
-            if (data === '' || data.id <= 0) {    // not found
-                window.location.hash = '#/account/' + $scope.accountId;
-            } else {
-                data.isActive = (data.isActive == 1);
-                data.isHeader = (data.isHeader == 1);
-                data.hasSL = (data.hasSL == 1);
+        accountFactory.getAccount($scope.accountId)
+            .success(function (data) {
+                if (data === '' || data.id <= 0) {    // not found
+                    window.location.hash = '#/account/' + $scope.accountId;
+                } else {
+                    data.isActive = (data.isActive == 1);
+                    data.isHeader = (data.isHeader == 1);
+                    data.hasSL = (data.hasSL == 1);
 
-                $scope.account = data;
+                    $scope.account = data;
 
-                $scope.accountType = data.accountType;
-                $scope.accountGroup = data.accountGroup;
-                $scope.parentAccount = data.parentAccount;
-                // segments
-                angular.forEach(data.segmentAccounts, function(segmentAccount, key) {
-                    $scope.checkAssignedSegment(segmentAccount.businessSegment.id);
-                });
+                    $scope.accountType = data.accountType;
+                    $scope.accountGroup = data.accountGroup;
+                    $scope.parentAccount = data.parentAccount;
+                    // segments
+                    angular.forEach(data.segmentAccounts, function(segmentAccount, key) {
+                        $scope.checkAssignedSegment(segmentAccount.businessSegment.id);
+                    });
+                }
+            })
+            .error(function (error) {
+                alert("Something went wrong.");
+                window.location.hash = '#/accounts';
+            });
 
-            }
-        }).error(function(a,b,c){
-            alert("Something went wrong.");
-            window.location.hash = '#/accounts';
-        });
         resourceURI = '/account/update';
     } else {
         accountFactory.getAccounts()
             .success(function (data) {
-                if (data.length > 0) {
-                    $scope.parentAccounts = data;
-                }
+                $scope.parentAccounts = data;
             })
             .error(function (error) {
                 alert('Failed to load accounts.');
@@ -140,15 +141,13 @@ coaControllers.controller('newAccountCtrl', ['$scope', '$routeParams', '$http', 
     }
 
     $scope.showAccountBrowser = function () {
-        // jquery way
-        $('#myModal').modal('show');
+        modalToggler.show('myModal');
     }
 
     $scope.accountSelectedFromBrowser = function (selectedAccount) {
         if (!angular.isUndefined(selectedAccount)) {
             $scope.parentAccount = selectedAccount;
-            // jquery way
-            $('#myModal').modal('hide');
+            modalToggler.hide('myModal');
         }
     }
 
