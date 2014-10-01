@@ -1,21 +1,25 @@
 var coaControllers = angular.module('accountCtrl', ['ngResource', 'ngSanitize']);
 
-coaControllers.controller('accountDetailsCtrl', ['$scope', '$routeParams', '$http', '$location', function($scope,  $routeParams, $http, $location) {
+coaControllers.controller('accountDetailsCtrl', ['$scope', '$routeParams', '$http', 'accountFactory',
+    function($scope,  $routeParams, $http, accountFactory) {
     if(!($routeParams.accountId === undefined)) {
         $scope.title = 'Account details';
 
         $scope.accountId = $routeParams.accountId;
-        $http.get('/account/'+ $scope.accountId).success(function(data) {
-            console.log(data);
-            if (data === '' || data.id <= 0) {
+
+        accountFactory.getAccount($scope.accountId)
+            .success(function (data) {
+                if (data === '' || data.id <= 0) {    // not found
+                    window.location.hash = '#/accounts';
+                } else {
+                    $scope.account = data;
+                }
+            })
+            .error(function (error) {
+                alert("Something went wrong.");
                 window.location.hash = '#/accounts';
-            } else {
-                $scope.account = data;
-            }
-        }).error(function(data){
-            alert("Something went wrong!");
-            window.location.hash = '#/accounts';
-        });
+            });
+
     } else {
         window.location.hash = '#/accounts';
     }
@@ -59,21 +63,8 @@ coaControllers.controller('newAccountCtrl', ['$scope', '$routeParams', '$http', 
         alert("Failed to fetch business segments.");
     });
 
-    $http.get('/account/type/list').success(function(data) {
-        if (data.length > 0) {
-            $scope.accountTypes = data;
-        }
-    }).error(function(data) {
-        alert("Failed to fetch account types.");
-    });
-
-    $http.get('/account/group/list').success(function(data) {
-        if (data.length > 0) {
-            $scope.accountGroups = data;
-        }
-    }).error(function(data) {
-        alert("Failed to fetch account groups.");
-    });
+    accountFactory.getAccountTypes().success(function (data) { $scope.accountTypes = data; });
+    accountFactory.getAccountGroups().success(function (data) { $scope.accountGroups = data; });
 
     if(!($routeParams.accountId === undefined)) {  // update mode
         $scope.title = 'Update account';
@@ -195,8 +186,6 @@ coaControllers.controller('newAccountCtrl', ['$scope', '$routeParams', '$http', 
         });
         jAccount.segmentAccounts = segmentAccounts;
 
-        console.log(jAccount);
-
         var res = $http.post(resourceURI, jAccount);
         res.success(function(data) {
             if (!data.success) {
@@ -204,14 +193,7 @@ coaControllers.controller('newAccountCtrl', ['$scope', '$routeParams', '$http', 
                 $scope.save ='Save';
                 $scope.submitting = false;
             } else {
-                // if successful, bind success message to message
-                $scope.message = data.successMessage;
-
-                setTimeout(function () {
-                    $scope.$apply(function () {
-                        window.location.hash = '#/account/' + data.modelId;
-                    });
-                }, 4000);
+                window.location.hash = '#/account/' + data.modelId;
             }
         });
         res.error(function(data, status, headers, config) {
