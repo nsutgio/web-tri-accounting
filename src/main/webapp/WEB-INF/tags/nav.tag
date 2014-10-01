@@ -15,4 +15,14 @@
     <li><a href="#">Test1</a></li>
     <li><a href="#">Test2</a></li>
     <li><a href="#">Test3</a></li>
+    <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+            Inventory <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu" role="menu">
+            <li><a href="/inventory/withdrawal">Stock Withdrawal</a></li>
+            <li><a href="javascript:void(0);">Stock Approval</a></li>
+            <li><a href="javascript:void(0);">Stock Release</a></li>
+        </ul>
+    </li>
 </ul>
