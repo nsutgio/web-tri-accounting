@@ -95,8 +95,8 @@ coaControllers.controller('newAccountCtrl', ['$scope', '$routeParams', '$http', 
                 }
             })
             .error(function (error) {
-                alert("Something went wrong.");
                 window.location.hash = '#/accounts';
+                toastr.warning('Account not found!');
             });
 
         resourceURI = '/account/update';
@@ -163,12 +163,14 @@ coaControllers.controller('newAccountCtrl', ['$scope', '$routeParams', '$http', 
                 $scope.errors = errorToElementBinder.bindToElements(data, $scope.errors);
                 $scope.save ='Save';
                 $scope.submitting = false;
+                toastr.warning('Error found.');
             } else {
                 window.location.hash = '#/account/' + data.modelId;
+                toastr.success('Account successfully saved!');
             }
         });
         res.error(function(data, status, headers, config) {
-            alert("Something went wrong!");
+            toastr.error('Something went wrong!');
             $scope.save ='Save';
             $scope.submitting = false;
         });
