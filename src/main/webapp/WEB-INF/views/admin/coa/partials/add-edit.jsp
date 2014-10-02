@@ -2,6 +2,7 @@
     <div class="row">
         <div class="col-md-12 col-lg-12">
             <button class="btn btn-primary" onclick="(window.location.href = '#/accounts')">Chart of Accounts</button>
+            <button title="browse account" type="button" class="btn btn-primary" ng-click="showAccountBrowserWithSegment()">Account with Segment Demo</button>
         </div>
     </div>
     <div class="row-top-buffer"></div>
@@ -266,6 +267,8 @@
         </div>
     </form>
     <div ng-include="modalBodyTemplateUrl" class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true"></div>
+    <%--Demo--%>
+    <div ng-include="modalBodyTemplateUrl2" class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true"></div>
 </div>
 
 
