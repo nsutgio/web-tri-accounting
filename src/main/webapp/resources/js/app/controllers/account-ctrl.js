@@ -140,12 +140,6 @@ coaControllers.controller('newAccountCtrl', ['$scope', '$routeParams', '$http', 
         modalToggler.show('myModal');
     }
 
-
-    $scope.modalBodyTemplateUrl2 = "/common/account-browser-with-segment";
-    $scope.showAccountBrowserWithSegment = function() {
-        modalToggler.show('myModal2');
-    }
-
     $scope.accountSelectedFromBrowser = function (selectedAccount) {
         if (!angular.isUndefined(selectedAccount)) {
             $scope.parentAccount = selectedAccount;
