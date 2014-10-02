@@ -13,6 +13,7 @@ coaControllers.controller('accountDetailsCtrl', ['$scope', '$routeParams', '$htt
         accountFactory.getAccount($scope.accountId)
             .success(function (data) {
                 if (data === '' || data.id <= 0) {    // not found
+                    toastr.warning('Account not found!');
                     window.location.hash = '#/accounts';
                 } else {
                     $scope.account = data;
@@ -83,7 +84,7 @@ coaControllers.controller('newAccountCtrl', ['$scope', '$routeParams', '$http', 
 
         accountFactory.getAccount($scope.accountId)
             .success(function (data) {
-                if (data === '' || data.id <= 0) {    // not found
+                if (data === '' || data.id <= 0) {    // not found 
                     window.location.hash = '#/account/' + $scope.accountId;
                 } else {
                     data.isActive = (data.isActive == 1);
