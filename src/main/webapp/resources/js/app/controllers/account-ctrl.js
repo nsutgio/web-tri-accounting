@@ -2,6 +2,9 @@ var coaControllers = angular.module('accountCtrl', ['ngResource', 'ngSanitize'])
 
 coaControllers.controller('accountDetailsCtrl', ['$scope', '$routeParams', '$http', 'accountFactory',
     function($scope,  $routeParams, $http, accountFactory) {
+
+    $scope.showDetails = false;
+
     if(!($routeParams.accountId === undefined)) {
         $scope.title = 'Account details';
 
@@ -13,14 +16,16 @@ coaControllers.controller('accountDetailsCtrl', ['$scope', '$routeParams', '$htt
                     window.location.hash = '#/accounts';
                 } else {
                     $scope.account = data;
+                    $scope.showDetails = true;
                 }
             })
             .error(function (error) {
-                alert("Something went wrong.");
+                toastr.warning('Account not found!');
                 window.location.hash = '#/accounts';
             });
 
     } else {
+        toastr.warning('Account not found!');
         window.location.hash = '#/accounts';
     }
 
@@ -35,6 +40,7 @@ coaControllers.controller('newAccountCtrl', ['$scope', '$routeParams', '$http', 
              accountService) {
 
     $scope.account = {};
+    $scope.showForm = true;
     // setup defaults
     var accountGroup = {"id" : "1"};
     var accountType = {"id" : "1"};
@@ -63,6 +69,7 @@ coaControllers.controller('newAccountCtrl', ['$scope', '$routeParams', '$http', 
 
     if(!($routeParams.accountId === undefined)) {  // update mode
         $scope.title = 'Update account';
+        $scope.showForm = false;
 
         $scope.accountId = $routeParams.accountId;
 
@@ -92,11 +99,13 @@ coaControllers.controller('newAccountCtrl', ['$scope', '$routeParams', '$http', 
                     angular.forEach(data.segmentAccounts, function(segmentAccount, key) {
                         $scope.checkAssignedSegment(segmentAccount.businessSegment.id);
                     });
+
+                    $scope.showForm = true;
                 }
             })
             .error(function (error) {
-                window.location.hash = '#/accounts';
                 toastr.warning('Account not found!');
+                window.location.hash = '#/accounts';
             });
 
         resourceURI = '/account/update';
