@@ -6,6 +6,7 @@ import com.tri.erp.spring.commons.helpers.Checker;
 import com.tri.erp.spring.commons.helpers.MessageFormatter;
 import com.tri.erp.spring.commons.helpers.StringFormatter;
 import com.tri.erp.spring.dto.AccountDTO;
+import com.tri.erp.spring.json_param.SegmentParam;
 import com.tri.erp.spring.model.*;
 import com.tri.erp.spring.repo.*;
 import com.tri.erp.spring.service.interfaces.AccountService;
@@ -97,6 +98,22 @@ public class AccountServiceImpl implements AccountService {
             findDescendants(account);
         }
         return this.accountsDtoList;
+    }
+
+    @Override
+    public List<Account> findAllBySegment(SegmentParam segmentParam) {
+        List<Account> list = new ArrayList<>();
+        if (segmentParam.getSegmentAccountIds() != null && segmentParam.getSegmentAccountIds().size() > 0) {
+            Integer[] segmentIds = new Integer[segmentParam.getSegmentAccountIds().size()];
+
+            for (int i = 0; i < segmentParam.getSegmentAccountIds().size(); i++) {
+                Integer id = segmentParam.getSegmentAccountIds().get(i);
+                segmentIds[i] = id;
+            }
+
+            List<Account> accounts = accountRepo.findAccountBySegment(segmentIds);
+        }
+        return list;
     }
 
     @Override

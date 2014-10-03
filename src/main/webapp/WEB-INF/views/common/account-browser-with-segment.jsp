@@ -40,7 +40,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr ng-repeat="account in accounts = (parentAccounts | filter:query)" style="cursor: pointer" ng-click="accountSelectedFromBrowser(account)">
+                            <tr ng-repeat="account in accounts | filter:query" style="cursor: pointer" ng-click="accountSelectedFromBrowser(account)">
                                 <td class='code-col'>{{account.code}}</td>
                                 <td>{{account.title}}</td>
                                 <td class='type-col'>{{account.accountType.description}}</td>

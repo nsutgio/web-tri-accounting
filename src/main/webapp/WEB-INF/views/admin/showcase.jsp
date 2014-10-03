@@ -16,16 +16,19 @@
     </jsp:attribute>
 </mytag:master>
 
+<script src="<c:url value="/resources/js/app/factories/account-factory.js" />"></script>
 <script src="<c:url value="/resources/js/app/factories/business-segment-factory.js" />"></script>
 <script src="<c:url value="/resources/js/app/services/jquery-fn-wrapper-service.js" />"></script>
 
 <script type="text/javascript">
-    var showcaseApp = angular.module('showcaseApp', ['jQueryFnWrapperService', 'businessSegmentFactory']);
+    var showcaseApp = angular.module('showcaseApp', ['jQueryFnWrapperService', 'businessSegmentFactory', 'accountFactory']);
 
-    showcaseApp.controller('accountBrowserCtrl', ['$scope', 'modalToggler', 'businessSegmentFactory',
-        function($scope, modalToggler, businessSegmentFactory) {
+    showcaseApp.controller('accountBrowserCtrl', ['$scope', 'modalToggler', 'businessSegmentFactory', 'accountFactory',
+        function($scope, modalToggler, businessSegmentFactory, accountFactory) {
 
         $scope.segments = [];
+        $scope.accounts = [];
+
         businessSegmentFactory.getSegments().success(function (data) {
 
             if (data.length > 0) {
@@ -33,8 +36,26 @@
                     segment['selected'] = true;
                     $scope.segments.push(segment);
                 });
+
+                $scope.loadAccounts();
             }
         });
+
+        $scope.loadAccounts = function () {
+            accountFactory.getAccountsBySegment($scope.collectionSegmentIds()).success(function (data) {
+                $scope.accounts = data;
+            });
+        }
+
+        $scope.collectionSegmentIds = function () {
+            var segmentIds = [];
+            angular.forEach($scope.segments, function(segment, key) {
+                if (segment.selected) {
+                    segmentIds.push(segment.id);
+                }
+            });
+            return segmentIds;
+        }
 
         $scope.accountBrowserWithSegmentUrl = "/common/account-browser-with-segment";
         $scope.showAccountBrowserWithSegment = function() {

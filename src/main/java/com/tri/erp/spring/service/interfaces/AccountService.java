@@ -2,6 +2,7 @@ package com.tri.erp.spring.service.interfaces;
 
 import com.tri.erp.spring.commons.Response;
 import com.tri.erp.spring.dto.AccountDTO;
+import com.tri.erp.spring.json_param.SegmentParam;
 import com.tri.erp.spring.model.Account;
 import org.springframework.context.MessageSource;
 import org.springframework.validation.BindingResult;
@@ -19,4 +20,5 @@ public interface AccountService {
     public List<Account> findByTitle(String title);
     public List<Account> findByIdNotIn(Integer... accountId);
     public List<AccountDTO> findAllTree();
+    public List<Account> findAllBySegment(SegmentParam segmentParam);
 }

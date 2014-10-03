@@ -5,6 +5,10 @@ accountFactory.factory('accountFactory', ['$http', function($http) {
         return $http.get('/account/list/');
     };
 
+    this.getAccountsBySegment = function (segmentIds) {
+        return $http.get('/account/list/');
+    };
+
     this.getAccountsExcept = function (accountId) {
         return $http.get('/account/' + accountId + '/except');
     };
