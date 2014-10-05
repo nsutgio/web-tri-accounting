@@ -9,6 +9,7 @@
     <jsp:attribute name="body">
         <div ng-app="myapp">
             <div ng-controller="acbCtrl">
+                <p>You selected: <b>{{ angular.isDefined(selectedAccount) ? selectedAccount.title : 'None'}}</b></p>
                 <div account-browser-s btn_label="Browse accounts" handler="accounts_selection_handler(account)" />
             </div>
         </div>
@@ -25,9 +26,8 @@
         var app = angular.module('myapp', ['cmnAccountBrowserWithSegmentApp']);
 
         app.controller('acbCtrl', ['$scope', function($scope) {
-
             $scope.accounts_selection_handler = function(account){
-                console.log('you clicked on', account)
+                $scope.selectedAccount = account;
             }
         }]);
 </script>
