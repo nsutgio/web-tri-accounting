@@ -16,22 +16,20 @@
             link: function (scope, elem, attrs) {
 
                 scope.segments = [];
+                var segmentIds = [];
 
                 var loadAccounts = function () {
-                    accountFactory.getAccountsBySegment(collectionSegmentIds()).success(function (data) {
-                        console.log(data);
+                    accountFactory.getAccountsBySegment(segmentIds).success(function (data) {
                         scope.accounts = data;
                     });
                 }
 
                 var collectionSegmentIds = function () {
-                    var segmentIds = [];
                     angular.forEach(scope.segments, function (segment, key) {
                         if (segment.selected) {
                             segmentIds.push(segment.id);
                         }
                     });
-                    return segmentIds;
                 }
 
                 elem.bind('click', function () {
@@ -45,6 +43,7 @@
                                     segment['selected'] = true;
                                     scope.segments.push(segment);
                                 });
+                                collectionSegmentIds();
                                 loadAccounts();
                             }
                         });
@@ -59,6 +58,35 @@
                         });
                     });
                 }
+
+                scope.getSelectedSegments = function (businessSegmentId) {
+                    angular.forEach(scope.segments, function (segment, key) {
+                        if (segment.id == businessSegmentId) {
+                            segment.selected = true;
+                            if ($scope.account.id > 0) {
+                                // check if is in newly selected segments
+                                var index = newSelectedSegment.indexOf(businessSegmentId);
+                                if (index < 0) { // not found
+                                    segment.assigned = true;
+                                }
+                            }
+                            $scope.segments[key] = segment;
+                            return;
+                        }
+                    });
+                }
+
+                scope.toggleSegment = function(idx, segment) {
+                    if (segment.selected) {
+                        segmentIds.push(segment.id);
+                    } else {
+                        var index = segmentIds.indexOf(segment.id);
+                        if (index >= 0) { // exists
+                            segmentIds.splice(index, 1); 
+                        }
+                    }
+                    loadAccounts();
+                };
             }
         };
     }]);
