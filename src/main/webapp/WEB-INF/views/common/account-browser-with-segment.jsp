@@ -45,7 +45,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr data-dismiss="modal" ng-repeat="account in accs = (accounts | filter:query)" style="cursor: pointer" ng-click="accountSelectedFromBrowser(account)">
+                                    <tr data-dismiss="modal" ng-repeat="account in accs = (accounts | filter:query)" style="cursor: pointer" ng-click="handler(account)">
                                         <td class='code-col'>{{account.code}}</td>
                                         <td>{{account.title}}</td>
                                         <td class='type-col'>{{account.accountType.description}}</td>

@@ -9,7 +9,7 @@
     <jsp:attribute name="body">
         <div ng-app="myapp">
             <div ng-controller="acbCtrl">
-                <div account-browser-s btn_label="Browse accounts" on-select="accounts_selection_handler(account)" />
+                <div account-browser-s btn_label="Browse accounts" handler="accounts_selection_handler(account)" />
             </div>
         </div>
     </jsp:attribute>
