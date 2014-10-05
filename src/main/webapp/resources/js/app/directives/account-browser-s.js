@@ -82,7 +82,12 @@
                     } else {
                         var index = segmentIds.indexOf(segment.id);
                         if (index >= 0) { // exists
-                            segmentIds.splice(index, 1); 
+                            if (segmentIds.length == 1) {
+                                segment.selected = true;
+                                toastr.warning("Must select at least 1 segment!");
+                            } else {
+                                segmentIds.splice(index, 1);
+                            }
                         }
                     }
                     loadAccounts();
