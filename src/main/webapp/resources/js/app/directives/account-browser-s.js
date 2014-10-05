@@ -19,7 +19,7 @@
                 var segmentIds = [];
 
                 var loadAccounts = function () {
-                    accountFactory.getAccountsBySegment(segmentIds).success(function (data) {
+                    accountFactory.getAccountsBySegment(segmentIds).success(function (data) { 
                         scope.accounts = data;
                     });
                 }
@@ -56,23 +56,6 @@
                         return scope.handler({
                             account: account
                         });
-                    });
-                }
-
-                scope.getSelectedSegments = function (businessSegmentId) {
-                    angular.forEach(scope.segments, function (segment, key) {
-                        if (segment.id == businessSegmentId) {
-                            segment.selected = true;
-                            if ($scope.account.id > 0) {
-                                // check if is in newly selected segments
-                                var index = newSelectedSegment.indexOf(businessSegmentId);
-                                if (index < 0) { // not found
-                                    segment.assigned = true;
-                                }
-                            }
-                            $scope.segments[key] = segment;
-                            return;
-                        }
                     });
                 }
 

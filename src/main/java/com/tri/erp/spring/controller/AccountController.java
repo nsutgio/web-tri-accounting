@@ -72,7 +72,7 @@ public class AccountController {
 
     @RequestMapping(value = "/by-segment", method = RequestMethod.GET)
     @ResponseBody
-    public List<Account> getAccountBySegments(@RequestParam(value = "segmentIds") String[] segmentIds) {
+    public List<AccountDTO> getAccountBySegments(@RequestParam(value = "segmentIds") String[] segmentIds) {
         return accountService.findAllBySegment(segmentIds);
     }
 }
