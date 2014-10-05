@@ -8,8 +8,8 @@
     </jsp:attribute>
     <jsp:attribute name="body">
         <div ng-app="myapp">
-            <div ng-controller="MainCtrl">
-                <div account-browser-s />
+            <div ng-controller="acbCtrl">
+                <div account-browser-s btn_label="Browse accounts" />
             </div>
         </div>
     </jsp:attribute>
@@ -24,6 +24,6 @@
 <script type="text/javascript">
         var app = angular.module('myapp', ['cmnAccountBrowserWithSegmentApp']);
 
-        app.controller('MainCtrl', ['$scope', function($scope) {
+        app.controller('acbCtrl', ['$scope', function($scope) {
         }]);
 </script>

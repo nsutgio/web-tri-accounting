@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<button title="browse account"  class="btn btn-primary" data-toggle="modal" data-target="#accountWithSegmentModal">Browse account</button>
+<button ng-controller="accountBrowserCtrl" title="browse account"  class="btn btn-primary" data-toggle="modal" data-target="#accountWithSegmentModal"> {{ btnLabel }}</button>
 
 <div class="modal fade" id="accountWithSegmentModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" style="width: 90%"  ng-app="cmnAccountBrowserWithSegmentApp">
@@ -11,7 +11,7 @@
                 <h4 class="modal-title" id="myModalLabel">Browse accounts</h4>
             </div>
             <div class="modal-body">
-                <div  ng-controller="accountBrowserCtrl">
+                <div>
                     <div class="row">
                         <div class="input-group pull-right" style="width: 300px">
                             <input class="form-control" placeholder="Search" ng-model="query" />
