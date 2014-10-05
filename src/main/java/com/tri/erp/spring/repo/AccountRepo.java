@@ -23,5 +23,5 @@ public interface AccountRepo extends JpaRepository<Account, Integer> {
     @Query(value = "SELECT accounts.* FROM accounts " +
             "JOIN segment_accounts ON accounts.acct_id = segment_accounts.acct_id " +
             "WHERE segment_accounts.bus_seg_id IN (:segmentIds)", nativeQuery = true)
-    public List<Account> findAccountBySegment(@Param("segmentIds") Integer[] segmentIds);
+    public List<Account> findBySegmentIds(@Param("segmentIds") List<String> segmentIds);
 }

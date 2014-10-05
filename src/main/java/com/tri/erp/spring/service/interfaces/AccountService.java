@@ -20,5 +20,5 @@ public interface AccountService {
     public List<Account> findByTitle(String title);
     public List<Account> findByIdNotIn(Integer... accountId);
     public List<AccountDTO> findAllTree();
-    public List<Account> findAllBySegment(SegmentParam segmentParam);
+    public List<Account> findAllBySegment(String[] segmentIds);
 }

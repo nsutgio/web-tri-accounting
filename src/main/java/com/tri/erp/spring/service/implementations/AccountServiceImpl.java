@@ -20,6 +20,7 @@ import javax.annotation.Resource;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
@@ -101,17 +102,10 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public List<Account> findAllBySegment(SegmentParam segmentParam) {
+    public List<Account> findAllBySegment(String[] segmentIds) {
         List<Account> list = new ArrayList<>();
-        if (segmentParam.getSegmentAccountIds() != null && segmentParam.getSegmentAccountIds().size() > 0) {
-            Integer[] segmentIds = new Integer[segmentParam.getSegmentAccountIds().size()];
-
-            for (int i = 0; i < segmentParam.getSegmentAccountIds().size(); i++) {
-                Integer id = segmentParam.getSegmentAccountIds().get(i);
-                segmentIds[i] = id;
-            }
-
-            List<Account> accounts = accountRepo.findAccountBySegment(segmentIds);
+        if (segmentIds != null && segmentIds.length > 0) {
+            list = accountRepo.findBySegmentIds(Arrays.asList(segmentIds));
         }
         return list;
     }

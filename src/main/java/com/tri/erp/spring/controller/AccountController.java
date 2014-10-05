@@ -12,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -71,7 +72,7 @@ public class AccountController {
 
     @RequestMapping(value = "/by-segment", method = RequestMethod.GET)
     @ResponseBody
-    public List<Account> getAccountBySegments(@RequestBody SegmentParam segmentParam) {
-        return accountService.findAllBySegment(segmentParam);
+    public List<Account> getAccountBySegments(@RequestParam(value = "segmentIds") String[] segmentIds) {
+        return accountService.findAllBySegment(segmentIds);
     }
 }

@@ -19,6 +19,7 @@
 
                 var loadAccounts = function () {
                     accountFactory.getAccountsBySegment(collectionSegmentIds()).success(function (data) {
+                        console.log(data);
                         scope.accounts = data;
                     });
                 }

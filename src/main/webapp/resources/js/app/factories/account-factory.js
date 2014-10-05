@@ -6,7 +6,7 @@ accountFactory.factory('accountFactory', ['$http', function($http) {
     };
 
     this.getAccountsBySegment = function (segmentIds) {
-        return $http.get('/account/list/');
+        return $http.get('/account/by-segment', {params : {segmentIds : segmentIds}});
     };
 
     this.getAccountsExcept = function (accountId) {
