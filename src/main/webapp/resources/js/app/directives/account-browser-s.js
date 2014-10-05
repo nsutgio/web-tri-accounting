@@ -5,7 +5,7 @@
     app.controller('accountBrowserCtrl', ['$scope', function ($scope) {
     }]);
 
-    app.directive('accountBrowserS', ['businessSegmentFactory', 'accountFactory', function (businessSegmentFactory, accountFactory) {
+    app.directive('accountBrowserS', ['$timeout', 'businessSegmentFactory', 'accountFactory', function ($timeout, businessSegmentFactory, accountFactory) {
         return {
             scope : {
                 btnLabel : '@',
@@ -49,6 +49,15 @@
                         });
                     });
                 });
+
+                // expose selected account to the outside world :)
+                scope.selectAccount = function(account) {
+                    return $timeout(function() {
+                        return scope.handler({
+                            account: account
+                        });
+                    });
+                }
             }
         };
     }]);
