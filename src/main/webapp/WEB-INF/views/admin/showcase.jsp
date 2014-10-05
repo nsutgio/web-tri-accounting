@@ -9,7 +9,7 @@
     <jsp:attribute name="body">
         <div ng-app="myapp">
             <div ng-controller="acbCtrl">
-                <div account-browser-s btn_label="Browse accounts" />
+                <div account-browser-s btn_label="Browse accounts" on-select="accounts_selection_handler(account)" />
             </div>
         </div>
     </jsp:attribute>
@@ -25,5 +25,9 @@
         var app = angular.module('myapp', ['cmnAccountBrowserWithSegmentApp']);
 
         app.controller('acbCtrl', ['$scope', function($scope) {
+
+            $scope.accounts_selection_handler = function(account){
+                console.log('you clicked on', account)
+            }
         }]);
 </script>

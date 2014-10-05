@@ -7,16 +7,13 @@
 
     app.directive('accountBrowserS', ['businessSegmentFactory', 'accountFactory', function (businessSegmentFactory, accountFactory) {
         return {
+            scope : {
+                btnLabel : '@'
+            },
             restrict: 'AE',
             templateUrl: '/common/account-browser-with-segment',
             link: function (scope, elem, attrs) {
-
-                if (attrs.btnLabel == null) {
-                    attrs.btnLabel = 'Browse accounts';
-                } else {
-                    scope.btnLabel = attrs.btnLabel;
-                }
-
+                
                 scope.segments = [];
 
                 var loadAccounts = function () {
