@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<button title="browse account"  class="btn btn-primary" data-toggle="modal" data-target="#accountWithSegmentModal">Browse account</button>
+
 <div class="modal fade" id="accountWithSegmentModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" style="width: 90%"  ng-app="cmnAccountBrowserWithSegmentApp">
         <div class="modal-content">
@@ -36,18 +38,19 @@
                             </div>
                             <div class="row-top-buffer" style="margin-top: 5px"/>
                             <div class="row" style='max-height: 500px; overflow: auto;'>
+                                <div ng-show="!accounts">Loading accounts...</div>
                                 <table class="table table-striped table-hover table-bordered">
                                     <thead>
                                     <tr>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr ng-repeat="account in accounts | filter:query" style="cursor: pointer" ng-click="accountSelectedFromBrowser(account)">
+                                    <tr data-dismiss="modal" ng-repeat="account in accs = (accounts | filter:query)" style="cursor: pointer" ng-click="accountSelectedFromBrowser(account)">
                                         <td class='code-col'>{{account.code}}</td>
                                         <td>{{account.title}}</td>
                                         <td class='type-col'>{{account.accountType.description}}</td>
                                     </tr>
-                                    <tr ng-show="!parentAccounts || accounts.length == 0"><td colspan="3" align="center">No records found</td></tr>
+                                    <tr ng-show="accs.length == 0"><td colspan="3" align="center">No records found</td></tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -61,3 +64,7 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+
+</script>
