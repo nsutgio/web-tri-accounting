@@ -10,7 +10,7 @@
             <div class="alert alert-info">{{ title }}</div>
         </div>
     </div>
-    <form ng-submit="processForm()">
+    <form ng-submit="processForm()" ng-show="showForm">
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         <div class="row">
             <div class="col-md-12 col-lg-12">

@@ -21,6 +21,11 @@ public class AdminController {
         return getAdminHomeView();
     }
 
+    @RequestMapping(value = {"/showcase"}, method = RequestMethod.GET)
+    public String showcase() {
+        return "admin/showcase";
+    }
+
 
     private String getAdminHomeView() {
         return "admin/dashboard";

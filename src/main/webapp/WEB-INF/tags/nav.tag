@@ -12,7 +12,7 @@
             <li><a href="#">Suppliers</a></li>
         </ul>
     </li>
-    <li><a href="#">Test1</a></li>
+    <li><a href="/admin/showcase">Showcase</a></li>
     <li><a href="#">Test2</a></li>
     <li><a href="#">Test3</a></li>
     <li class="dropdown">

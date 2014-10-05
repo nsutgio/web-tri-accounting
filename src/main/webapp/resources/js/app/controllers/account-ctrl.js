@@ -1,22 +1,32 @@
 var coaControllers = angular.module('accountCtrl', ['ngResource', 'ngSanitize']);
 
-coaControllers.controller('accountDetailsCtrl', ['$scope', '$routeParams', '$http', '$location', function($scope,  $routeParams, $http, $location) {
+coaControllers.controller('accountDetailsCtrl', ['$scope', '$routeParams', '$http', 'accountFactory',
+    function($scope,  $routeParams, $http, accountFactory) {
+
+    $scope.showDetails = false;
+
     if(!($routeParams.accountId === undefined)) {
         $scope.title = 'Account details';
 
         $scope.accountId = $routeParams.accountId;
-        $http.get('/account/'+ $scope.accountId).success(function(data) {
-            console.log(data);
-            if (data === '' || data.id <= 0) {
+
+        accountFactory.getAccount($scope.accountId)
+            .success(function (data) {
+                if (data === '' || data.id <= 0) {    // not found
+                    toastr.warning('Account not found!');
+                    window.location.hash = '#/accounts';
+                } else {
+                    $scope.account = data;
+                    $scope.showDetails = true;
+                }
+            })
+            .error(function (error) {
+                toastr.warning('Account not found!');
                 window.location.hash = '#/accounts';
-            } else {
-                $scope.account = data;
-            }
-        }).error(function(data){
-            alert("Something went wrong!");
-            window.location.hash = '#/accounts';
-        });
+            });
+
     } else {
+        toastr.warning('Account not found!');
         window.location.hash = '#/accounts';
     }
 
@@ -26,9 +36,12 @@ coaControllers.controller('accountDetailsCtrl', ['$scope', '$routeParams', '$htt
 }]);
 
 coaControllers.controller('newAccountCtrl', ['$scope', '$routeParams', '$http', 'errorToElementBinder', 'accountFactory',
-    function($scope, $routeParams, $http, errorToElementBinder, accountFactory) {
+    'modalToggler', 'businessSegmentFactory', 'accountService',
+    function($scope, $routeParams, $http, errorToElementBinder, accountFactory, modalToggler, businessSegmentFactory,
+             accountService) {
 
     $scope.account = {};
+    $scope.showForm = true;
     // setup defaults
     var accountGroup = {"id" : "1"};
     var accountType = {"id" : "1"};
@@ -51,72 +64,56 @@ coaControllers.controller('newAccountCtrl', ['$scope', '$routeParams', '$http', 
     $scope.modalBodyTemplateUrl = "/common/account-browser";
     var resourceURI = '/account/create';
 
-    $http.get('/bus-seg/list').success(function(data) {
-        if (data.length > 0) {
-            $scope.segments = data;
-        }
-    }).error(function(data) {
-        alert("Failed to fetch business segments.");
-    });
-
-    $http.get('/account/type/list').success(function(data) {
-        if (data.length > 0) {
-            $scope.accountTypes = data;
-        }
-    }).error(function(data) {
-        alert("Failed to fetch account types.");
-    });
-
-    $http.get('/account/group/list').success(function(data) {
-        if (data.length > 0) {
-            $scope.accountGroups = data;
-        }
-    }).error(function(data) {
-        alert("Failed to fetch account groups.");
-    });
+    businessSegmentFactory.getSegments().success(function (data) { $scope.segments = data; });
+    accountFactory.getAccountTypes().success(function (data) { $scope.accountTypes = data; });
+    accountFactory.getAccountGroups().success(function (data) { $scope.accountGroups = data; });
 
     if(!($routeParams.accountId === undefined)) {  // update mode
         $scope.title = 'Update account';
+        $scope.showForm = false;
 
         $scope.accountId = $routeParams.accountId;
 
-        $http.get('/account/' + $scope.accountId + '/except').success(function(data) {
-            if (data.length > 0) {
+        accountFactory.getAccountsExcept($scope.accountId)
+            .success(function (data) {
                 $scope.parentAccounts = data;
-            }
-        });
+            })
+            .error(function (error) {
+                alert('Failed to load accounts.');
+            });
 
-        $http.get('/account/'+ $scope.accountId).success(function(data) {
-            console.log(data);
-            if (data === '' || data.id <= 0) {    // not found
-                window.location.hash = '#/account/' + $scope.accountId;
-            } else {
-                data.isActive = (data.isActive == 1);
-                data.isHeader = (data.isHeader == 1);
-                data.hasSL = (data.hasSL == 1);
+        accountFactory.getAccount($scope.accountId)
+            .success(function (data) {
+                if (data === '' || data.id <= 0) {    // not found 
+                    window.location.hash = '#/account/' + $scope.accountId;
+                } else {
+                    data.isActive = (data.isActive == 1);
+                    data.isHeader = (data.isHeader == 1);
+                    data.hasSL = (data.hasSL == 1);
 
-                $scope.account = data;
+                    $scope.account = data;
 
-                $scope.accountType = data.accountType;
-                $scope.accountGroup = data.accountGroup;
-                $scope.parentAccount = data.parentAccount;
-                // segments
-                angular.forEach(data.segmentAccounts, function(segmentAccount, key) {
-                    $scope.checkAssignedSegment(segmentAccount.businessSegment.id);
-                });
+                    $scope.accountType = data.accountType;
+                    $scope.accountGroup = data.accountGroup;
+                    $scope.parentAccount = data.parentAccount;
+                    // segments
+                    angular.forEach(data.segmentAccounts, function(segmentAccount, key) {
+                        $scope.checkAssignedSegment(segmentAccount.businessSegment.id);
+                    });
 
-            }
-        }).error(function(a,b,c){
-            alert("Something went wrong.");
-            window.location.hash = '#/accounts';
-        });
+                    $scope.showForm = true;
+                }
+            })
+            .error(function (error) {
+                toastr.warning('Account not found!');
+                window.location.hash = '#/accounts';
+            });
+
         resourceURI = '/account/update';
     } else {
         accountFactory.getAccounts()
             .success(function (data) {
-                if (data.length > 0) {
-                    $scope.parentAccounts = data;
-                }
+                $scope.parentAccounts = data;
             })
             .error(function (error) {
                 alert('Failed to load accounts.');
@@ -140,15 +137,13 @@ coaControllers.controller('newAccountCtrl', ['$scope', '$routeParams', '$http', 
     }
 
     $scope.showAccountBrowser = function () {
-        // jquery way
-        $('#myModal').modal('show');
+        modalToggler.show('myModal');
     }
 
     $scope.accountSelectedFromBrowser = function (selectedAccount) {
         if (!angular.isUndefined(selectedAccount)) {
             $scope.parentAccount = selectedAccount;
-            // jquery way
-            $('#myModal').modal('hide');
+            modalToggler.hide('myModal');
         }
     }
 
@@ -170,33 +165,7 @@ coaControllers.controller('newAccountCtrl', ['$scope', '$routeParams', '$http', 
         $http.defaults.headers.post['X-CSRF-TOKEN'] = $('input[name=_csrf]').val();
 
         // create json to be posted to the server
-        var jAccount = angular.copy($scope.account);
-        jAccount.isActive = jAccount.isActive ? 1 : 0;
-        jAccount.hasSL =jAccount.hasSL ? 1 : 0;
-        jAccount.isHeader = jAccount.isHeader ? 1 : 0;
-
-        jAccount.accountGroup = angular.copy($scope.accountGroup);
-        jAccount.accountType = angular.copy($scope.accountType);
-        jAccount.parentAccount = angular.copy($scope.parentAccount);
-        jAccount.parentAccountId = jAccount.parentAccount == null ? 0 : jAccount.parentAccount.id;
-
-        var segmentAccounts = [];
-        var scopeSegments = angular.copy($scope.segments);
-        angular.forEach(scopeSegments, function(segment, key) {
-            if (segment.selected) {
-                delete segment['selected']; // hibernate will complain, so delete it
-                delete segment['assigned'];
-
-                var segmentAccount = {
-                    "accountCode" : "",
-                    "businessSegment" :segment
-                };
-                segmentAccounts.push(segmentAccount);
-            }
-        });
-        jAccount.segmentAccounts = segmentAccounts;
-
-        console.log(jAccount);
+        var jAccount = accountService.createAccountJson($scope);
 
         var res = $http.post(resourceURI, jAccount);
         res.success(function(data) {
@@ -204,38 +173,25 @@ coaControllers.controller('newAccountCtrl', ['$scope', '$routeParams', '$http', 
                 $scope.errors = errorToElementBinder.bindToElements(data, $scope.errors);
                 $scope.save ='Save';
                 $scope.submitting = false;
+                toastr.warning('Error found.');
             } else {
-                // if successful, bind success message to message
-                $scope.message = data.successMessage;
-
-                setTimeout(function () {
-                    $scope.$apply(function () {
-                        window.location.hash = '#/account/' + data.modelId;
-                    });
-                }, 4000);
+                window.location.hash = '#/account/' + data.modelId;
+                toastr.success('Account successfully saved!');
             }
         });
         res.error(function(data, status, headers, config) {
-            alert("Something went wrong!");
+            toastr.error('Something went wrong!');
             $scope.save ='Save';
             $scope.submitting = false;
         });
     };
 }]);
 
-coaControllers.controller('treeGridCtrl',  ['$scope', '$http', '$sce', function($scope, $http, $sce) {
+coaControllers.controller('treeGridCtrl',  ['$scope', 'accountFactory', function($scope, accountFactory) {
     var tree, myTreeData;
     var rawTreeData;
 
-    $.ajax({
-        url:  '/account/list/tree',
-        type: 'GET',
-        async: false
-    }).done(function(data) {
-        rawTreeData = data;
-    }).error(function() {
-        alert("Something went wrong!");
-    });
+    rawTreeData = accountFactory.getTreeAccounts().data;
 
     myTreeData = getTree(rawTreeData, 'id', 'parentAccountId');
     $scope.tree_data = myTreeData;

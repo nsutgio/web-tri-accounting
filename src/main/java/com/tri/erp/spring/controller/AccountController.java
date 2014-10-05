@@ -2,6 +2,7 @@ package com.tri.erp.spring.controller;
 
 import com.tri.erp.spring.commons.Response;
 import com.tri.erp.spring.dto.AccountDTO;
+import com.tri.erp.spring.json_param.SegmentParam;
 import com.tri.erp.spring.model.Account;
 import com.tri.erp.spring.service.interfaces.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -66,5 +68,11 @@ public class AccountController {
     public List<AccountDTO> accountListTree() {
         List<AccountDTO> accountList = accountService.findAllTree();
         return accountList;
+    }
+
+    @RequestMapping(value = "/by-segment", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Account> getAccountBySegments(@RequestParam(value = "segmentIds") String[] segmentIds) {
+        return accountService.findAllBySegment(segmentIds);
     }
 }

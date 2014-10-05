@@ -12,7 +12,7 @@
     </div>
 </div>
 
-<div class="row">
+<div class="row" ng-show="showDetails">
     <div class="col-md-7 col-lg-7">
         <div class="row">
             <div class="col-md-12 col-lg-12">
