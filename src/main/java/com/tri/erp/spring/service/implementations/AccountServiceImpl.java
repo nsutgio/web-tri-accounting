@@ -102,10 +102,23 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public List<Account> findAllBySegment(String[] segmentIds) {
-        List<Account> list = new ArrayList<>();
+    public List<AccountDTO> findAllBySegment(String[] segmentIds) {
+        List<AccountDTO> list = new ArrayList<>();
         if (segmentIds != null && segmentIds.length > 0) {
-            list = accountRepo.findBySegmentIds(Arrays.asList(segmentIds));
+            List<Object[]> result = accountRepo.findBySegmentIds(Arrays.asList(segmentIds));
+            if (result != null) {
+                for(Object[] objects : result) {
+                    AccountDTO a = new AccountDTO();
+                    a.setId((Integer) objects[0]);
+                    a.setTitle((String) objects[1]);
+                    a.setCode((String) objects[2]);
+
+                    AccountType at = new AccountType((String) objects[3], null);
+                    a.setAccountType(at);
+
+                    list.add(a);
+                }
+            }
         }
         return list;
     }
