@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.sql.Date;
 
 /**
  * Created by Ryan D. Repe on 10/5/2014.
@@ -72,5 +73,31 @@ public class StockWithdrawalTmp {
 
     @Column(name = "sw_number")
     private String referenceNo;
+
+    public StockWithdrawalTmp(int id, int transId, Date transDate, int deptId, String purpose, String description, int locationId, int categoryId, int userId, int approvedBy, int receivedBy, int requisitioned, int preparedBy, int notedBy, int issuedBy, int docStatusId, String remarks, Date transDateTime, int requestType, String referenceNo) {
+        this.id = id;
+        this.transId = transId;
+        this.transDate = transDate;
+        this.deptId = deptId;
+        this.purpose = purpose;
+        this.description = description;
+        this.locationId = locationId;
+        this.categoryId = categoryId;
+        this.userId = userId;
+        this.approvedBy = approvedBy;
+        this.receivedBy = receivedBy;
+        this.requisitioned = requisitioned;
+        this.preparedBy = preparedBy;
+        this.notedBy = notedBy;
+        this.issuedBy = issuedBy;
+        this.docStatusId = docStatusId;
+        this.remarks = remarks;
+        this.transDateTime = transDateTime;
+        this.requestType = requestType;
+        this.referenceNo = referenceNo;
+    }
+
+    public StockWithdrawalTmp() {
+    }
 }
 
